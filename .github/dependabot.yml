@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" # or the package manager you use (e.g., "pip", "maven")
+    directory: "/" # location of the package manifest file in the repository
+    schedule:
+      interval: "weekly"
