@@ -22,7 +22,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          
+
   codeql:
     runs-on: windows-latest
 
@@ -34,19 +34,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'powershell' ] # Adjust according to your project languages
+        # List supported languages here
+        language: [ 'javascript', 'python' ] # Adjust according to your project languages
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v3
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
+
