@@ -20,7 +20,5 @@ jobs:
         shell: pwsh
 
       - name: Run PSScriptAnalyzer
-        run: Invoke-ScriptAnalyzer -Path ./src -Recurse
+        run: Invoke-ScriptAnalyzer -Path ./ -Recurse
         shell: pwsh
-
-
