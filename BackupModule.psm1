@@ -1,4 +1,4 @@
-﻿
+
 
 function Start-Backup
 {
@@ -12,7 +12,7 @@ function Start-Backup
         [Int]$FinalCount = $null
     )
 
-    #Write-Host "Function: Start-Backup | BackupOperation: $BackupOperation | PathStatementBackup: $PathStatementBackup | TotalArrayBackup: $($TotalArrayBackup | ForEach-Object { $_ -join ', ' }) | SourceArrayBackup: $SourceArrayBackup | DestinationArrayBackup: $DestinationArrayBackup | FinalCount: $FinalCount" -ForegroundColor Green      
+    #Write-Host "Function: Start-Backup | BackupOperation: $BackupOperation | PathStatementBackup: $PathStatementBackup | TotalArrayBackup: $($TotalArrayBackup | ForEach-Object { $_ -join ', ' }) | SourceArrayBackup: $SourceArrayBackup | DestinationArrayBackup: $DestinationArrayBackup | FinalCount: $FinalCount" -ForegroundColor Green
 
     function Backup-DataOne
     {
@@ -25,30 +25,30 @@ function Start-Backup
             $FinalSourceDir = $SourceArrayBackup[$BaseCount]
             $FinalDestDir = $DestinationArrayBackup[$BaseCount]
 
-            if (((($FinalSourceDir.StartsWith('"') -and $FinalSourceDir.EndsWith('"')) -or (($FinalSourceDir.StartsWith('"')) -or ($FinalSourceDir.EndsWith('"')))) -or ($FinalSourceDir.StartsWith("'") -and $FinalSourceDir.EndsWith("'"))) -or (($FinalSourceDir.StartsWith("'")) -or ($FinalSourceDir.EndsWith("'"))))  
+            if (((($FinalSourceDir.StartsWith('"') -and $FinalSourceDir.EndsWith('"')) -or (($FinalSourceDir.StartsWith('"')) -or ($FinalSourceDir.EndsWith('"')))) -or ($FinalSourceDir.StartsWith("'") -and $FinalSourceDir.EndsWith("'"))) -or (($FinalSourceDir.StartsWith("'")) -or ($FinalSourceDir.EndsWith("'"))))
             {
                 $FinalSourceDir = $FinalSourceDir.Trim('"', "'" )
             }
 
-            if (((($FinalDestDir.StartsWith('"') -and $FinalDestDir.EndsWith('"')) -or (($FinalDestDir.StartsWith('"')) -or ($FinalDestDir.EndsWith('"')))) -or ($FinalDestDir.StartsWith("'") -and $FinalDestDir.EndsWith("'"))) -or (($FinalDestDir.StartsWith("'")) -or ($FinalDestDir.EndsWith("'"))))  
+            if (((($FinalDestDir.StartsWith('"') -and $FinalDestDir.EndsWith('"')) -or (($FinalDestDir.StartsWith('"')) -or ($FinalDestDir.EndsWith('"')))) -or ($FinalDestDir.StartsWith("'") -and $FinalDestDir.EndsWith("'"))) -or (($FinalDestDir.StartsWith("'")) -or ($FinalDestDir.EndsWith("'"))))
             {
                 $FinalDestDir = $FinalDestDir.Trim('"', "'" )
             }
 
             [Bool]$TestTheSource = Test-Path -Path $FinalSourceDir
-            
+
             if ($TestTheSource -eq $false)
             {
                 [Int]$UserInputLoop = 0
 
                 while ($UserInputLoop -eq 0)
-                { 
+                {
                     Write-Host "Backup $WriteOutCount. $FinalSourceDir does not exist!" -ForegroundColor Red
                     Write-Host "Do you want to create this directory?" -ForegroundColor Red
                     Write-Host "1. Yes"
                     Write-Host "2. No"
-                
-                    $UserInputLoop = Get-UserInputBackup 
+
+                    $UserInputLoop = Get-UserInputBackup
                 }
 
                 [Int]$MakeDirChoice = $UserInputLoop
@@ -63,12 +63,12 @@ function Start-Backup
                     Write-Host
 
                     $BaseCount = $BaseCount + 1
-                    $WriteOutCount = $WriteOutCount + 1 
-                    continue 
+                    $WriteOutCount = $WriteOutCount + 1
+                    continue
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(54)A. Parent Function: Start-Backup | Child Function: Backup-DataOne | Variable MakeDirChoice: $MakeDirChoice (Should equal 1 or 2)" 
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(54)A. Parent Function: Start-Backup | Child Function: Backup-DataOne | Variable MakeDirChoice: $MakeDirChoice (Should equal 1 or 2)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -84,14 +84,14 @@ function Start-Backup
                 {
                     Write-Host "Backup $WriteOutCount. $FinalDestDir does not exist!" -ForegroundColor Yellow
                     Write-Host "Do you want to create this directory?" -ForegroundColor Yellow
-                    Write-Host "1. Yes" 
+                    Write-Host "1. Yes"
                     Write-Host "2. No"
 
                     $UserInputLoop = Get-UserInputBackup
                 }
-                
+
                 [Int]$MakeDirChoice = $UserInputLoop
-                
+
                 if ($MakeDirChoice -eq 1)
                 {
                     New-Item -Path $FinalDestDir -ItemType Directory -Force
@@ -102,15 +102,15 @@ function Start-Backup
                     Write-Host
 
                     $BaseCount = $BaseCount + 1
-                    $WriteOutCount = $WriteOutCount + 1 
-                    continue 
+                    $WriteOutCount = $WriteOutCount + 1
+                    continue
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(54)B. Parent Function: Start-Backup | Child Function: Backup-DataOne | Variable MakeDirChoice: $MakeDirChoice (Should equal 1 or 2)" 
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(54)B. Parent Function: Start-Backup | Child Function: Backup-DataOne | Variable MakeDirChoice: $MakeDirChoice (Should equal 1 or 2)"
                     Exit-CaTScheduler
                     Exit
-                }   
+                }
             }
 
             $SourceItems = Get-ChildItem -Path $FinalSourceDir -Recurse
@@ -118,46 +118,46 @@ function Start-Backup
 
             $DestItemLookup = @{}
 
-            foreach ($Item in $DestItems) 
+            foreach ($Item in $DestItems)
             {
                 $RelativePath = Get-RelativePath -BasePath $FinalDestDir -FullPath $Item.FullName
                 $DestItemLookup[$RelativePath] = $Item
             }
 
-            foreach ($SourceItem in $SourceItems) 
+            foreach ($SourceItem in $SourceItems)
             {
                 $RelativePath = Get-RelativePath -BasePath $FinalSourceDir -FullPath $SourceItem.FullName
 
-                if ($SourceItem.PSIsContainer) 
+                if ($SourceItem.PSIsContainer)
                 {
-                    if (-not $DestItemLookup.ContainsKey($RelativePath)) 
+                    if (-not $DestItemLookup.ContainsKey($RelativePath))
                     {
                         $DestinationPath = Join-Path -Path $FinalDestDir -ChildPath $RelativePath
                         New-Item -Path $DestinationPath -ItemType Directory -Force
-                        Write-BackupLog -LogTypeX 1 -MessageX "(One time backup) The directory $DestinationPath was created within $FinalDestDir in order to complete the backup of $FinalSourceDir to $FinalDestDir" 
+                        Write-BackupLog -LogTypeX 1 -MessageX "(One time backup) The directory $DestinationPath was created within $FinalDestDir in order to complete the backup of $FinalSourceDir to $FinalDestDir"
                     }
                 }
-                else 
+                else
                 {
-                    if ($DestItemLookup.ContainsKey($RelativePath)) 
+                    if ($DestItemLookup.ContainsKey($RelativePath))
                     {
                         $DestItem = $DestItemLookup[$RelativePath]
 
                         $SourceHash = Get-FileHash -Path $SourceItem.FullName
                         $DestHash = Get-FileHash -Path $DestItem.FullName
 
-                        if ($SourceHash.Hash -ne $DestHash.Hash) 
+                        if ($SourceHash.Hash -ne $DestHash.Hash)
                         {
                             Copy-Item -Path $SourceItem.FullName -Destination $DestItem.FullName -Force
-                            Write-BackupLog -LogTypeX 1 -MessageX "(One time backup) The file $($SourceItem.FullName) was copied to $($DestItem.FullName) in order to complete the backup of $FinalSourceDir to $FinalDestDir" 
+                            Write-BackupLog -LogTypeX 1 -MessageX "(One time backup) The file $($SourceItem.FullName) was copied to $($DestItem.FullName) in order to complete the backup of $FinalSourceDir to $FinalDestDir"
                         }
                     }
-                    else 
+                    else
                     {
                         $DestinationPath = Join-Path -Path $FinalDestDir -ChildPath $RelativePath
                         $DestinationDir = Split-Path -Path $DestinationPath -Parent
 
-                        if (-not (Test-Path -Path $DestinationDir)) 
+                        if (-not (Test-Path -Path $DestinationDir))
                         {
                             New-Item -Path $DestinationDir -ItemType Directory -Force
                             Write-BackupLog -LogTypeX 1 -MessageX "(One time backup) The directory $DestinationDir was created in order to complete the backup of $FinalSourceDir to $FinalDestDir"
@@ -173,15 +173,15 @@ function Start-Backup
             Write-Host
 
             $BaseCount = $BaseCount + 1
-            $WriteOutCount = $WriteOutCount + 1 
+            $WriteOutCount = $WriteOutCount + 1
         }
 
         return $true
     }
 
-    function Get-RelativePath 
+    function Get-RelativePath
     {
-        param 
+        param
         (
             [string]$BasePath,
             [string]$FullPath
@@ -201,7 +201,7 @@ function Start-Backup
         $LogFileOneX = "$PathStatementBackup\Logs\InfoLog.log"
         $TimestampX = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
-        if ($LogTypeX -eq 1) 
+        if ($LogTypeX -eq 1)
         {
             Add-Content -Path $LogFileOneX -Value "INFO: $TimestampX"
             Add-Content -Path $LogFileOneX -Value "$MessageX"
@@ -217,26 +217,26 @@ function Start-Backup
         }
     }
 
-    function Get-UserInputBackup 
+    function Get-UserInputBackup
     {
-        $UserChoiceXX = Read-Host "Choice" 
+        $UserChoiceXX = Read-Host "Choice"
         Write-Host
 
         if ($UserChoiceXX -eq "")
         {
             Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
             Write-Host
-            
+
             return 0
         }
 
-        [Bool]$IsItAnIntegerBackup = [Int]::TryParse($UserChoiceXX, [ref]$null) 
+        [Bool]$IsItAnIntegerBackup = [Int]::TryParse($UserChoiceXX, [ref]$null)
 
         if (-not $IsItAnIntegerBackup)
         {
             Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
             Write-Host
-            
+
             return 0
         }
 
@@ -250,36 +250,36 @@ function Start-Backup
             {
                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                 Write-Host
-            
+
                 return 0
             }
         }
 
         if (($UserChoiceX -eq 1) -or ($UserChoiceX -eq 2))
         {
-            [Int]$ChosenUserChoice = $UserChoiceX 
-            
-            return $ChosenUserChoice  
+            [Int]$ChosenUserChoice = $UserChoiceX
+
+            return $ChosenUserChoice
         }
         elseif ($UserInputX -eq 0)
         {
             Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
             Write-Host
-            
+
             return 0
         }
         elseif (($UserChoiceX -lt 0) -or ($UserChoiceX -gt 2))
         {
             Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
             Write-Host
-            
+
             return 0
         }
         else
         {
             Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
             Write-Host
-            
+
             return 0
         }
     }
@@ -308,7 +308,7 @@ function Start-Backup
             Exit-CaTScheduler
             Exit
         }
-        
+
         [Bool]$IsBackupGood = Backup-DataOne
 
         if ($IsBackupGood -eq $true)
@@ -338,4 +338,4 @@ function Start-Backup
     }
 }
 
-Export-ModuleMember -Function Start-Backup 
+Export-ModuleMember -Function Start-Backup

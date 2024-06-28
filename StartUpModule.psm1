@@ -1,12 +1,12 @@
-﻿
+
 
 function Start-CaTScheduler
-{ 
+{
     param
     (
         [String]$PathStatementStartup = "",
         [Int]$Start = $null
-    ) 
+    )
 
     function Start-Logs
     {
@@ -15,12 +15,12 @@ function Start-CaTScheduler
 
         if ($LogDirectoryTest -eq $false)
         {
-            New-Item -Path $LogDirectoryPath -ItemType "directory" -Force 
+            New-Item -Path $LogDirectoryPath -ItemType "directory" -Force
             [Int]$LogDirCreate = 1
         }
-        else 
+        else
         {
-            [Int]$LogDirCreate = 0 
+            [Int]$LogDirCreate = 0
         }
 
         [String]$ErrorLogPath = "$PathStatementStartup\Logs\ErrorLog.log"
@@ -29,13 +29,13 @@ function Start-CaTScheduler
         if ($ErrorLogTest -eq $false)
         {
             New-Item -Path $ErrorLogPath -ItemType "File" -Force
-            [Int]$ErrorLogCreate = 1       
+            [Int]$ErrorLogCreate = 1
         }
         else
         {
-            [Int]$ErrorLogCreate = 0  
+            [Int]$ErrorLogCreate = 0
         }
-        
+
         [String]$InfoLogPath = "$PathStatementStartup\Logs\InfoLog.log"
         [Bool]$InfoLogTest = Test-Path -Path $InfoLogPath -PathType Leaf
 
@@ -46,12 +46,12 @@ function Start-CaTScheduler
         }
         else
         {
-            [Int]$InfoLogCreate = 0      
+            [Int]$InfoLogCreate = 0
         }
 
         Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) Function Get-StartupItems executed sucessfully. Startup script successful."
 
-        if (($LogDirCreate -eq 1) -or ($LogDirCreate -eq 0)) 
+        if (($LogDirCreate -eq 1) -or ($LogDirCreate -eq 0))
         {
             if ($LogDirCreate -eq 1)
             {
@@ -75,7 +75,7 @@ function Start-CaTScheduler
             {
                 Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 2 -Message "(Startup) Created $ErrorLogPath because the path did not exist on start up. Function: Start-CaTScheduler"
             }
-            elseif ($ErrorLogCreate -eq 0) 
+            elseif ($ErrorLogCreate -eq 0)
             {
                 Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $ErrorLogPath good. Function: Start-CaTScheduler"
             }
@@ -93,7 +93,7 @@ function Start-CaTScheduler
             {
                 Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 2 -Message "(Startup) Created $InfoLogPath because the path did not exist on start up. Function: Start-CaTScheduler"
             }
-            elseif ($InfoLogCreate -eq 0) 
+            elseif ($InfoLogCreate -eq 0)
             {
                 Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $InfoLogPath good. Function: Start-CaTScheduler"
             }
@@ -104,7 +104,7 @@ function Start-CaTScheduler
                 Exit
             }
         }
-        
+
         return $true
     }
 
@@ -118,10 +118,10 @@ function Start-CaTScheduler
             New-Item -Path $ConfigDirectoryPath -ItemType "directory" -Force
 
             Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 2 -Message "(Startup) Created $ConfigDirectoryPath because the path did not exist on start up. Function: Start-CaTScheduler"
-        } 
+        }
         elseif ($ConfigDirectoryTest -eq $true)
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $ConfigDirectoryPath good. Function: Start-CaTScheduler"    
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $ConfigDirectoryPath good. Function: Start-CaTScheduler"
         }
         else
         {
@@ -141,7 +141,7 @@ function Start-CaTScheduler
         }
         elseif ($SavedPathsTest -eq $true)
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $SavedPathsPath good. Function: Start-CaTScheduler"    
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $SavedPathsPath good. Function: Start-CaTScheduler"
         }
         else
         {
@@ -153,7 +153,7 @@ function Start-CaTScheduler
         [String]$TaskNumberPath = "$PathStatementStartup\ConfigurationFiles\TaskNumber.txt"
         [Bool]$TaskNumberTest = Test-Path -Path $TaskNumberPath -PathType Leaf
 
-        if ($TaskNumberTest -eq $false) 
+        if ($TaskNumberTest -eq $false)
         {
             New-Item -Path $TaskNumberPath -ItemType "File" -Force
 
@@ -163,7 +163,7 @@ function Start-CaTScheduler
         }
         elseif ($TaskNumberTest -eq $true)
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $TaskNumberPath good. Function: Start-CaTScheduler"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $TaskNumberPath good. Function: Start-CaTScheduler"
         }
         else
         {
@@ -183,7 +183,7 @@ function Start-CaTScheduler
         }
         elseif ($ScheduledTasksTest -eq $true)
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $ScheduledTasksPath good. Function: Start-CaTScheduler"    
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) $ScheduledTasksPath good. Function: Start-CaTScheduler"
         }
         else
         {
@@ -209,7 +209,7 @@ function Start-CaTScheduler
         $HashtableDataStartup = Get-Content -Path $SavedPathsPath | ConvertFrom-Json
         $PathHashTableStartup = @{}
 
-        foreach ($Item in $HashtableDataStartup) 
+        foreach ($Item in $HashtableDataStartup)
         {
             $PathHashTableStartup[$Item.Name] = $Item.Value
         }
@@ -218,16 +218,16 @@ function Start-CaTScheduler
         {
             [Int]$NewOrSavedStartup = 1
         }
-        elseif ($PathHashTableStartup.Count -gt 0) 
+        elseif ($PathHashTableStartup.Count -gt 0)
         {
-            [Int]$NewOrSavedStartup = 0    
+            [Int]$NewOrSavedStartup = 0
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 2 -Message "(Startup) General error. Function: Start-CaTScheduler | Variable PathHashTableStartup ($PathHashTableStartup) is not equal to 0 or greater than 0." 
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 2 -Message "(Startup) General error. Function: Start-CaTScheduler | Variable PathHashTableStartup ($PathHashTableStartup) is not equal to 0 or greater than 0."
         }
 
-        return $NewOrSavedStartup 
+        return $NewOrSavedStartup
     }
 
     if ($Start -eq 1)
@@ -242,18 +242,18 @@ function Start-CaTScheduler
             {
                 [Bool]$ScriptGood = Start-ScheduledTaskScript
 
-                if ($ScriptGood -eq $true) 
+                if ($ScriptGood -eq $true)
                 {
                     Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) Script GetScheduledTasks.ps1 started sucessfully"
-                    
+
                     [Int]$NewOrSavedStartup = Get-NewOrSaved
-                    
-                    if (($NewOrSavedStartup -eq 1) -or ($NewOrSavedStartup -eq 0)) 
+
+                    if (($NewOrSavedStartup -eq 1) -or ($NewOrSavedStartup -eq 0))
                     {
                         Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementStartup -LogType 1 -Message "(Startup) Function Start-CaTScheduler executed sucessfully. Startup module successful."
 
                         Get-Menu -ChooseMenu 1 -PathStatementMenu $PathStatementStartup -NewOrSavedMenu $NewOrSavedStartup
-                    } 
+                    }
                     else
                     {
                         Write-Host "Startup failed" -ForegroundColor Red
@@ -282,10 +282,10 @@ function Start-CaTScheduler
     {
         Write-Host "Startup failed" -ForegroundColor Red
         Exit
-    } 
+    }
 }
 
-Function Exit-CaTScheduler 
+Function Exit-CaTScheduler
 {
     Write-Host
     Write-Host "Thank you for using Compare and Transfer" -ForegroundColor Yellow

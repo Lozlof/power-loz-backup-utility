@@ -1,6 +1,6 @@
-﻿
 
-param 
+
+param
 (
     [string]$SourceDir,
     [string]$DestDir

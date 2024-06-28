@@ -1,14 +1,14 @@
-﻿
+
 
 function Update-ScheduledTaskHashTable
-{ 
+{
     param
     (
         [Int]$StartOperation
     )
 
     function Get-CaTScheduledTasks
-    { 
+    {
         Import-Module ScheduledTasks
 
         $TaskNames = @()
@@ -21,7 +21,7 @@ function Update-ScheduledTaskHashTable
 
         while ($Number -lt $TaskNames.Count)
         {
-            foreach ($Task in $TaskNames) 
+            foreach ($Task in $TaskNames)
             {
                 $Number = $Number + 1
                 [String]$TheTaskName = "$Task"
@@ -39,39 +39,39 @@ function Update-ScheduledTaskHashTable
                         $SourceDir = $Match.Groups[1].Value
                     }
 
-                    if ($Match.Groups[2].Value) 
+                    if ($Match.Groups[2].Value)
                     {
                         $DestDir = $Match.Groups[2].Value
                     }
 
-                    [String]$TheTaskDirectory = "Source Directory: $SourceDir Destination Directory: $DestDir" 
+                    [String]$TheTaskDirectory = "Source Directory: $SourceDir Destination Directory: $DestDir"
                 }
 
                 $SelectedTaskTriggers = $SelectedTask.Triggers
 
-                foreach ($Trigger in $SelectedTaskTriggers) 
+                foreach ($Trigger in $SelectedTaskTriggers)
                 {
                     $Time = [DateTime]::Parse($Trigger.StartBoundary).ToString("t")
-        
-                    if ($Trigger.PSObject.TypeNames -contains "Microsoft.Management.Infrastructure.CimInstance#MSFT_TaskDailyTrigger") 
+
+                    if ($Trigger.PSObject.TypeNames -contains "Microsoft.Management.Infrastructure.CimInstance#MSFT_TaskDailyTrigger")
                     {
                         [String]$TheTaskTrigger = "Trigger: Daily at $Time"
                     }
-                    elseif ($Trigger.PSObject.TypeNames -contains "Microsoft.Management.Infrastructure.CimInstance#MSFT_TaskWeeklyTrigger") 
+                    elseif ($Trigger.PSObject.TypeNames -contains "Microsoft.Management.Infrastructure.CimInstance#MSFT_TaskWeeklyTrigger")
                     {
-                        $DaysOfWeek = $Trigger.DaysOfWeek -join ", " 
+                        $DaysOfWeek = $Trigger.DaysOfWeek -join ", "
                         [String]$TheTaskTrigger = "Trigger: Weekly on $DaysOfWeek at $Time"
                     }
-                    elseif ($Trigger.PSObject.TypeNames -contains "Microsoft.Management.Infrastructure.CimInstance#MSFT_TaskMonthlyTrigger") 
+                    elseif ($Trigger.PSObject.TypeNames -contains "Microsoft.Management.Infrastructure.CimInstance#MSFT_TaskMonthlyTrigger")
                     {
                         $DaysOfMonth = $Trigger.DaysOfMonth -join ", "
                         [String]$TheTaskTrigger = "Trigger: Monthly on day(s) $DaysOfMonth at $Time"
                     }
-                    elseif ($Trigger.PSObject.TypeNames -contains "Microsoft.Management.Infrastructure.CimInstance#MSFT_TaskOneTimeTrigger") 
+                    elseif ($Trigger.PSObject.TypeNames -contains "Microsoft.Management.Infrastructure.CimInstance#MSFT_TaskOneTimeTrigger")
                     {
                         [String]$TheTaskTrigger = "Trigger: One-time at $Time"
                     }
-                    else 
+                    else
                     {
                         [String]$TheTaskTrigger = "Trigger: $($Trigger.TriggerType) at $Time"
                     }
@@ -80,11 +80,11 @@ function Update-ScheduledTaskHashTable
                 $CompleteTasks = ($TheTaskName, $TheTaskDirectory, $TheTaskTrigger)
 
                 [String]$Key = "Key. $Number"
-                $ScheduledTasksHashTableX[$Key] = $CompleteTasks 
+                $ScheduledTasksHashTableX[$Key] = $CompleteTasks
             }
         }
 
-        return $ScheduledTasksHashTableX 
+        return $ScheduledTasksHashTableX
     }
 
     function Write-CaTScheduledTasks
@@ -100,7 +100,7 @@ function Update-ScheduledTaskHashTable
 
     if ($StartOperation -eq 1)
     {
-        $PathStatementXX = $PSScriptRoot 
+        $PathStatementXX = $PSScriptRoot
         Set-Location $PathStatementXX
         $PathStatementX = Get-Location
         $PathStatement = "$PathStatementX\ConfigurationFiles\ScheduledTasks.json"
@@ -123,4 +123,4 @@ function Update-ScheduledTaskHashTable
 }
 
 Update-ScheduledTaskHashTable -StartOperation 1
-    
+

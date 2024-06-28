@@ -1,4 +1,4 @@
-﻿
+
 
 function Write-Task
 {
@@ -9,8 +9,8 @@ function Write-Task
         [Object[][]]$TotalArrayScheduling = @()
     )
 
-    function Write-TheSchedule 
-    { 
+    function Write-TheSchedule
+    {
         param
         (
             $SourceArrayTasking = @(),
@@ -29,28 +29,28 @@ function Write-Task
             $AllReturnValues = @()
         )
 
-        #Write-Host "Debug: Function: Write-TheSchedule | SourceArrayTasking: $SourceArrayTasking | DestArrayTasking: $DestArrayTasking | TheCountTasking: $TheCountTasking | FinalSourceDir: $FinalSourceDir | FinalDestDir: $FinalDestDir | FinalSourceDirX: $FinalSourceDirX | FinalDestDirX: $FinalDestDirX | FinalVerifyCountOne: $FinalVerifyCountOne | FinalVerifyCountTwo: $FinalVerifyCountTwo | FinalVerifyCountOneX: $FinalVerifyCountOneX | FinalVerifyCountTwoX: $FinalVerifyCountTwoX | DidAsk: $DidAsk | UserChoice: $UserChoice | AllReturnValues: $AllReturnValues" -ForegroundColor Green  
+        #Write-Host "Debug: Function: Write-TheSchedule | SourceArrayTasking: $SourceArrayTasking | DestArrayTasking: $DestArrayTasking | TheCountTasking: $TheCountTasking | FinalSourceDir: $FinalSourceDir | FinalDestDir: $FinalDestDir | FinalSourceDirX: $FinalSourceDirX | FinalDestDirX: $FinalDestDirX | FinalVerifyCountOne: $FinalVerifyCountOne | FinalVerifyCountTwo: $FinalVerifyCountTwo | FinalVerifyCountOneX: $FinalVerifyCountOneX | FinalVerifyCountTwoX: $FinalVerifyCountTwoX | DidAsk: $DidAsk | UserChoice: $UserChoice | AllReturnValues: $AllReturnValues" -ForegroundColor Green
 
         function Get-UserInputSchedulingOne
         {
-            $UserChoiceXX = Read-Host "Choice" 
+            $UserChoiceXX = Read-Host "Choice"
             Write-Host
 
             if ($UserChoiceXX -eq "")
             {
                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                 Write-Host
-            
+
                 return 0
             }
 
-            [Bool]$IsItAnIntegerScheduling = [Int]::TryParse($UserChoiceXX, [ref]$null) 
+            [Bool]$IsItAnIntegerScheduling = [Int]::TryParse($UserChoiceXX, [ref]$null)
 
             if (-not $IsItAnIntegerScheduling)
             {
                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                 Write-Host
-            
+
                 return 0
             }
 
@@ -64,18 +64,18 @@ function Write-Task
                 {
                     Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                     Write-Host
-            
+
                     return 0
                 }
             }
 
             if (($UserChoiceX -eq 1) -or ($UserChoiceX -eq 2))
             {
-                [Int]$ChosenUserChoice = $UserChoiceX 
-            
-                return $ChosenUserChoice  
+                [Int]$ChosenUserChoice = $UserChoiceX
+
+                return $ChosenUserChoice
             }
-            elseif ($UserChoiceX -eq 0) 
+            elseif ($UserChoiceX -eq 0)
             {
                 [Int]$LoopingLoop = 0
 
@@ -84,21 +84,21 @@ function Write-Task
 
                 while ($LoopingLoop -eq 0)
                 {
-                    Write-Host "Do you want to restart?" 
+                    Write-Host "Do you want to restart?"
                     Write-Host "1. Yes"
                     Write-Host "2. No"
 
                     $UserChoiceX = Read-Host "Choice"
                     Write-Host
-                        
+
                     if ($UserChoiceX -eq "")
                     {
                         Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                         Write-Host
                         continue
-                    } 
+                    }
 
-                    [Bool]$IntegerLooping = [Int]::TryParse($UserChoiceX, [ref]$null) 
+                    [Bool]$IntegerLooping = [Int]::TryParse($UserChoiceX, [ref]$null)
 
                     if (-not $IntegerLooping)
                     {
@@ -121,11 +121,11 @@ function Write-Task
                         }
                     }
 
-                    if (($UserChoice -eq 1) -or ($UserChoice -eq 2)) 
+                    if (($UserChoice -eq 1) -or ($UserChoice -eq 2))
                     {
-                        [Int]$ChosenUserChoice = $UserChoice  
+                        [Int]$ChosenUserChoice = $UserChoice
                     }
-                    elseif (($UserChoice -lt 1) -or ($UserChoice -gt 2)) 
+                    elseif (($UserChoice -lt 1) -or ($UserChoice -gt 2))
                     {
                         Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                         Write-Host
@@ -159,14 +159,14 @@ function Write-Task
             {
                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                 Write-Host
-            
+
                 return 0
             }
             else
             {
                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                 Write-Host
-            
+
                 return 0
             }
         }
@@ -192,12 +192,12 @@ function Write-Task
 
             if ($UserChoice -eq 2)
             {
-                if ($FinalVerifyCountTwo -lt $FinalVerifyCountOne) 
+                if ($FinalVerifyCountTwo -lt $FinalVerifyCountOne)
                 {
                     $FinalSourceDir += $SourceArrayTasking[$FinalVerifyCountTwo]
                     $FinalDestDir += $DestArrayTasking[$FinalVerifyCountTwo]
 
-                    [Int]$Numbering = $FinalVerifyCountTwo + 1 
+                    [Int]$Numbering = $FinalVerifyCountTwo + 1
                     Write-Host "Backup $Numbering. " -NoNewline
                     Write-Host "$($FinalSourceDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow -NoNewline
                     Write-Host " to " -NoNewline
@@ -205,13 +205,13 @@ function Write-Task
 
                     Get-SchedulingMenu -NumberX $Numbering -ControlNumber 1 -FlowControl 1 -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                 }
-                elseif ($FinalVerifyCountTwo -eq $FinalVerifyCountOne) 
+                elseif ($FinalVerifyCountTwo -eq $FinalVerifyCountOne)
                 {
                     if ($AllReturnValues.Count -eq $FinalVerifyCountOne)
                     {
-                        Write-Host "$FinalVerifyCountOne backups have been sucessfully verified" 
+                        Write-Host "$FinalVerifyCountOne backups have been sucessfully verified"
                         Write-Host "Thank you for using CaT Scheduler"
-                        Write-Host 
+                        Write-Host
                         Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                     }
                     elseif ($AllReturnValues.Count -ne $FinalVerifyCountOne)
@@ -222,39 +222,39 @@ function Write-Task
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(60)A Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable UserChoice: $UserChoice (Should equal 2)"   
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(60)A Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable UserChoice: $UserChoice (Should equal 2)"
                         Exit-CaTScheduler
                         Exit
-                    }    
+                    }
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(60)B Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable UserChoice: $UserChoice (Should equal 2)"   
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(60)B Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable UserChoice: $UserChoice (Should equal 2)"
                     Exit-CaTScheduler
                     Exit
                 }
             }
             elseif ($UserChoice -eq 1)
             {
-                while ($FinalVerifyCountTwoX -lt $FinalVerifyCountOneX) 
+                while ($FinalVerifyCountTwoX -lt $FinalVerifyCountOneX)
                 {
-                    $FinalSourceDirX += $SourceArrayTasking[$FinalVerifyCountTwoX] 
+                    $FinalSourceDirX += $SourceArrayTasking[$FinalVerifyCountTwoX]
                     $FinalDestDirX += $DestArrayTasking[$FinalVerifyCountTwoX]
 
-                    [Int]$NumberingX = $FinalVerifyCountTwoX + 1 
+                    [Int]$NumberingX = $FinalVerifyCountTwoX + 1
                     Write-Host "Backup $NumberingX. " -NoNewline
                     Write-Host "$($FinalSourceDirX[$FinalVerifyCountTwoX])" -ForegroundColor Yellow -NoNewline
                     Write-Host " to " -NoNewline
                     Write-Host "$($FinalDestDirX[$FinalVerifyCountTwoX])" -ForegroundColor Yellow
 
-                    $FinalVerifyCountTwoX = $FinalVerifyCountTwoX + 1 
+                    $FinalVerifyCountTwoX = $FinalVerifyCountTwoX + 1
                 }
 
                 Get-SchedulingMenu -NumberX $NumberingX -ControlNumber 0 -FlowControl 1 -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(61)A Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable UserChoice: $UserChoice (Should equal 1)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(61)A Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable UserChoice: $UserChoice (Should equal 1)"
                 Exit-CaTScheduler
                 Exit
             }
@@ -266,25 +266,25 @@ function Write-Task
             $FinalSourceDir += $SourceArrayTasking[$FinalVerifyCountTwo]
             $FinalDestDir += $DestArrayTasking[$FinalVerifyCountTwo]
 
-            [Int]$Numbering = $FinalVerifyCountTwo + 1 
+            [Int]$Numbering = $FinalVerifyCountTwo + 1
             Write-Host "Backup $Numbering. " -NoNewline
             Write-Host "$($FinalSourceDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow -NoNewline
             Write-Host " to " -NoNewline
             Write-Host "$($FinalDestDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow
-                
+
             Get-SchedulingMenu -NumberX $Numbering -ControlNumber 1 -FlowControl 1 -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice
         }
         elseif ($TheCountTasking -eq 0)
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(62)A Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable TheCountTasking: $TheCountTasking (Should equal 0), program fails with a value of zero"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(62)A Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable TheCountTasking: $TheCountTasking (Should equal 0), program fails with a value of zero"
             Exit-CaTScheduler
             Exit
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(62)B Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable TheCountTasking: $TheCountTasking (Should equal 0)"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(62)B Parent Function: Write-Task | Child Function: Write-TheSchedule | Variable TheCountTasking: $TheCountTasking (Should equal 0)"
             Exit-CaTScheduler
-            Exit 
+            Exit
         }
     }
 
@@ -314,12 +314,12 @@ function Write-Task
             [Int]$DidAsk = 0,
             [Int]$UserChoice = $null,
             $AllReturnValues = @()
-        ) 
+        )
 
         #Write-Host "Debug: Function: Get-SchedulingMenu | Often: $Often | Day: $Day | Hour: $Hour | Minute: $Minute | Ampm: $AmPm | FlowControl: $FlowControl | GoBackNumber: $GoBackNumber | NumberX: $NumberX | ControlNumber: $ControlNumber | SchedulingVariables: $SchedulingVariables" -ForegroundColor Green
-        #Write-Host "Debug: Function: Get-SchedulingMenu | SourceArrayTasking: $SourceArrayTasking | DestArrayTasking: $DestArrayTasking | TheCountTasking: $TheCountTasking | FinalSourceDir: $FinalSourceDir | FinalDestDir: $FinalDestDir | FinalSourceDirX: $FinalSourceDirX | FinalDestDirX: $FinalDestDirX | FinalVerifyCountTwo: $FinalVerifyCountTwo | FinalVerifyCountOne: $FinalVerifyCountOne | DidAsk: $DidAsk | UserChoice: $UserChoice | AllReturnValues: $AllReturnValues" -ForegroundColor Green        
+        #Write-Host "Debug: Function: Get-SchedulingMenu | SourceArrayTasking: $SourceArrayTasking | DestArrayTasking: $DestArrayTasking | TheCountTasking: $TheCountTasking | FinalSourceDir: $FinalSourceDir | FinalDestDir: $FinalDestDir | FinalSourceDirX: $FinalSourceDirX | FinalDestDirX: $FinalDestDirX | FinalVerifyCountTwo: $FinalVerifyCountTwo | FinalVerifyCountOne: $FinalVerifyCountOne | DidAsk: $DidAsk | UserChoice: $UserChoice | AllReturnValues: $AllReturnValues" -ForegroundColor Green
 
-        function Get-UserInputSchedulingTwo 
+        function Get-UserInputSchedulingTwo
         {
             param
             (
@@ -328,41 +328,41 @@ function Write-Task
                 [Int]$NeedZero = 0
             )
 
-            $UserChoiceXX = Read-Host "Choice" 
+            $UserChoiceXX = Read-Host "Choice"
             Write-Host
 
-            if (($UserChoiceXX -eq "") -and (($NeedZero -eq 0) -or ($NeedZero -eq 1))) 
+            if (($UserChoiceXX -eq "") -and (($NeedZero -eq 0) -or ($NeedZero -eq 1)))
             {
                 if ($NeedZero -eq 1)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red 
+                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
                     Write-Host
 
                     return 60
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red 
+                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
                     Write-Host
 
                     return 0
                 }
             }
 
-            [Bool]$IsItAnIntegerScheduling = [Int]::TryParse($UserChoiceXX, [ref]$null) 
+            [Bool]$IsItAnIntegerScheduling = [Int]::TryParse($UserChoiceXX, [ref]$null)
 
             if (-not $IsItAnIntegerScheduling)
             {
                 if ($NeedZero -eq 1)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red 
+                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
                     Write-Host
 
                     return 60
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red 
+                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
                     Write-Host
 
                     return 0
@@ -379,14 +379,14 @@ function Write-Task
                 {
                     if ($NeedZero -eq 1)
                     {
-                        Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red 
+                        Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
                         Write-Host
 
                         return 60
                     }
                     else
                     {
-                        Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red 
+                        Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
                         Write-Host
 
                         return 0
@@ -396,17 +396,17 @@ function Write-Task
 
             if ((($UserChoiceX -ge 1) -and ($UserChoiceX -le $NumberOfChoices)) -and ($NeedZero -eq 0))
             {
-                [Int]$ChosenUserChoice = $UserChoiceX 
-                
-                return $ChosenUserChoice  
+                [Int]$ChosenUserChoice = $UserChoiceX
+
+                return $ChosenUserChoice
             }
             elseif ((($UserChoiceX -ge 0) -and ($UserChoiceX -le $NumberOfChoices)) -and ($NeedZero -eq 1))
             {
-                [Int]$ChosenUserChoice = $UserChoiceX 
-                
+                [Int]$ChosenUserChoice = $UserChoiceX
+
                 return $ChosenUserChoice
             }
-            elseif (($UserChoiceX -eq 0) -and ($NeedZero -eq 0)) 
+            elseif (($UserChoiceX -eq 0) -and ($NeedZero -eq 0))
             {
                 if ($GoBackNumberX -eq 1)
                 {
@@ -419,21 +419,21 @@ function Write-Task
 
                         while ($LoopingLoop -eq 0)
                         {
-                            Write-Host "Do you want to restart?" 
+                            Write-Host "Do you want to restart?"
                             Write-Host "1. Yes"
                             Write-Host "2. No"
 
                             $UserChoiceXXX = Read-Host "Choice"
                             Write-Host
-                        
+
                             if ($UserChoiceXXX -eq "")
                             {
                                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                                 Write-Host
                                 continue
-                            } 
+                            }
 
-                            [Bool]$IntegerLooping = [Int]::TryParse($UserChoiceXXX, [ref]$null) 
+                            [Bool]$IntegerLooping = [Int]::TryParse($UserChoiceXXX, [ref]$null)
 
                             if (-not $IntegerLooping)
                             {
@@ -456,11 +456,11 @@ function Write-Task
                                 }
                             }
 
-                            if (($UserChoiceXX -eq 1) -or ($UserChoiceXX -eq 2)) 
+                            if (($UserChoiceXX -eq 1) -or ($UserChoiceXX -eq 2))
                             {
-                                [Int]$ChosenUserChoice = $UserChoiceXX  
+                                [Int]$ChosenUserChoice = $UserChoiceXX
                             }
-                            elseif (($UserChoiceXX -lt 1) -or ($UserChoiceXX -gt 2)) 
+                            elseif (($UserChoiceXX -lt 1) -or ($UserChoiceXX -gt 2))
                             {
                                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                                 Write-Host
@@ -490,7 +490,7 @@ function Write-Task
                             }
                         }
                     }
-                    elseif (($TheCountTasking -gt 1) -and ($AllReturnValues.Count -eq 0)) 
+                    elseif (($TheCountTasking -gt 1) -and ($AllReturnValues.Count -eq 0))
                     {
                         Write-Task -SchedulingOperation 1 -PathStatementScheduling $PathStatementScheduling -TotalArrayScheduling $TotalArrayScheduling
                     }
@@ -504,21 +504,21 @@ function Write-Task
 
                         while ($LoopingLoop -eq 0)
                         {
-                            Write-Host "Do you want to restart?" 
+                            Write-Host "Do you want to restart?"
                             Write-Host "1. Yes"
                             Write-Host "2. No"
 
                             $UserChoiceXXX = Read-Host "Choice"
                             Write-Host
-                        
+
                             if ($UserChoiceXXX -eq "")
                             {
                                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                                 Write-Host
                                 continue
-                            } 
+                            }
 
-                            [Bool]$IntegerLooping = [Int]::TryParse($UserChoiceXXX, [ref]$null) 
+                            [Bool]$IntegerLooping = [Int]::TryParse($UserChoiceXXX, [ref]$null)
 
                             if (-not $IntegerLooping)
                             {
@@ -541,11 +541,11 @@ function Write-Task
                                 }
                             }
 
-                            if (($UserChoiceXX -eq 1) -or ($UserChoiceXX -eq 2)) 
+                            if (($UserChoiceXX -eq 1) -or ($UserChoiceXX -eq 2))
                             {
-                                [Int]$ChosenUserChoice = $UserChoiceXX  
+                                [Int]$ChosenUserChoice = $UserChoiceXX
                             }
-                            elseif (($UserChoiceXX -lt 1) -or ($UserChoiceXX -gt 2)) 
+                            elseif (($UserChoiceXX -lt 1) -or ($UserChoiceXX -gt 2))
                             {
                                 Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
                                 Write-Host
@@ -564,7 +564,7 @@ function Write-Task
                                 continue
                             }
 
-                            if ($ChosenUserChoice -eq 2) 
+                            if ($ChosenUserChoice -eq 2)
                             {
                                 Write-TheSchedule -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                             }
@@ -577,7 +577,7 @@ function Write-Task
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)A Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"   
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)A Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"
                         Exit-CaTScheduler
                         Exit
                     }
@@ -592,13 +592,13 @@ function Write-Task
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 2 -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
-                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null))) 
+                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null)))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 3 -Often $Often -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)B Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"   
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)B Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"
                         Exit-CaTScheduler
                         Exit
                     }
@@ -607,22 +607,22 @@ function Write-Task
                 {
                     if (($Day -eq "") -or ($Day -eq $null))
                     {
-                        Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 5 -Often $Often -Hour $Hour -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues 
+                        Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 5 -Often $Often -Hour $Hour -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
-                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null))) 
+                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null)))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 5 -Often $Often -Day $Day -Hour $Hour -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)C Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"   
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)C Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"
                         Exit-CaTScheduler
                         Exit
                     }
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)D Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"   
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)D Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -633,38 +633,38 @@ function Write-Task
                 {
                     if (($Day -eq "") -or ($Day -eq $null))
                     {
-                        Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 4 -Often $Often -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues  
+                        Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 4 -Often $Often -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
-                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null))) 
+                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null)))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 4 -Often $Often -Day $Day -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)E Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"   
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)E Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"
                         Exit-CaTScheduler
                         Exit
                     }
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)F Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"   
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(63)F Parent Function: Write-Task | Child Function: Get-UserInputSchedulingTwo"
                     Exit-CaTScheduler
                     Exit
                 }
             }
-            elseif ((($UserChoiceX -lt 0) -or ($UserChoiceX -gt $NumberOfChoices)) -and (($NeedZero -eq 0) -or ($NeedZero -eq 1))) 
+            elseif ((($UserChoiceX -lt 0) -or ($UserChoiceX -gt $NumberOfChoices)) -and (($NeedZero -eq 0) -or ($NeedZero -eq 1)))
             {
                 if ($NeedZero -eq 1)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red 
+                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
                     Write-Host
 
                     return 60
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red 
+                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
                     Write-Host
 
                     return 0
@@ -674,14 +674,14 @@ function Write-Task
             {
                 if ($NeedZero -eq 1)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red 
+                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
                     Write-Host
 
                     return 60
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red 
+                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
                     Write-Host
 
                     return 0
@@ -689,7 +689,7 @@ function Write-Task
             }
         }
 
-        function Get-SchedulingMenuOne 
+        function Get-SchedulingMenuOne
         {
             param
             (
@@ -707,7 +707,7 @@ function Write-Task
                     Write-Host "1. Daily"
                     Write-Host "2. Weekly"
 
-                    $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 1 -NeedZero 0 
+                    $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 1 -NeedZero 0
                 }
 
                 $UsrOftenChoice = $LoopNumOne
@@ -722,37 +722,37 @@ function Write-Task
                     Write-Host "1. Daily"
                     Write-Host "2. Weekly"
 
-                    $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 1 -NeedZero 0 
+                    $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 1 -NeedZero 0
                 }
 
                 $UsrOftenChoice = $LoopNumOne
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(64)B Parent Function: Write-Task | Child Function: Get-SchedulingMenuOne | Variable ControlNum: $ControlNum (Should equal 0 or 1)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(64)B Parent Function: Write-Task | Child Function: Get-SchedulingMenuOne | Variable ControlNum: $ControlNum (Should equal 0 or 1)"
                 Exit-CaTScheduler
                 Exit
             }
-    
+
             if ($UsrOftenChoice -eq 1)
             {
-                $OftenX = "Daily" 
+                $OftenX = "Daily"
             }
             elseif ($UsrOftenChoice -eq 2)
             {
                 $OftenX = "Weekly"
-            } 
+            }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(64)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuOne | Variable UsrOftenChoice: $UsrOftenChoice (Shoudl equal 1 or 2)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(64)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuOne | Variable UsrOftenChoice: $UsrOftenChoice (Shoudl equal 1 or 2)"
                 Exit-CaTScheduler
                 Exit
             }
 
             return $OftenX
         }
-       
-        function Get-SchedulingMenuTwo 
+
+        function Get-SchedulingMenuTwo
         {
             [Int]$LoopNumOne = 0
 
@@ -765,11 +765,11 @@ function Write-Task
                 Write-Host "4. Wednesday"
                 Write-Host "5. Thursday"
                 Write-Host "6. Friday"
-                Write-Host "7. Saturday"  
+                Write-Host "7. Saturday"
 
-                $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 7 -GoBackNumberX 2 -NeedZero 0 
-            } 
-            
+                $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 7 -GoBackNumberX 2 -NeedZero 0
+            }
+
             $DayOfWeek = $LoopNumOne
 
             if ($DayOfWeek -eq 1)
@@ -802,7 +802,7 @@ function Write-Task
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(65)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuTwo | Variable DayOfWeek: $DayOfWeek (Shoudl equal 1 - 7)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(65)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuTwo | Variable DayOfWeek: $DayOfWeek (Shoudl equal 1 - 7)"
                 Exit-CaTScheduler
                 Exit
             }
@@ -810,7 +810,7 @@ function Write-Task
             return $DayX
         }
 
-        function Get-SchedulingMenuThree 
+        function Get-SchedulingMenuThree
         {
             [Int]$LoopNumOne = 0
 
@@ -821,10 +821,10 @@ function Write-Task
                 Write-Host "01 02 03 04 05 06 07 08 09 10 11 12"
                 Write-Host "Type in the hour you want the backup to happen"
 
-                $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 12 -GoBackNumberX 3 -NeedZero 0 
+                $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 12 -GoBackNumberX 3 -NeedZero 0
             }
 
-            $UsrHourChoice = $LoopNumOne 
+            $UsrHourChoice = $LoopNumOne
 
             if (($UsrHourChoice -ge 1) -and ($UsrHourChoice -le 12))
             {
@@ -832,7 +832,7 @@ function Write-Task
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(66)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuThree | Variable UsrHourChoice: $UsrHourChoice (Shoudl equal 1 - 12)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(66)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuThree | Variable UsrHourChoice: $UsrHourChoice (Shoudl equal 1 - 12)"
                 Exit-CaTScheduler
                 Exit
             }
@@ -840,31 +840,31 @@ function Write-Task
             return $HourX
         }
 
-        function Get-SchedulingMenuFour 
+        function Get-SchedulingMenuFour
         {
             [Int]$LoopNumOne = 60
 
             while ($LoopNumOne -eq 60)
             {
-                Write-Host "XX:" -NoNewline 
+                Write-Host "XX:" -NoNewline
                 Write-Host "XX" -NoNewline -ForegroundColor Yellow
                 Write-Host " AM/PM"
                 Write-Host "00 - 59"
                 Write-Host "Type in the minute you want the backup to happen"  -NoNewline
                 Write-Host "    (60 is to go back)" -ForegroundColor Yellow
 
-                $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 59 -GoBackNumberX 4 -NeedZero 1 
+                $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 59 -GoBackNumberX 4 -NeedZero 1
             }
-       
+
             $UsrMinuteChoice = $LoopNumOne
 
             if (($UsrMinuteChoice -ge 0) -and ($UsrMinuteChoice -le 59))
             {
-                $MinuteX = $UsrMinuteChoice  
+                $MinuteX = $UsrMinuteChoice
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(67)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuFour | Variable UsrMinuteChoice: $UsrMinuteChoice (Shoudl equal 0 - 59)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(67)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuFour | Variable UsrMinuteChoice: $UsrMinuteChoice (Shoudl equal 0 - 59)"
                 Exit-CaTScheduler
                 Exit
             }
@@ -873,18 +873,18 @@ function Write-Task
         }
 
         function Get-SchedulingMenuFive
-        { 
+        {
             [Int]$LoopNumOne = 0
 
             while ($LoopNumOne -eq 0)
             {
-                Write-Host "XX:XX" -NoNewline 
+                Write-Host "XX:XX" -NoNewline
                 Write-Host " AM/PM" -ForegroundColor Yellow
                 Write-Host "AM or PM?"
                 Write-Host "1. AM"
                 Write-Host "2. PM"
 
-                $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 5 -NeedZero 0 
+                $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 5 -NeedZero 0
             }
 
             $UsrAmpmChoice = $LoopNumOne
@@ -899,17 +899,17 @@ function Write-Task
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(68)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuFive | Variable UsrAmpmChoice: $UsrAmpmChoice (Shoudl equal 1 or 2)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(68)A Parent Function: Write-Task | Child Function: Get-SchedulingMenuFive | Variable UsrAmpmChoice: $UsrAmpmChoice (Shoudl equal 1 or 2)"
                 Exit-CaTScheduler
-                Exit 
+                Exit
             }
 
             return $AmPmX
         }
-        
+
         if (($FlowControl -eq 1) -or ($GoBackNumber -eq 2))
         {
-            $Often = Get-SchedulingMenuOne -Number $NumberX -ControlNum $ControlNumber 
+            $Often = Get-SchedulingMenuOne -Number $NumberX -ControlNum $ControlNumber
 
             if ($Often -eq "Weekly")
             {
@@ -921,36 +921,36 @@ function Write-Task
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(69)A Parent Function: Write-Task | Variable Often: $Often (Shoudl equal Weekly or Daily)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(69)A Parent Function: Write-Task | Variable Often: $Often (Shoudl equal Weekly or Daily)"
                 Exit-CaTScheduler
                 Exit
             }
-        } 
+        }
 
         if (($FlowControl -eq 2) -or ($GoBackNumber -eq 3))
         {
-            $Day = Get-SchedulingMenuTwo 
+            $Day = Get-SchedulingMenuTwo
 
             $FlowControl = 3
         }
 
         if (($FlowControl -eq 3) -or ($GoBackNumber -eq 4))
         {
-            $Hour = Get-SchedulingMenuThree  
+            $Hour = Get-SchedulingMenuThree
 
             $FlowControl = 4
         }
 
         if (($FlowControl -eq 4) -or ($GoBackNumber -eq 5))
         {
-            $Minute = Get-SchedulingMenuFour 
+            $Minute = Get-SchedulingMenuFour
 
             $FlowControl = 5
         }
 
         if ($FlowControl -eq 5)
         {
-            $AmPm = Get-SchedulingMenuFive 
+            $AmPm = Get-SchedulingMenuFive
 
             $FlowControl = 6
         }
@@ -960,22 +960,22 @@ function Write-Task
 
             if (($Day -eq "") -or ($Day -eq $null))
             {
-                $SchedulingVariablesX = @($Often, $Hour, $Minute, $AmPm) 
-                
-                $FlowControl = 7           
+                $SchedulingVariablesX = @($Often, $Hour, $Minute, $AmPm)
+
+                $FlowControl = 7
             }
-            elseif ((-not($Day -eq "")) -or (-not($Day -eq $null))) 
+            elseif ((-not($Day -eq "")) -or (-not($Day -eq $null)))
             {
-                $SchedulingVariablesX = @($Often, $Day, $Hour, $Minute, $AmPm) 
-                
-                $FlowControl = 7           
+                $SchedulingVariablesX = @($Often, $Day, $Hour, $Minute, $AmPm)
+
+                $FlowControl = 7
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)A Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 6)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)A Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 6)"
                 Exit-CaTScheduler
                 Exit
-            }    
+            }
         }
 
         if ($FlowControl -eq 7)
@@ -998,67 +998,67 @@ function Write-Task
         {
             $SchedulingVariablesXX = $SchedulingVariables
 
-            if (($UserChoice -eq 1) -or ($UserChoice -eq 3)) 
+            if (($UserChoice -eq 1) -or ($UserChoice -eq 3))
             {
-                while ($FinalVerifyCountTwo -lt $FinalVerifyCountOne) 
+                while ($FinalVerifyCountTwo -lt $FinalVerifyCountOne)
                 {
                     $FinalSourceDir += $SourceArrayTasking[$FinalVerifyCountTwo]
                     $FinalDestDir += $DestArrayTasking[$FinalVerifyCountTwo]
 
                     [Bool]$TaskCreationReturnValue = Format-TheScheduledTask -SourceDir $FinalSourceDir[$FinalVerifyCountTwo] -DestinationDir $FinalDestDir[$FinalVerifyCountTwo] -SchedulingVariables $SchedulingVariablesXX
-                    
+
                     [Int]$TaskCreationNumbering = $FinalVerifyCountTwo + 1
-                    
+
                     [String]$SourceX = $FinalSourceDir[$FinalVerifyCountTwo]
                     [String]$DestX = $FinalDestDir[$FinalVerifyCountTwo]
 
-                    if (($TaskCreationReturnValue -eq $false) -or (-not($TaskCreationReturnValue -eq $true))) 
+                    if (($TaskCreationReturnValue -eq $false) -or (-not($TaskCreationReturnValue -eq $true)))
                     {
                         Write-Host
                         Write-Host "Backup $TaskCreationNumbering was not sucessfully verified" -ForegroundColor Red
                         Write-Host "Source: $SourceX" -ForegroundColor Red
                         Write-Host "Destination: $DestX" -ForegroundColor Red
                         Write-Host
-                    } 
+                    }
                     elseif ($TaskCreationReturnValue -eq $true)
                     {
                         Write-Host
                         Write-Host "Backup $TaskCreationNumbering was sucessfully verified"
                         Write-Host "Source: $SourceX"
                         Write-Host "Destination: $DestX"
-                        Write-Host  
+                        Write-Host
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)A Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"   
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)A Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"
                         Exit-CaTScheduler
                         Exit
                     }
-                    
+
                     $AllReturnValues += $TaskCreationReturnValue
 
                     $FinalVerifyCountTwo = $FinalVerifyCountTwo + 1
                 }
-                
+
                 if ($AllReturnValues.Count -eq $FinalVerifyCountOne)
                 {
                     if ($UserChoice -eq 1)
                     {
-                        Write-Host "$FinalVerifyCountOne backups have been sucessfully verified" 
+                        Write-Host "$FinalVerifyCountOne backups have been sucessfully verified"
                         Write-Host "Thank you for using CaT Scheduler"
-                        Write-Host 
+                        Write-Host
                         Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                     }
-                    elseif ($UserChoice -eq 3) 
+                    elseif ($UserChoice -eq 3)
                     {
-                        Write-Host "$FinalVerifyCountOne backup was sucessfully verified" 
+                        Write-Host "$FinalVerifyCountOne backup was sucessfully verified"
                         Write-Host "Thank you for using CaT Scheduler"
-                        Write-Host 
+                        Write-Host
                         Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)B Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"   
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)B Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"
                         Exit-CaTScheduler
                         Exit
                     }
@@ -1071,39 +1071,39 @@ function Write-Task
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)C Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"   
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)C Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"
                     Exit-CaTScheduler
                     Exit
-                }  
+                }
             }
             elseif ($UserChoice -eq 2)
             {
-                [Bool]$TaskCreationReturnValue = Format-TheScheduledTask -SourceDir $FinalSourceDir[$FinalVerifyCountTwo] -DestinationDir $FinalDestDir[$FinalVerifyCountTwo] -SchedulingVariables $SchedulingVariablesXX   
+                [Bool]$TaskCreationReturnValue = Format-TheScheduledTask -SourceDir $FinalSourceDir[$FinalVerifyCountTwo] -DestinationDir $FinalDestDir[$FinalVerifyCountTwo] -SchedulingVariables $SchedulingVariablesXX
 
                 [Int]$TaskCreationNumbering = $FinalVerifyCountTwo + 1
 
                 [String]$SourceX = $FinalSourceDir[$FinalVerifyCountTwo]
                 [String]$DestX = $FinalDestDir[$FinalVerifyCountTwo]
 
-                if (($TaskCreationReturnValue -eq $false) -or (-not($TaskCreationReturnValue -eq $true))) 
+                if (($TaskCreationReturnValue -eq $false) -or (-not($TaskCreationReturnValue -eq $true)))
                 {
                     Write-Host
                     Write-Host "Backup $TaskCreationNumbering was not sucessfully verified" -ForegroundColor Red
                     Write-Host "Source: $SourceX" -ForegroundColor Red
                     Write-Host "Destination: $DestX" -ForegroundColor Red
                     Write-Host
-                } 
+                }
                 elseif ($TaskCreationReturnValue -eq $true)
                 {
                     Write-Host
                     Write-Host "Backup $TaskCreationNumbering was sucessfully verified"
                     Write-Host "Source: $SourceX"
                     Write-Host "Destination: $DestX"
-                    Write-Host  
+                    Write-Host
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)D Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"   
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)D Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -1116,20 +1116,20 @@ function Write-Task
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)E Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(70)E Parent Function: Write-Task | Variable FlowControl: $FlowControl  (Shoudl equal 8)"
                 Exit-CaTScheduler
                 Exit
             }
         }
     }
- 
+
     function Format-TheScheduledTask
     {
         param
         (
             [String]$SourceDir,
             [String]$DestinationDir,
-            $SchedulingVariables = @()   
+            $SchedulingVariables = @()
         )
 
         function Get-TaskNumber
@@ -1137,47 +1137,47 @@ function Write-Task
             [String]$FilePath = "$PathStatementScheduling\ConfigurationFiles\TaskNumber.txt"
             $Content = Get-Content -Path $FilePath
             [Int]$TaskNumber = [Int]$Content
-    
-            return $TaskNumber 
+
+            return $TaskNumber
         }
 
         [Int]$ScheduledTaskNumber = Get-TaskNumber
 
-        [Int]$ScheduledTaskNumberX = $ScheduledTaskNumber + 1   
+        [Int]$ScheduledTaskNumberX = $ScheduledTaskNumber + 1
 
         if ($SchedulingVariables.Count -eq 5)
         {
-            [String]$OftenX = $SchedulingVariables[0] 
-            [String]$DayX = $SchedulingVariables[1] 
-            [String]$HourX = $SchedulingVariables[2] 
-            [String]$MinuteX = $SchedulingVariables[3] 
-            [String]$AmpmX = $SchedulingVariables[4] 
+            [String]$OftenX = $SchedulingVariables[0]
+            [String]$DayX = $SchedulingVariables[1]
+            [String]$HourX = $SchedulingVariables[2]
+            [String]$MinuteX = $SchedulingVariables[3]
+            [String]$AmpmX = $SchedulingVariables[4]
         }
         elseif ($SchedulingVariables.Count -eq 4)
         {
-            [String]$OftenX = $SchedulingVariables[0]  
-            [String]$HourX = $SchedulingVariables[1] 
-            [String]$MinuteX = $SchedulingVariables[2] 
+            [String]$OftenX = $SchedulingVariables[0]
+            [String]$HourX = $SchedulingVariables[1]
+            [String]$MinuteX = $SchedulingVariables[2]
             [String]$AmpmX = $SchedulingVariables[3]
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(71)A Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable SchedulingVariables Count should equal 4 or 5"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(71)A Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable SchedulingVariables Count should equal 4 or 5"
             Exit-CaTScheduler
             Exit
         }
 
-        if ($MinuteX.Length -eq 1) 
+        if ($MinuteX.Length -eq 1)
         {
             [String]$TimeX = "$($HourX):0$($MinuteX)$($AmpmX)"
         }
-        elseif ($MinuteX.Length -eq 2) 
+        elseif ($MinuteX.Length -eq 2)
         {
             [String]$TimeX = "$($HourX):$($MinuteX)$($AmpmX)"
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(71)B Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable MinuteX length should equal 1 or 2"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(71)B Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable MinuteX length should equal 1 or 2"
             Exit-CaTScheduler
             Exit
         }
@@ -1186,30 +1186,30 @@ function Write-Task
 
         if ($OftenX -eq "Daily")
         {
-            $Trigger = New-ScheduledTaskTrigger -Daily -At $TimeX 
+            $Trigger = New-ScheduledTaskTrigger -Daily -At $TimeX
 
             [Int]$EndMsg = 1
         }
         elseif ($OftenX -eq "Weekly")
         {
             $Trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $DayX -At $TimeX
-        
-            [Int]$EndMsg = 2    
+
+            [Int]$EndMsg = 2
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(71)C Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable OftenX: $OftenX (Should equal Daily or Weekly)"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(71)C Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable OftenX: $OftenX (Should equal Daily or Weekly)"
             Exit-CaTScheduler
             Exit
         }
 
-        [String]$WrapperScript = "$PathStatementScheduling\WrapperScript.ps1" 
+        [String]$WrapperScript = "$PathStatementScheduling\WrapperScript.ps1"
 
-        [String]$Arguments = "-NoProfile -WindowStyle Hidden -File `"$WrapperScript`" -SourceDir `"$SourceDir`" -DestDir `"$DestinationDir`"" 
+        [String]$Arguments = "-NoProfile -WindowStyle Hidden -File `"$WrapperScript`" -SourceDir `"$SourceDir`" -DestDir `"$DestinationDir`""
 
         $Action = New-ScheduledTaskAction -Execute 'PowerShell.exe' -Argument $Arguments
         $Principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
-        $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable 
+        $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
 
         $NewTaskAction = Register-ScheduledTask -TaskName $Taskname -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings -Description "Task created by CaT Scheduler."
 
@@ -1232,14 +1232,14 @@ function Write-Task
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(71)D Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable EndMsg: $EndMsg (Should equal 1 or 2)"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(71)D Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable EndMsg: $EndMsg (Should equal 1 or 2)"
             Exit-CaTScheduler
             Exit
-        } 
+        }
 
         if ($SchedulingVariables.Count -eq 5)
         {
-            $AllVariables = @($SourceDir, $DestinationDir, $SchedulingVariables, $ScheduledTaskNumber, $ScheduledTaskNumberX, $OftenX, $DayX, $HourX, $MinuteX, $AmpmX, $TimeX, $Taskname, $Trigger, $EndMsg, $WrapperScript, $Arguments, $Action, $Principal, $Settings, $NewTaskAction, $FilePath, $NewItemTaskNumber) 
+            $AllVariables = @($SourceDir, $DestinationDir, $SchedulingVariables, $ScheduledTaskNumber, $ScheduledTaskNumberX, $OftenX, $DayX, $HourX, $MinuteX, $AmpmX, $TimeX, $Taskname, $Trigger, $EndMsg, $WrapperScript, $Arguments, $Action, $Principal, $Settings, $NewTaskAction, $FilePath, $NewItemTaskNumber)
 
             if ($AllVariables -contains $null)
             {
@@ -1251,14 +1251,14 @@ function Write-Task
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(72)A Parent Function: Write-Task | Child Function: Format-TheScheduledTask"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(72)A Parent Function: Write-Task | Child Function: Format-TheScheduledTask"
                 Exit-CaTScheduler
                 Exit
             }
         }
-        elseif ($SchedulingVariables.Count -eq 4) 
+        elseif ($SchedulingVariables.Count -eq 4)
         {
-            $AllVariables = @($SourceDir, $DestinationDir, $SchedulingVariables, $ScheduledTaskNumber, $ScheduledTaskNumberX, $OftenX, $HourX, $MinuteX, $AmpmX, $TimeX, $Taskname, $Trigger, $EndMsg, $WrapperScript, $Arguments, $Action, $Principal, $Settings, $NewTaskAction, $FilePath, $NewItemTaskNumber) 
+            $AllVariables = @($SourceDir, $DestinationDir, $SchedulingVariables, $ScheduledTaskNumber, $ScheduledTaskNumberX, $OftenX, $HourX, $MinuteX, $AmpmX, $TimeX, $Taskname, $Trigger, $EndMsg, $WrapperScript, $Arguments, $Action, $Principal, $Settings, $NewTaskAction, $FilePath, $NewItemTaskNumber)
 
             if ($AllVariables -contains $null)
             {
@@ -1270,14 +1270,14 @@ function Write-Task
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(72)B Parent Function: Write-Task | Child Function: Format-TheScheduledTask"   
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(72)B Parent Function: Write-Task | Child Function: Format-TheScheduledTask"
                 Exit-CaTScheduler
                 Exit
             }
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(72)C Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable SchedulingVariables Count should equal 4 or 5"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(72)C Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable SchedulingVariables Count should equal 4 or 5"
             Exit-CaTScheduler
             Exit
         }
@@ -1296,14 +1296,14 @@ function Write-Task
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(73)A Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable DoesNotHaveNull: $DoesNotHaveNull (Should equal true or false)"   
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(73)A Parent Function: Write-Task | Child Function: Format-TheScheduledTask | Variable DoesNotHaveNull: $DoesNotHaveNull (Should equal true or false)"
             Exit-CaTScheduler
             Exit
         }
     }
 
     if ($SchedulingOperation -eq 1)
-    {                                                                  
+    {
         $SourceArrayScheduling = $TotalArrayScheduling[0]
         $DestinationArrayScheduling = $TotalArrayScheduling[1]
 
@@ -1326,7 +1326,7 @@ function Write-Task
             Exit-CaTScheduler
             Exit
         }
-        
+
         Write-TheSchedule -SourceArrayTasking $SourceArrayScheduling -DestArrayTasking $DestinationArrayScheduling -TheCountTasking $FinalCountScheduling
     }
     else
