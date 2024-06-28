@@ -4,6 +4,8 @@ function Invoke-ReadWrite
 {
     param
     (
+        $InformationPreference = "Continue",
+        $WarningPreference = "Continue",
         [Int]$OperationChoice = $null,
         [String]$Message = $null,
         [Int]$LogType = $null,
@@ -167,11 +169,13 @@ function Invoke-ReadWrite
 
             [Int]$TotalKeys = $PathHashTableReadWrite.Count
 
-            Write-Host "Saved path statements:" -ForegroundColor Yellow
+            [Console]::ForegroundColor = [ConsoleColor]::Magenta
+            Write-Information -MessageData "Saved path statements:" 
+            [Console]::ResetColor()
 
             foreach ($Key in $PathHashTableReadWrite.Keys)
             {
-                Write-Host "$Key. $($PathHashTableReadWrite[$Key])"
+                Write-Information -MessageData "$Key. $($PathHashTableReadWrite[$Key])"
             }
 
              if ($SourceOrDest -eq 1)
@@ -189,7 +193,7 @@ function Invoke-ReadWrite
                 Exit
             }
 
-            Write-Host "Choose the $DirType"
+            Write-Information -MessageData "Choose the $DirType"
 
             if ($SourceOrDest -eq 1)
             {
@@ -290,13 +294,15 @@ function Invoke-ReadWrite
                     $ContinueTheLoop = $null
                 )
 
+                [String]$WarningOne = "The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back."
+
                 $UserInputX = Read-Host "Choice"
-                Write-Host
+                Write-Information -MessageData ""
 
                 if ($UserInputX -eq "")
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
 
                     if ($GoBackControl -eq 1)
                     {
@@ -312,8 +318,8 @@ function Invoke-ReadWrite
 
                 if (-not $IsItAnInteger)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
 
                     if ($GoBackControl -eq 1)
                     {
@@ -333,8 +339,8 @@ function Invoke-ReadWrite
                 {
                     if ($_.Exception.Message -like "*Input string was not in a correct format.*")
                     {
-                        Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                        Write-Host
+                        $WarningOne | Write-Warning
+                        Write-Information -MessageData ""
 
                         if ($GoBackControl -eq 1)
                         {
@@ -365,8 +371,8 @@ function Invoke-ReadWrite
                 }
                 elseif (($UserInput -lt 0) -or ($UserInput -gt $NumberOfChoices))
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
 
                     if ($GoBackControl -eq 1)
                     {
@@ -379,8 +385,8 @@ function Invoke-ReadWrite
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
 
                     if ($GoBackControl -eq 1)
                     {
@@ -395,7 +401,7 @@ function Invoke-ReadWrite
 
             while ($ContinueTheLoop -eq 0)
             {
-                Write-Host "Choose the backup that you want to delete"
+                Write-Information -MessageData "Choose the backup that you want to delete"
                 $ContinueTheLoop = Get-UserInput
             }
 
@@ -412,8 +418,8 @@ function Invoke-ReadWrite
             }
             elseif ($TaskArray.Count -eq 0)
             {
-                Write-Host "There are no scheduled backups"
-                Write-Host
+                Write-Information -MessageData "There are no scheduled backups"
+                Write-Information -MessageData
                 Start-CaTScheduler -PathStatementStartup $PathStatementReadWrite -Start 1
             }
             else
@@ -433,9 +439,9 @@ function Invoke-ReadWrite
 
             while ($ContinueTheLoopTwo -eq 0)
             {
-                Write-Host "$TheWordsThree"
-                Write-Host "1. Yes"
-                Write-Host "2. No"
+                Write-Information -MessageData "$TheWordsThree"
+                Write-Information -MessageData "1. Yes"
+                Write-Information -MessageData "2. No"
                 $ContinueTheLoopTwo = Get-UserInput -ContinueTheLoop $ContinueTheLoop
             }
 
@@ -481,7 +487,7 @@ function Invoke-ReadWrite
                 }
                 elseif ((-not ($FilteredProcesses -eq $null)) -or (-not ($FilteredProcesses -eq "")))
                 {
-                    Write-Host "Loading Scheduled Tasks"
+                    Write-Information -MessageData "Loading Scheduled Tasks"
                     Start-Sleep -Seconds 2
                 }
                 else
@@ -494,8 +500,8 @@ function Invoke-ReadWrite
 
             if ($ContinueLooking -eq 0)
             {
-                Write-Host "Done loading"
-                Write-Host
+                Write-Information -MessageData "Done loading"
+                Write-Information -MessageData
 
                 return $true
             }

@@ -4,6 +4,8 @@ function Set-Input
 {
     param
     (
+        $InformationPreference = "Continue",
+        $WarningPreference = "Continue",
         [Int]$ChooseMenuX = $null,
         [Int]$TypeOfBackupX = $null,
         [Object[][]]$TotalArrayInput = @(),
@@ -22,17 +24,20 @@ function Set-Input
 
     function Get-Path
     {
+        [String]$WarningFour = "The input given was not valid. Please enter a valid path statement or 0 to go back."
+        [String]$WarningFive = "The input given was not valid. A file cannot be used as the destination path."
+
         while ($ContinueLoopOne -eq 0)
         {
-            Write-Host "Enter the source directory or file"
+            Write-Information -MessageData "Enter the source directory or file"
 
             $SourceDirX = Read-Host "Your path"
-            Write-Host
+            Write-Information -MessageData ""
 
             if ($SourceDirX -eq "")
             {
-                Write-Host "Error: The input given was not valid. Please enter a valid path statement or 0 to go back." -ForegroundColor Red
-                Write-Host
+                $WarningFour | Write-Warning
+                Write-Information -MessageData ""
 
                 if (-not $TotalArrayInput -or $TotalArrayInput.Count -eq 0)
                 {
@@ -135,8 +140,8 @@ function Set-Input
             }
             elseif ($IsItGoodPath -eq $false)
             {
-                Write-Host "Error: The input given was not valid. Please enter a valid path statement or 0 to go back." -ForegroundColor Red
-                Write-Host
+                $WarningFour | Write-Warning
+                Write-Information -MessageData ""
             }
             else
             {
@@ -148,14 +153,14 @@ function Set-Input
 
         while ($ContinueLoopTwo -eq 0)
         {
-            Write-Host "Enter the destination directory"
+            Write-Information -MessageData "Enter the destination directory"
             $DestDirX = Read-Host "Your path"
 
             if ($DestDirX -eq "")
             {
-                Write-Host
-                Write-Host "Error: The input given was not valid. Please enter a valid path statement or 0 to go back." -ForegroundColor Red
-                Write-Host
+                Write-Information -MessageData ""
+                $WarningFour | Write-Warning
+                Write-Information -MessageData ""
 
                 if (-not $TotalArrayInput -or $TotalArrayInput.Count -eq 0)
                 {
@@ -176,12 +181,12 @@ function Set-Input
             {
                 if (-not $TotalArrayInput -or $TotalArrayInput.Count -eq 0)
                 {
-                    Write-Host
+                    Write-Information -MessageData ""
                     Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 elseif ($TotalArrayInput.Count -eq 2)
                 {
-                    Write-Host
+                    Write-Information -MessageData ""
                     Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 else
@@ -225,9 +230,9 @@ function Set-Input
 
                 if ($IsItGoodPathTwo -eq $false)
                 {
-                    Write-Host
-                    Write-Host "Error: The input given was not valid. Please enter a valid path statement or 0 to go back." -ForegroundColor Red
-                    Write-Host
+                    Write-Information -MessageData ""
+                    $WarningFour | Write-Warning
+                    Write-Information -MessageData ""
                 }
                 elseif ($IsItGoodPathTwo -eq $true)
                 {
@@ -235,9 +240,9 @@ function Set-Input
 
                     if ($IsItGoodPathThree -eq $false)
                     {
-                        Write-Host
-                        Write-Host "Error: The input given was not valid. A file cannot be used as the destination path." -ForegroundColor Red
-                        Write-Host
+                        Write-Information -MessageData ""
+                        $WarningFive | Write-Warning
+                        Write-Information -MessageData ""
                     }
                     elseif ($IsItGoodPathThree -eq $true)
                     {
@@ -319,7 +324,7 @@ function Set-Input
             Exit
         }
 
-        Write-Host
+        Write-Information -MessageData ""
         return $TheTotalArrayX
     }
 

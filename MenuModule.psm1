@@ -4,6 +4,8 @@ function Get-Menu
 {
     param
     (
+        $InformationPreference = "Continue",
+        $WarningPreference = "Continue",
         [Int]$ChooseMenu = $null,
         [Int]$TypeOfBackup = $null,
         [Object[][]]$TotalArrayMenu = @(),
@@ -24,11 +26,15 @@ function Get-Menu
 
     function Get-UserInput
     {
+        [String]$WarningOne = "The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back."
+        [String]$WarningTwo = "The input given was not valid. The options are 1 - $NumberOfChoices."
+        [String]$WarningThree = "You cannot go back from here. Choose 2 to restart." 
+
         $UserInputXX = Read-Host "Choice"
 
         if (-not($SourceOrDestMenu -eq 2))
         {
-            Write-Host
+            Write-Information -MessageData ""
         }
 
         if ($UserInputXX -eq "")
@@ -37,16 +43,16 @@ function Get-Menu
             {
                 if ($SourceOrDestMenu -eq 2)
                 {
-                    Write-Host
+                    Write-Information -MessageData ""
                 }
 
-                Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                Write-Host
+                $WarningOne | Write-Warning
+                Write-Information -MessageData ""
             }
             else
             {
-                Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices." -ForegroundColor Red
-                Write-Host
+                $WarningTwo | Write-Warning
+                Write-Information -MessageData ""
             }
 
             if ($PreserveArray -eq 1)
@@ -199,16 +205,16 @@ function Get-Menu
             {
                 if ($SourceOrDestMenu -eq 2)
                 {
-                    Write-Host
+                    Write-Information -MessageData ""
                 }
 
-                Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                Write-Host
+                $WarningOne | Write-Warning
+                Write-Information -MessageData ""
             }
             else
             {
-                Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices." -ForegroundColor Red
-                Write-Host
+                $WarningTwo | Write-Warning
+                Write-Information -MessageData ""
             }
 
             if ($PreserveArray -eq 1)
@@ -365,16 +371,16 @@ function Get-Menu
                 {
                     if ($SourceOrDestMenu -eq 2)
                     {
-                        Write-Host
+                        Write-Information -MessageData ""
                     }
 
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices." -ForegroundColor Red
-                    Write-Host
+                    $WarningTwo | Write-Warning
+                    Write-Information -MessageData ""
                 }
 
                 if ($PreserveArray -eq 1)
@@ -609,17 +615,17 @@ function Get-Menu
                     {
                         if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
                         {
-                            Write-Host
+                            Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1
                         }
                         elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
                         {
-                            Write-Host
+                            Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -SourcePathItem $SourcePathItemMenu
                         }
                         elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
                         {
-                            Write-Host
+                            Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu
                         }
                         else
@@ -633,17 +639,17 @@ function Get-Menu
                     {
                         if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
                         {
-                            Write-Host
+                            Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -TotalArrayReadWrite $TotalArrayMenu
                         }
                         elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
                         {
-                            Write-Host
+                            Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                         }
                         elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
                         {
-                            Write-Host
+                            Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                         }
                         else
@@ -676,8 +682,8 @@ function Get-Menu
             }
             elseif ($PreserveArray -eq 5)
             {
-                Write-Host "You cannot go back from here. Choose 2 to restart." -ForegroundColor Yellow
-                Write-Host
+                $WarningThree | Write-Warning
+                Write-Information -MessageData ""
                 Get-Menu -ChooseMenu 6 -TypeOfBackup $TypeOfBackup -TotalArrayMenu $TotalArrayMenu -PathStatementMenu $PathStatementMenu
             }
             else
@@ -691,16 +697,16 @@ function Get-Menu
             {
                 if ($SourceOrDestMenu -eq 2)
                 {
-                    Write-Host
+                    Write-Information -MessageData ""
                 }
 
-                Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                Write-Host
+                $WarningOne | Write-Warning
+                Write-Information -MessageData ""
             }
             else
             {
-                Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices." -ForegroundColor Red
-                Write-Host
+                $WarningTwo | Write-Warning
+                Write-Information -MessageData ""
             }
 
             if ($PreserveArray -eq 1)
@@ -850,16 +856,16 @@ function Get-Menu
             {
                 if ($SourceOrDestMenu -eq 2)
                 {
-                    Write-Host
+                    Write-Information -MessageData ""
                 }
 
-                Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back." -ForegroundColor Red
-                Write-Host
+                $WarningOne | Write-Warning
+                Write-Information -MessageData ""
             }
             else
             {
-                Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices." -ForegroundColor Red
-                Write-Host
+                $WarningTwo | Write-Warning
+                Write-Information -MessageData ""
             }
 
             if ($PreserveArray -eq 1)
@@ -1009,26 +1015,29 @@ function Get-Menu
 
     function Get-MainMenu
     {
-        Write-Host "Main Menu" -ForegroundColor Yellow
-        Write-Host
-        Write-Host "Choose a task from the list!"
-        Write-Host "1. Schedule a persistent backup"
-        Write-Host "2. Run a backup for one time execution"
-        Write-Host "3. Delete scheduled backups"
-        Write-Host "0. Quit"
+        [Console]::ForegroundColor = [ConsoleColor]::Cyan
+        Write-Information -MessageData "Main Menu" 
+        [Console]::ResetColor()
+
+        Write-Information -MessageData ""  
+        Write-Information -MessageData "Choose a task from the list!" 
+        Write-Information -MessageData "1. Schedule a persistent backup"  
+        Write-Information -MessageData "2. Run a backup for one time execution"  
+        Write-Information -MessageData "3. Delete scheduled backups" 
+        Write-Information -MessageData "0. Quit"
     }
 
     function Get-MenuOne
     {
         if ($TypeOfBackup -eq 1)
         {
-            Write-Host "1. Schedule a backup from new paths"
-            Write-Host "2. Schedule a backup from saved path"
+            Write-Information -MessageData "1. Schedule a backup from new paths"
+            Write-Information -MessageData "2. Schedule a backup from saved path"
         }
         elseif ($TypeOfBackup -eq 2)
         {
-            Write-Host "1. Run a backup from new paths"
-            Write-Host "2. Run a backup from saved paths"
+            Write-Information -MessageData "1. Run a backup from new paths"
+            Write-Information -MessageData "2. Run a backup from saved paths"
         }
         else
         {
@@ -1040,16 +1049,19 @@ function Get-Menu
 
     function Get-MenuTwo
     {
-        Write-Host "Would you like to create another backup?"
-        Write-Host "1. Yes"
-        Write-Host "2. No"
+        Write-Information -MessageData "Would you like to create another backup?"
+        Write-Information -MessageData "1. Yes"
+        Write-Information -MessageData "2. No"
     }
 
     function Get-MenuThree
     {
-        Write-Host "Going back from here will erase your existing backups. Do you want to continue going back?" -ForegroundColor Yellow
-        Write-Host "1. Yes"
-        Write-Host "2. No"
+        [Console]::ForegroundColor = [ConsoleColor]::Yellow
+        Write-Information -MessageData "Going back from here will erase your existing backups. Do you want to continue going back?" 
+        [Console]::ResetColor()
+
+        Write-Information -MessageData "1. Yes"
+        Write-Information -MessageData "2. No"
     }
 
     function Get-TheArray
@@ -1084,28 +1096,28 @@ function Get-Menu
 
         [Int]$ArrayCountBase = 0
 
-        Write-Host "Please verify your selection" -ForegroundColor Yellow
+        [Console]::ForegroundColor = [ConsoleColor]::Magenta
+        Write-Information -MessageData "Please verify your selection" 
+        [Console]::ResetColor()
 
         while ($ArrayCountBase -lt $ArrayCount)
         {
             $ArrayNumber = $ArrayCountBase + 1
-            Write-Host "Backup $ArrayNumber. The directory " -NoNewline
-            Write-Host "$($SourceArrayMenu[$ArrayCountBase])" -ForegroundColor Yellow -NoNewline
-            Write-Host " will backup to " -NoNewline
-            Write-Host "$($DestinationArrayMenu[$ArrayCountBase])" -ForegroundColor Yellow
+
+            Write-Information -MessageData "Backup $ArrayNumber. The directory [ $($SourceArrayMenu[$ArrayCountBase]) ] will backup to [ $($DestinationArrayMenu[$ArrayCountBase]) ]"
 
             $ArrayCountBase = $ArrayCountBase + 1
         }
 
-        Write-Host "Is this correct?"
+        Write-Information -MessageData "Is this correct?"
 
         if ($TypeOfBackup -eq 1)
         {
-            Write-Host "1. Yes - Continue to scheduling"
+            Write-Information -MessageData "1. Yes - Continue to scheduling"
         }
         elseif ($TypeOfBackup -eq 2)
         {
-            Write-Host "1. Yes - Execute backup"
+            Write-Information -MessageData "1. Yes - Execute backup"
         }
         else
         {
@@ -1114,7 +1126,7 @@ function Get-Menu
             Exit
         }
 
-        Write-Host "2. No - restart"
+        Write-Information -MessageData "2. No - restart"
     }
 
     if ($ChooseMenu -eq 1)
