@@ -43,10 +43,13 @@ function Start-Backup
 
                 while ($UserInputLoop -eq 0)
                 {
-                    Write-Host "Backup $WriteOutCount. $FinalSourceDir does not exist!" -ForegroundColor Red
-                    Write-Host "Do you want to create this directory?" -ForegroundColor Red
-                    Write-Host "1. Yes"
-                    Write-Host "2. No"
+                    [Console]::ForegroundColor = [ConsoleColor]::Yellow
+                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir does not exist!" 
+                    Write-Information -MessageData "Do you want to create this directory?" 
+                    [Console]::ResetColor()
+
+                    Write-Information -MessageData "1. Yes"
+                    Write-Information -MessageData "2. No"
 
                     $UserInputLoop = Get-UserInputBackup
                 }
@@ -59,8 +62,11 @@ function Start-Backup
                 }
                 elseif ($MakeDirChoice -eq 2)
                 {
-                    Write-Host "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir failed!" -ForegroundColor Red
-                    Write-Host
+                    [Console]::ForegroundColor = [ConsoleColor]::Red
+                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir failed!" 
+                    [Console]::ResetColor()
+
+                    Write-Information -MessageData ""
 
                     $BaseCount = $BaseCount + 1
                     $WriteOutCount = $WriteOutCount + 1
@@ -82,10 +88,13 @@ function Start-Backup
 
                 while ($UserInputLoop -eq 0)
                 {
-                    Write-Host "Backup $WriteOutCount. $FinalDestDir does not exist!" -ForegroundColor Yellow
-                    Write-Host "Do you want to create this directory?" -ForegroundColor Yellow
-                    Write-Host "1. Yes"
-                    Write-Host "2. No"
+                    [Console]::ForegroundColor = [ConsoleColor]::Yellow
+                    Write-Information -MessageData "Backup $WriteOutCount. $FinalDestDir does not exist!" 
+                    Write-Information -MessageData "Do you want to create this directory?" 
+                    [Console]::ResetColor()
+
+                    Write-Information -MessageData "1. Yes"
+                    Write-Information -MessageData "2. No"
 
                     $UserInputLoop = Get-UserInputBackup
                 }
@@ -98,8 +107,11 @@ function Start-Backup
                 }
                 elseif ($MakeDirChoice -eq 2)
                 {
-                    Write-Host "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir failed!" -ForegroundColor Red
-                    Write-Host
+                    [Console]::ForegroundColor = [ConsoleColor]::Red
+                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir failed!" 
+                    [Console]::ResetColor()
+
+                    Write-Information -MessageData ""
 
                     $BaseCount = $BaseCount + 1
                     $WriteOutCount = $WriteOutCount + 1
@@ -169,8 +181,11 @@ function Start-Backup
                 }
             }
 
-            Write-Host "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir complete!" -ForegroundColor Yellow
-            Write-Host
+            [Console]::ForegroundColor = [ConsoleColor]::Magenta
+            Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir complete!" 
+            [Console]::ResetColor()
+
+            Write-Information -MessageData ""
 
             $BaseCount = $BaseCount + 1
             $WriteOutCount = $WriteOutCount + 1
@@ -219,13 +234,15 @@ function Start-Backup
 
     function Get-UserInputBackup
     {
+        [String]$WarningTen = "The input given was not valid. The options are 1 or 2."
+
         $UserChoiceXX = Read-Host "Choice"
-        Write-Host
+        Write-Information -MessageData ""
 
         if ($UserChoiceXX -eq "")
         {
-            Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-            Write-Host
+            $WarningTen | Write-Warning
+            Write-Information -MessageData ""
 
             return 0
         }
@@ -234,8 +251,8 @@ function Start-Backup
 
         if (-not $IsItAnIntegerBackup)
         {
-            Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-            Write-Host
+            $WarningTen | Write-Warning
+            Write-Information -MessageData ""
 
             return 0
         }
@@ -248,8 +265,8 @@ function Start-Backup
         {
             if ($_.Exception.Message -like "*Input string was not in a correct format.*")
             {
-                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                Write-Host
+                $WarningTen | Write-Warning
+                Write-Information -MessageData ""
 
                 return 0
             }
@@ -263,22 +280,22 @@ function Start-Backup
         }
         elseif ($UserInputX -eq 0)
         {
-            Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-            Write-Host
+            $WarningTen | Write-Warning
+            Write-Information -MessageData ""
 
             return 0
         }
         elseif (($UserChoiceX -lt 0) -or ($UserChoiceX -gt 2))
         {
-            Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-            Write-Host
+            $WarningTen | Write-Warning
+            Write-Information -MessageData ""
 
             return 0
         }
         else
         {
-            Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-            Write-Host
+            $WarningTen | Write-Warning
+            Write-Information -MessageData ""
 
             return 0
         }
@@ -313,14 +330,20 @@ function Start-Backup
 
         if ($IsBackupGood -eq $true)
         {
-            Write-Host "All backups complete!" -ForegroundColor Yellow
-            Write-Host
+            [Console]::ForegroundColor = [ConsoleColor]::Magenta
+            Write-Information -MessageData "All backups complete!" #FIXFIXFIXFIX
+            [Console]::ResetColor()
+
+            Write-Information -MessageData ""
             Start-CaTScheduler -PathStatementStartup $PathStatementBackup -Start 1
         }
         elseif (-not ($IsBackupGood -eq $true))
         {
-            Write-Host "Backup(s) failed!" -ForegroundColor Red
-            Write-Host
+            [Console]::ForegroundColor = [ConsoleColor]::Red
+            Write-Information -MessageData "Backup(s) failed!" #FIXFIXFIXFIX 
+            [Console]::ResetColor()
+
+            Write-Information -MessageData ""
             Start-CaTScheduler -PathStatementStartup $PathStatementBackup -Start 1
         }
         else
