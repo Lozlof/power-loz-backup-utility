@@ -33,13 +33,15 @@ function Write-Task
 
         function Get-UserInputSchedulingOne
         {
+            [String]$WarningTen = "The input given was not valid. The options are 1 or 2." 
+
             $UserChoiceXX = Read-Host "Choice"
-            Write-Host
+            Write-Information -MessageData ""
 
             if ($UserChoiceXX -eq "")
             {
-                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                Write-Host
+                $WarningTen | Write-Warning
+                Write-Information -MessageData ""
 
                 return 0
             }
@@ -48,8 +50,8 @@ function Write-Task
 
             if (-not $IsItAnIntegerScheduling)
             {
-                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                Write-Host
+                $WarningTen | Write-Warning
+                Write-Information -MessageData ""
 
                 return 0
             }
@@ -62,8 +64,8 @@ function Write-Task
             {
                 if ($_.Exception.Message -like "*Input string was not in a correct format.*")
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                    Write-Host
+                    $WarningTen | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 0
                 }
@@ -79,22 +81,25 @@ function Write-Task
             {
                 [Int]$LoopingLoop = 0
 
-                Write-Host "You cannot go back from here. Choose 1 to restart." -ForegroundColor Yellow
-                Write-Host
+                [Console]::ForegroundColor = [ConsoleColor]::Yellow
+                Write-Information -MessageData "You cannot go back from here. Choose 1 to restart." 
+                [Console]::ResetColor()
+
+                Write-Information -MessageData ""
 
                 while ($LoopingLoop -eq 0)
                 {
-                    Write-Host "Do you want to restart?"
-                    Write-Host "1. Yes"
-                    Write-Host "2. No"
+                    Write-Information -MessageData "Do you want to restart?"
+                    Write-Information -MessageData "1. Yes"
+                    Write-Information -MessageData "2. No"
 
                     $UserChoiceX = Read-Host "Choice"
-                    Write-Host
+                    Write-Information -MessageData ""
 
                     if ($UserChoiceX -eq "")
                     {
-                        Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                        Write-Host
+                        $WarningTen | Write-Warning
+                        Write-Information -MessageData ""
                         continue
                     }
 
@@ -102,8 +107,8 @@ function Write-Task
 
                     if (-not $IntegerLooping)
                     {
-                        Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                        Write-Host
+                        $WarningTen | Write-Warning
+                        Write-Information -MessageData ""
                         continue
                     }
 
@@ -115,8 +120,8 @@ function Write-Task
                     {
                         if ($_.Exception.Message -like "*Input string was not in a correct format.*")
                         {
-                            Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                            Write-Host
+                            $WarningTen | Write-Warning
+                            Write-Information -MessageData ""
                             continue
                         }
                     }
@@ -127,20 +132,20 @@ function Write-Task
                     }
                     elseif (($UserChoice -lt 1) -or ($UserChoice -gt 2))
                     {
-                        Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                        Write-Host
+                        $WarningTen | Write-Warning
+                        Write-Information -MessageData ""
                         continue
                     }
                     elseif ($UserChoice -eq 0)
                     {
-                        Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                        Write-Host
+                        $WarningTen | Write-Warning
+                        Write-Information -MessageData ""
                         continue
                     }
                     else
                     {
-                        Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                        Write-Host
+                        $WarningTen | Write-Warning
+                        Write-Information -MessageData ""
                         continue
                     }
 
@@ -157,15 +162,15 @@ function Write-Task
             }
             elseif (($UserChoiceX -lt 0) -or ($UserChoiceX -gt 2))
             {
-                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                Write-Host
+                $WarningTen | Write-Warning
+                Write-Information -MessageData ""
 
                 return 0
             }
             else
             {
-                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                Write-Host
+                $WarningTen | Write-Warning
+                Write-Information -MessageData ""
 
                 return 0
             }
@@ -179,9 +184,9 @@ function Write-Task
 
                 while ($UserLoop -eq 0)
                 {
-                    Write-Host "Would you like to schedule your $TheCountTasking backups for:"
-                    Write-Host "1. All at the same day and time"
-                    Write-Host "2. Different days and times"
+                    Write-Information -MessageData "Would you like to schedule your $TheCountTasking backups for:"
+                    Write-Information -MessageData "1. All at the same day and time"
+                    Write-Information -MessageData "2. Different days and times"
 
                     $UserLoop = Get-UserInputSchedulingOne
                 }
@@ -197,7 +202,7 @@ function Write-Task
                     $FinalSourceDir += $SourceArrayTasking[$FinalVerifyCountTwo]
                     $FinalDestDir += $DestArrayTasking[$FinalVerifyCountTwo]
 
-                    [Int]$Numbering = $FinalVerifyCountTwo + 1
+                    [Int]$Numbering = $FinalVerifyCountTwo + 1 #FIXFIXFIXFIX
                     Write-Host "Backup $Numbering. " -NoNewline
                     Write-Host "$($FinalSourceDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow -NoNewline
                     Write-Host " to " -NoNewline
@@ -209,15 +214,17 @@ function Write-Task
                 {
                     if ($AllReturnValues.Count -eq $FinalVerifyCountOne)
                     {
-                        Write-Host "$FinalVerifyCountOne backups have been sucessfully verified"
-                        Write-Host "Thank you for using CaT Scheduler"
-                        Write-Host
+                        Write-Information -MessageData "$FinalVerifyCountOne backups have been sucessfully verified"
+                        Write-Information -MessageData "Thank you for using CaT Scheduler"
+                        Write-Information -MessageData ""
+
                         Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                     }
                     elseif ($AllReturnValues.Count -ne $FinalVerifyCountOne)
                     {
-                        Write-Host "$FinalVerifyCountOne backups have not been sucessfully verified" -ForegroundColor Red
-                        Write-Host
+                        Write-Information -MessageData "$FinalVerifyCountOne backups have not been sucessfully verified" -ForegroundColor Red
+                        Write-Information -MessageData
+
                         Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                     }
                     else
@@ -241,7 +248,7 @@ function Write-Task
                     $FinalSourceDirX += $SourceArrayTasking[$FinalVerifyCountTwoX]
                     $FinalDestDirX += $DestArrayTasking[$FinalVerifyCountTwoX]
 
-                    [Int]$NumberingX = $FinalVerifyCountTwoX + 1
+                    [Int]$NumberingX = $FinalVerifyCountTwoX + 1   #FIXFIXFIXFIXFIX
                     Write-Host "Backup $NumberingX. " -NoNewline
                     Write-Host "$($FinalSourceDirX[$FinalVerifyCountTwoX])" -ForegroundColor Yellow -NoNewline
                     Write-Host " to " -NoNewline
@@ -266,7 +273,7 @@ function Write-Task
             $FinalSourceDir += $SourceArrayTasking[$FinalVerifyCountTwo]
             $FinalDestDir += $DestArrayTasking[$FinalVerifyCountTwo]
 
-            [Int]$Numbering = $FinalVerifyCountTwo + 1
+            [Int]$Numbering = $FinalVerifyCountTwo + 1 #FIXFIXFIXFIXFIX
             Write-Host "Backup $Numbering. " -NoNewline
             Write-Host "$($FinalSourceDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow -NoNewline
             Write-Host " to " -NoNewline
@@ -328,22 +335,26 @@ function Write-Task
                 [Int]$NeedZero = 0
             )
 
+            [String]$WarningEleven = "The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back."
+            [String]$WarningOne = "The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back."
+            [String]$WarningTen = "The input given was not valid. The options are 1 or 2." 
+
             $UserChoiceXX = Read-Host "Choice"
-            Write-Host
+            Write-Information -MessageData ""
 
             if (($UserChoiceXX -eq "") -and (($NeedZero -eq 0) -or ($NeedZero -eq 1)))
             {
                 if ($NeedZero -eq 1)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
-                    Write-Host
+                    $WarningEleven | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 60
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 0
                 }
@@ -355,15 +366,15 @@ function Write-Task
             {
                 if ($NeedZero -eq 1)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
-                    Write-Host
+                    $WarningEleven | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 60
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 0
                 }
@@ -379,15 +390,15 @@ function Write-Task
                 {
                     if ($NeedZero -eq 1)
                     {
-                        Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
-                        Write-Host
+                        $WarningEleven | Write-Warning
+                        Write-Information -MessageData ""
 
                         return 60
                     }
                     else
                     {
-                        Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
-                        Write-Host
+                        $WarningOne | Write-Warning
+                        Write-Information -MessageData ""
 
                         return 0
                     }
@@ -414,22 +425,25 @@ function Write-Task
                     {
                         [Int]$LoopingLoop = 0
 
-                        Write-Host "You cannot go back from here. Choose 1 to restart." -ForegroundColor Yellow
-                        Write-Host
+                        [Console]::ForegroundColor = [ConsoleColor]::Yellow
+                        Write-Information -MessageData "You cannot go back from here. Choose 1 to restart." 
+                        [Console]::ResetColor()
+
+                        Write-Information -MessageData ""
 
                         while ($LoopingLoop -eq 0)
                         {
-                            Write-Host "Do you want to restart?"
-                            Write-Host "1. Yes"
-                            Write-Host "2. No"
+                            Write-Information -MessageData "Do you want to restart?"
+                            Write-Information -MessageData "1. Yes"
+                            Write-Information -MessageData "2. No"
 
                             $UserChoiceXXX = Read-Host "Choice"
-                            Write-Host
+                            Write-Information -MessageData ""
 
                             if ($UserChoiceXXX -eq "")
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
 
@@ -437,8 +451,8 @@ function Write-Task
 
                             if (-not $IntegerLooping)
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
 
@@ -450,8 +464,8 @@ function Write-Task
                             {
                                 if ($_.Exception.Message -like "*Input string was not in a correct format.*")
                                 {
-                                    Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                    Write-Host
+                                    $WarningTen | Write-Warning
+                                    Write-Information -MessageData ""
                                     continue
                                 }
                             }
@@ -462,20 +476,20 @@ function Write-Task
                             }
                             elseif (($UserChoiceXX -lt 1) -or ($UserChoiceXX -gt 2))
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
                             elseif ($UserChoiceXX -eq 0)
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
                             else
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
 
@@ -498,23 +512,26 @@ function Write-Task
                     {
                         [Int]$LoopingLoop = 0
 
-                        Write-Host "You cannot go back from here. Choose 2 to quit." -ForegroundColor Yellow
-                        Write-Host "The backups you have already created will be preserved." -ForegroundColor Yellow
-                        Write-Host
+                        [Console]::ForegroundColor = [ConsoleColor]::Yellow
+                        Write-Information -MessageData "You cannot go back from here. Choose 2 to quit." 
+                        Write-Information -MessageData "The backups you have already created will be preserved." 
+                        [Console]::ResetColor()
+
+                        Write-Information -MessageData ""
 
                         while ($LoopingLoop -eq 0)
                         {
-                            Write-Host "Do you want to restart?"
-                            Write-Host "1. Yes"
-                            Write-Host "2. No"
+                            Write-Information -MessageData "Do you want to restart?"
+                            Write-Information -MessageData "1. Yes"
+                            Write-Information -MessageData "2. No"
 
                             $UserChoiceXXX = Read-Host "Choice"
                             Write-Host
 
                             if ($UserChoiceXXX -eq "")
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
 
@@ -522,8 +539,8 @@ function Write-Task
 
                             if (-not $IntegerLooping)
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
 
@@ -535,8 +552,8 @@ function Write-Task
                             {
                                 if ($_.Exception.Message -like "*Input string was not in a correct format.*")
                                 {
-                                    Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                    Write-Host
+                                    $WarningTen | Write-Warning
+                                    Write-Information -MessageData ""
                                     continue
                                 }
                             }
@@ -547,20 +564,20 @@ function Write-Task
                             }
                             elseif (($UserChoiceXX -lt 1) -or ($UserChoiceXX -gt 2))
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
                             elseif ($UserChoiceXX -eq 0)
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
                             else
                             {
-                                Write-Host "Error: The input given was not valid. The options are 1 or 2" -ForegroundColor Red
-                                Write-Host
+                                $WarningTen | Write-Warning
+                                Write-Information -MessageData ""
                                 continue
                             }
 
@@ -657,15 +674,15 @@ function Write-Task
             {
                 if ($NeedZero -eq 1)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
-                    Write-Host
+                    $WarningEleven | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 60
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 0
                 }
@@ -674,15 +691,15 @@ function Write-Task
             {
                 if ($NeedZero -eq 1)
                 {
-                    Write-Host "Error: The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back" -ForegroundColor Red
-                    Write-Host
+                    $WarningEleven | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 60
                 }
                 else
                 {
-                    Write-Host "Error: The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back" -ForegroundColor Red
-                    Write-Host
+                    $WarningOne | Write-Warning
+                    Write-Information -MessageData ""
 
                     return 0
                 }
@@ -703,9 +720,9 @@ function Write-Task
 
                 while ($LoopNumOne -eq 0)
                 {
-                    Write-Host "How often do you want backup $Number to run?"
-                    Write-Host "1. Daily"
-                    Write-Host "2. Weekly"
+                    Write-Information -MessageData "How often do you want backup $Number to run?"
+                    Write-Information -MessageData "1. Daily"
+                    Write-Information -MessageData "2. Weekly"
 
                     $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 1 -NeedZero 0
                 }
@@ -718,9 +735,9 @@ function Write-Task
 
                 while ($LoopNumOne -eq 0)
                 {
-                    Write-Host "How often do you want your $Number backups to run?"
-                    Write-Host "1. Daily"
-                    Write-Host "2. Weekly"
+                    Write-Information -MessageData "How often do you want your $Number backups to run?"
+                    Write-Information -MessageData "1. Daily"
+                    Write-Information -MessageData "2. Weekly"
 
                     $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 1 -NeedZero 0
                 }
@@ -758,14 +775,14 @@ function Write-Task
 
             while ($LoopNumOne -eq 0)
             {
-                Write-Host "Which day of the week?"
-                Write-Host "1. Sunday"
-                Write-Host "2. Monday"
-                Write-Host "3. Tuesday"
-                Write-Host "4. Wednesday"
-                Write-Host "5. Thursday"
-                Write-Host "6. Friday"
-                Write-Host "7. Saturday"
+                Write-Information -MessageData "Which day of the week?"
+                Write-Information -MessageData "1. Sunday"
+                Write-Information -MessageData "2. Monday"
+                Write-Information -MessageData "3. Tuesday"
+                Write-Information -MessageData "4. Wednesday"
+                Write-Information -MessageData "5. Thursday"
+                Write-Information -MessageData "6. Friday"
+                Write-Information -MessageData "7. Saturday"
 
                 $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 7 -GoBackNumberX 2 -NeedZero 0
             }
@@ -816,7 +833,7 @@ function Write-Task
 
             while ($LoopNumOne -eq 0)
             {
-                Write-Host "XX" -NoNewline -ForegroundColor Yellow
+                Write-Host "XX" -NoNewline -ForegroundColor Yellow #FIXFIXFIXFIX
                 Write-Host ":XX AM/PM"
                 Write-Host "01 02 03 04 05 06 07 08 09 10 11 12"
                 Write-Host "Type in the hour you want the backup to happen"
@@ -847,7 +864,7 @@ function Write-Task
             while ($LoopNumOne -eq 60)
             {
                 Write-Host "XX:" -NoNewline
-                Write-Host "XX" -NoNewline -ForegroundColor Yellow
+                Write-Host "XX" -NoNewline -ForegroundColor Yellow #FIXFIXFIXFIX
                 Write-Host " AM/PM"
                 Write-Host "00 - 59"
                 Write-Host "Type in the minute you want the backup to happen"  -NoNewline
@@ -879,7 +896,7 @@ function Write-Task
             while ($LoopNumOne -eq 0)
             {
                 Write-Host "XX:XX" -NoNewline
-                Write-Host " AM/PM" -ForegroundColor Yellow
+                Write-Host " AM/PM" -ForegroundColor Yellow #FIXFIXFIXFIX
                 Write-Host "AM or PM?"
                 Write-Host "1. AM"
                 Write-Host "2. PM"
@@ -1014,19 +1031,23 @@ function Write-Task
 
                     if (($TaskCreationReturnValue -eq $false) -or (-not($TaskCreationReturnValue -eq $true)))
                     {
-                        Write-Host
-                        Write-Host "Backup $TaskCreationNumbering was not sucessfully verified" -ForegroundColor Red
-                        Write-Host "Source: $SourceX" -ForegroundColor Red
-                        Write-Host "Destination: $DestX" -ForegroundColor Red
-                        Write-Host
+                        Write-Information -MessageData ""
+
+                        [Console]::ForegroundColor = [ConsoleColor]::Red
+                        Write-Information -MessageData "Backup $TaskCreationNumbering was not sucessfully verified" 
+                        Write-Information -MessageData "Source: $SourceX" 
+                        Write-Information -MessageData "Destination: $DestX" 
+                        [Console]::ResetColor()
+
+                        Write-Information -MessageData ""
                     }
                     elseif ($TaskCreationReturnValue -eq $true)
                     {
-                        Write-Host
-                        Write-Host "Backup $TaskCreationNumbering was sucessfully verified"
-                        Write-Host "Source: $SourceX"
-                        Write-Host "Destination: $DestX"
-                        Write-Host
+                        Write-Information -MessageData ""
+                        Write-Information -MessageData "Backup $TaskCreationNumbering was sucessfully verified"
+                        Write-Information -MessageData "Source: $SourceX"
+                        Write-Information -MessageData "Destination: $DestX"
+                        Write-Information -MessageData ""
                     }
                     else
                     {

@@ -501,7 +501,7 @@ function Invoke-ReadWrite
             if ($ContinueLooking -eq 0)
             {
                 Write-Information -MessageData "Done loading"
-                Write-Information -MessageData
+                Write-Information -MessageData ""
 
                 return $true
             }
@@ -510,6 +510,7 @@ function Invoke-ReadWrite
         function Write-ScheduledTasks
         {
             [String]$GetTasksFilePath = "$PathStatementReadWrite\ConfigurationFiles\ScheduledTasks.json"
+            [String]$WarningSix = "ScheduledTasks.json cannot be found"
 
             if (Test-Path -Path $GetTasksFilePath)
             {
@@ -518,8 +519,8 @@ function Invoke-ReadWrite
             else
             {
                 Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule) Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Child Function: Write-ScheduledTasks | ScheduledTasks.json cannot be accessed. Variable GetTasksFilePath: $GetTasksFilePath"
-                Write-Host "Error: ScheduledTasks.json cannot be found" -ForegroundColor Red
-                Write-Host
+                $WarningSix | Write-Warning
+                Write-Information -MessageData ""
                 Start-CaTScheduler -PathStatementStartup $PathStatementReadWrite -Start 1
             }
 
@@ -533,7 +534,7 @@ function Invoke-ReadWrite
             [Int]$BackupNumber = 1
             $TaskNameArray = @()
 
-            Write-Host "Scheduled backups" -ForegroundColor Yellow
+            Write-Information -MessageData "Scheduled backups" 
 
             foreach ($Key in $ScheduledTasksHashTable.Keys)
             {
@@ -563,10 +564,10 @@ function Invoke-ReadWrite
                     $ControlDetails = $ControlDetails + 1
                 }
 
-                Write-Host "$BackupNumber. $DetailsOne"
-                Write-Host "   $DetailsTwo"
-                Write-Host "   $DetailsThree"
-                Write-Host
+                Write-Information -MessageData "$BackupNumber. $DetailsOne"
+                Write-Information -MessageData "   $DetailsTwo"
+                Write-Information -MessageData "   $DetailsThree"
+                Write-Information -MessageData ""
 
                 $TaskNameArray += $DetailsOne
 
@@ -594,8 +595,8 @@ function Invoke-ReadWrite
                 }
                 elseif (($TaskNamesArrayCount -eq $null) -or ($TaskNamesArrayCount -eq 0))
                 {
-                    Write-Host "There are no scheduled backups"
-                    Write-Host
+                    Write-Information -MessageData "There are no scheduled backups"
+                    Write-Information -MessageData ""
                     Start-CaTScheduler -PathStatementStartup $PathStatementReadWrite -Start 1
                 }
                 else
@@ -607,9 +608,12 @@ function Invoke-ReadWrite
             }
             elseif (-not ($IsItDone -eq $true))
             {
+                [String]$WarningSeven = "Failed to verify scheduled tasks"
+
                 Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule) Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Function Test-IfFinished failed to return true"
-                Write-Host "Error: Failed to verify scheduled tasks" -ForegroundColor Red
-                Write-Host
+
+                $WarningSeven | Write-Warning
+                Write-Information -MessageData ""
                 Start-CaTScheduler -PathStatementStartup $PathStatementReadWrite -Start 1
             }
             else
@@ -633,8 +637,8 @@ function Invoke-ReadWrite
             }
             elseif (($TaskNamesArrayCount -eq $null) -or ($TaskNamesArrayCount -eq 0))
             {
-                Write-Host "There are no scheduled backups"
-                Write-Host
+                Write-Information -MessageData "There are no scheduled backups"
+                Write-Information -MessageData ""
                 Start-CaTScheduler -PathStatementStartup $PathStatementReadWrite -Start 1
             }
             else
@@ -738,6 +742,9 @@ function Invoke-ReadWrite
     }
     elseif ($OperationChoice -eq 3)
     {
+        [String]$WarningEight = "The chosen path does not exist. Please choose a valid path statement."
+        [String]$WarningNine = "The chosen path is not valid. A file cannot be used as the destination path."
+        
         if ($SourceOrDest -eq 1)
         {
             Get-PathStatements
@@ -768,8 +775,9 @@ function Invoke-ReadWrite
                 }
                 elseif ($IsItGoodStatement -eq $false) #Do you want to create this folder?
                 {
-                    Write-Host "Error: The chosen path does not exist. Please choose a valid path statement." -ForegroundColor Red
-                    Write-Host
+                    $WarningEight | Write-Warning
+                    Write-Information -MessageData ""
+
                     $SourcePathItem = ""
                     $SourceOrDest = 1
                     Get-PathStatements
@@ -804,9 +812,10 @@ function Invoke-ReadWrite
 
                     if ($IsItGoodStatementTwo -eq $false)
                     {
-                        Write-Host
-                        Write-Host "Error: The chosen path does not exist. Please choose a valid path statement." -ForegroundColor Red
-                        Write-Host
+                        Write-Information -MessageData ""
+                        $WarningEight | Write-Warning
+                        Write-Information -MessageData ""
+
                         $DestinationPathItem = ""
                         $SourceOrDest = 2
                         Get-PathStatements
@@ -817,9 +826,10 @@ function Invoke-ReadWrite
 
                         if ($IsItGoodPathThree -eq $false)
                         {
-                            Write-Host
-                            Write-Host "Error: The chosen path is not valid. A file cannot be used as the destination path." -ForegroundColor Red
-                            Write-Host
+                            Write-Information -MessageData ""
+                            $WarningNine | Write-Warning
+                            Write-Information -MessageData ""
+
                             $DestinationPathItem = ""
                             $SourceOrDest = 2
                             Get-PathStatements
@@ -871,13 +881,19 @@ function Invoke-ReadWrite
 
             if ($GoodRemove -eq $true)
             {
-                Write-Host "Taskname $NameOfSelection deleted sucessfully" -ForegroundColor Yellow
-                Write-Host
+                [Console]::ForegroundColor = [ConsoleColor]::Magenta
+                Write-Information -MessageData "Taskname $NameOfSelection deleted sucessfully" 
+                [Console]::ResetColor()
+
+                Write-Information -MessageData ""
             }
             elseif (-not ($GoodRemove -eq $true))
             {
-                Write-Host "Taskname $NameOfSelection was not deleted sucessfully" -ForegroundColor Yellow
-                Write-Host
+                [Console]::ForegroundColor = [ConsoleColor]::Red
+                Write-Information -MessageData "Taskname $NameOfSelection was not deleted sucessfully" 
+                [Console]::ResetColor()
+
+                Write-Information -MessageData ""
             }
             else
             {

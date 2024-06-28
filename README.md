@@ -37,3 +37,4 @@ At C:\Users\srogers\Documents\CaT_Scheduler_0.4.0\SchedulingModule.psm1:91 char:
 +                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : MetadataError: (:) [], ArgumentTransformationMetadataException
     + FullyQualifiedErrorId : RuntimeException
+                                         WARNING: The input given was not valid. The options are 1 - 1 or 0 to go back.                         BackupModule has issues.         Scheduling Module has issues.  
