@@ -4,6 +4,7 @@ function Get-StartupItems
 {
     param
     (
+        $ErrorActionPreference = "Stop",
         [Int]$Start = $null
     )
 
@@ -39,15 +40,17 @@ function Get-StartupItems
     {
         $env:PSModulePath += ";$PathStatement"
 
-        Import-Module -Name "$PathStatement\StartUpModule.psm1"
-        Import-Module -Name "$PathStatement\MenuModule.psm1"
-        Import-Module -Name "$PathStatement\InputModule.psm1"
-        Import-Module -Name "$PathStatement\ReadWriteModule.psm1"
-        Import-Module -Name "$PathStatement\BackupModule.psm1"
-        Import-Module -Name "$PathStatement\SchedulingModule.psm1"
+        Import-Module -Name "$PathStatement\LozStartUpModule.psm1"
+        Import-Module -Name "$PathStatement\LozMenuModule.psm1"
+        Import-Module -Name "$PathStatement\LozInputModule.psm1"
+        Import-Module -Name "$PathStatement\LozReadWriteModule.psm1"
+        Import-Module -Name "$PathStatement\LozBackupModule.psm1"
+        Import-Module -Name "$PathStatement\LozSchedulingModule.psm1"
 
         return $true
     }
+
+    [String]$ErrorOne = "Startup failed"
 
     if ($Start -eq 1)
     {
@@ -77,31 +80,31 @@ function Get-StartupItems
                     }
                     else
                     {
-                        Write-Host "Startup failed" -ForegroundColor Red
+                        Write-Error -Message "$ErrorOne"
                         Exit
                     }
                 }
                 else
                 {
-                    Write-Host "Startup failed" -ForegroundColor Red
+                    Write-Error -Message "$ErrorOne"
                     Exit
                 }
             }
             else
             {
-                Write-Host "Startup failed" -ForegroundColor Red
+                Write-Error -Message "$ErrorOne"
                 Exit
             }
         }
         else
         {
-            Write-Host "Startup failed" -ForegroundColor Red
+            Write-Error -Message "$ErrorOne"
             Exit
         }
     }
     else
     {
-        Write-Host "Startup failed" -ForegroundColor Red
+        Write-Error -Message "$ErrorOne"
         Exit
     }
 }

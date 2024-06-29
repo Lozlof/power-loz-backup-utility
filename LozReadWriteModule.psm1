@@ -28,8 +28,8 @@ function Invoke-ReadWrite
 
     function Write-Log
     {
-        $LogFileOne = "$PathStatementReadWrite\Logs\InfoLog.log"
-        $LogFileTwo = "$PathStatementReadWrite\Logs\ErrorLog.log"
+        $LogFileOne = "$PathStatementReadWrite\PowerLozLogs\LozInfoLog.log"
+        $LogFileTwo = "$PathStatementReadWrite\PowerLozLogs\LozErrorLog.log"
         $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
         if ($LogType -eq 1)
@@ -68,7 +68,7 @@ function Invoke-ReadWrite
 
     function Write-PathStatements
     {
-        $SavedPathsPathReadWrite = "$PathStatementReadWrite\ConfigurationFiles\SavedPaths.json"
+        $SavedPathsPathReadWrite = "$PathStatementReadWrite\PowerLozConfigurationFiles\LozSavedPaths.json"
         $PathHashTableReadWrite = @{}
 
         if (Test-Path -Path $SavedPathsPathReadWrite)
@@ -148,7 +148,7 @@ function Invoke-ReadWrite
 
     function Get-PathStatements
     {
-        [String]$SavedPathsPathReadWrite = "$PathStatementReadWrite\ConfigurationFiles\SavedPaths.json"
+        [String]$SavedPathsPathReadWrite = "$PathStatementReadWrite\PowerLozConfigurationFiles\LozSavedPaths.json"
 
         if (($PrintHashTable -eq 0) -or ($PrintHashTable -eq $null))
         {
@@ -169,8 +169,8 @@ function Invoke-ReadWrite
 
             [Int]$TotalKeys = $PathHashTableReadWrite.Count
 
-            [Console]::ForegroundColor = [ConsoleColor]::Magenta
-            Write-Information -MessageData "Saved path statements:" 
+            [Console]::ForegroundColor = [ConsoleColor]::Cyan
+            Write-Information -MessageData "Saved path statements:"
             [Console]::ResetColor()
 
             foreach ($Key in $PathHashTableReadWrite.Keys)
@@ -419,7 +419,7 @@ function Invoke-ReadWrite
             elseif ($TaskArray.Count -eq 0)
             {
                 Write-Information -MessageData "There are no scheduled backups"
-                Write-Information -MessageData
+                Write-Information -MessageData ""
                 Start-CaTScheduler -PathStatementStartup $PathStatementReadWrite -Start 1
             }
             else
@@ -479,7 +479,7 @@ function Invoke-ReadWrite
                         CPU         = $_.CPU
                         Memory      = $_.WorkingSet64
                         CommandLine = $ProcessDetails.CommandLine}
-                } | Where-Object { $_.CommandLine -like "*GetScheduledTasks*" } | Sort-Object -Property CommandLine
+                } | Where-Object { $_.CommandLine -like "*LozFindScheduledTasks*" } | Sort-Object -Property CommandLine
 
                 if (($FilteredProcesses -eq $null) -or ($FilteredProcesses -eq ""))
                 {
@@ -509,7 +509,7 @@ function Invoke-ReadWrite
 
         function Write-ScheduledTasks
         {
-            [String]$GetTasksFilePath = "$PathStatementReadWrite\ConfigurationFiles\ScheduledTasks.json"
+            [String]$GetTasksFilePath = "$PathStatementReadWrite\PowerLozConfigurationFiles\LozScheduledTasks.json"
             [String]$WarningSix = "ScheduledTasks.json cannot be found"
 
             if (Test-Path -Path $GetTasksFilePath)
@@ -534,7 +534,7 @@ function Invoke-ReadWrite
             [Int]$BackupNumber = 1
             $TaskNameArray = @()
 
-            Write-Information -MessageData "Scheduled backups" 
+            Write-Information -MessageData "Scheduled backups"
 
             foreach ($Key in $ScheduledTasksHashTable.Keys)
             {
@@ -744,7 +744,7 @@ function Invoke-ReadWrite
     {
         [String]$WarningEight = "The chosen path does not exist. Please choose a valid path statement."
         [String]$WarningNine = "The chosen path is not valid. A file cannot be used as the destination path."
-        
+
         if ($SourceOrDest -eq 1)
         {
             Get-PathStatements
@@ -881,8 +881,8 @@ function Invoke-ReadWrite
 
             if ($GoodRemove -eq $true)
             {
-                [Console]::ForegroundColor = [ConsoleColor]::Magenta
-                Write-Information -MessageData "Taskname $NameOfSelection deleted sucessfully" 
+                [Console]::ForegroundColor = [ConsoleColor]::Cyan
+                Write-Information -MessageData "Taskname $NameOfSelection deleted sucessfully"
                 [Console]::ResetColor()
 
                 Write-Information -MessageData ""
@@ -890,7 +890,7 @@ function Invoke-ReadWrite
             elseif (-not ($GoodRemove -eq $true))
             {
                 [Console]::ForegroundColor = [ConsoleColor]::Red
-                Write-Information -MessageData "Taskname $NameOfSelection was not deleted sucessfully" 
+                Write-Information -MessageData "Taskname $NameOfSelection was not deleted sucessfully"
                 [Console]::ResetColor()
 
                 Write-Information -MessageData ""
@@ -902,10 +902,11 @@ function Invoke-ReadWrite
                 Exit
             }
 
-            [String]$GetTasksScriptPath = "$PathStatementReadWrite\GetScheduledTasks.ps1"
+            [String]$GetTasksScriptPath = "$PathStatementReadWrite\LozFindScheduledTasks.ps1"
+
             Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -WindowStyle Hidden -File `"$GetTasksScriptPath`"" -WindowStyle Hidden -Verb RunAs
 
-            Get-TheScheduledTasks
+            Get-TheScheduledTasks -HasBeenChecked 0
         }
         else
         {

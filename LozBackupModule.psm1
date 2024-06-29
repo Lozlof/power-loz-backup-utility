@@ -4,6 +4,8 @@ function Start-Backup
 {
     param
     (
+        $InformationPreference = "Continue",
+        $WarningPreference = "Continue",
         [Int]$BackupOperation = $null,
         [String]$PathStatementBackup = "",
         [Object[][]]$TotalArrayBackup = @(),
@@ -44,8 +46,8 @@ function Start-Backup
                 while ($UserInputLoop -eq 0)
                 {
                     [Console]::ForegroundColor = [ConsoleColor]::Yellow
-                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir does not exist!" 
-                    Write-Information -MessageData "Do you want to create this directory?" 
+                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir does not exist!"
+                    Write-Information -MessageData "Do you want to create this directory?"
                     [Console]::ResetColor()
 
                     Write-Information -MessageData "1. Yes"
@@ -63,7 +65,7 @@ function Start-Backup
                 elseif ($MakeDirChoice -eq 2)
                 {
                     [Console]::ForegroundColor = [ConsoleColor]::Red
-                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir failed!" 
+                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir failed!"
                     [Console]::ResetColor()
 
                     Write-Information -MessageData ""
@@ -89,8 +91,8 @@ function Start-Backup
                 while ($UserInputLoop -eq 0)
                 {
                     [Console]::ForegroundColor = [ConsoleColor]::Yellow
-                    Write-Information -MessageData "Backup $WriteOutCount. $FinalDestDir does not exist!" 
-                    Write-Information -MessageData "Do you want to create this directory?" 
+                    Write-Information -MessageData "Backup $WriteOutCount. $FinalDestDir does not exist!"
+                    Write-Information -MessageData "Do you want to create this directory?"
                     [Console]::ResetColor()
 
                     Write-Information -MessageData "1. Yes"
@@ -108,7 +110,7 @@ function Start-Backup
                 elseif ($MakeDirChoice -eq 2)
                 {
                     [Console]::ForegroundColor = [ConsoleColor]::Red
-                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir failed!" 
+                    Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir failed!"
                     [Console]::ResetColor()
 
                     Write-Information -MessageData ""
@@ -181,8 +183,8 @@ function Start-Backup
                 }
             }
 
-            [Console]::ForegroundColor = [ConsoleColor]::Magenta
-            Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir complete!" 
+            [Console]::ForegroundColor = [ConsoleColor]::Cyan
+            Write-Information -MessageData "Backup $WriteOutCount. $FinalSourceDir to $FinalDestDir complete!"
             [Console]::ResetColor()
 
             Write-Information -MessageData ""
@@ -213,7 +215,7 @@ function Start-Backup
             [Int]$LogTypeX = $null
         )
 
-        $LogFileOneX = "$PathStatementBackup\Logs\InfoLog.log"
+        $LogFileOneX = "$PathStatementBackup\PowerLozLogs\LozInfoLog.log"
         $TimestampX = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
         if ($LogTypeX -eq 1)
@@ -330,17 +332,15 @@ function Start-Backup
 
         if ($IsBackupGood -eq $true)
         {
-            [Console]::ForegroundColor = [ConsoleColor]::Magenta
-            Write-Information -MessageData "All backups complete!" #FIXFIXFIXFIX
-            [Console]::ResetColor()
-
+            Write-Information -MessageData "All backups complete!"
             Write-Information -MessageData ""
+
             Start-CaTScheduler -PathStatementStartup $PathStatementBackup -Start 1
         }
         elseif (-not ($IsBackupGood -eq $true))
         {
             [Console]::ForegroundColor = [ConsoleColor]::Red
-            Write-Information -MessageData "Backup(s) failed!" #FIXFIXFIXFIX 
+            Write-Information -MessageData "Backup(s) failed!"
             [Console]::ResetColor()
 
             Write-Information -MessageData ""

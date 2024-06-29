@@ -27,8 +27,8 @@ function Invoke-BackupScript
         Set-Location $PathStatementX
         $PathStatement = Get-Location
 
-        $CompareAndTransferLogFile = "$PathStatement\Logs\InfoLog.log"
-        $CompareAndTransferLogFileOne = "$PathStatement\Logs\ErrorLog.log"
+        $CompareAndTransferLogFile = "$PathStatement\PowerLozLogs\LozInfoLog.log"
+        $CompareAndTransferLogFileOne = "$PathStatement\PowerLozLogs\LozErrorLog.log"
         $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
         if ($LogTypeX -eq 1)

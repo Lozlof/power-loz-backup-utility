@@ -103,7 +103,7 @@ function Update-ScheduledTaskHashTable
         $PathStatementXX = $PSScriptRoot
         Set-Location $PathStatementXX
         $PathStatementX = Get-Location
-        $PathStatement = "$PathStatementX\ConfigurationFiles\ScheduledTasks.json"
+        $PathStatement = "$PathStatementX\PowerLozConfigurationFiles\LozScheduledTasks.json"
 
         [Bool]$IsWritten= Write-CaTScheduledTasks
 

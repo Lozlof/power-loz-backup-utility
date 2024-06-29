@@ -4,13 +4,15 @@ function Start-CaTScheduler
 {
     param
     (
+        $ErrorActionPreference = "Stop",
+        $InformationPreference = "Continue",
         [String]$PathStatementStartup = "",
         [Int]$Start = $null
     )
 
     function Start-Logs
     {
-        [String]$LogDirectoryPath = "$PathStatementStartup\Logs"
+        [String]$LogDirectoryPath = "$PathStatementStartup\PowerLozLogs"
         [Bool]$LogDirectoryTest = Test-Path -Path $LogDirectoryPath -PathType Container
 
         if ($LogDirectoryTest -eq $false)
@@ -23,7 +25,7 @@ function Start-CaTScheduler
             [Int]$LogDirCreate = 0
         }
 
-        [String]$ErrorLogPath = "$PathStatementStartup\Logs\ErrorLog.log"
+        [String]$ErrorLogPath = "$PathStatementStartup\PowerLozLogs\LozErrorLog.log"
         [Bool]$ErrorLogTest = Test-Path -Path $ErrorLogPath -PathType Leaf
 
         if ($ErrorLogTest -eq $false)
@@ -36,7 +38,7 @@ function Start-CaTScheduler
             [Int]$ErrorLogCreate = 0
         }
 
-        [String]$InfoLogPath = "$PathStatementStartup\Logs\InfoLog.log"
+        [String]$InfoLogPath = "$PathStatementStartup\PowerLozLogs\LozInfoLog.log"
         [Bool]$InfoLogTest = Test-Path -Path $InfoLogPath -PathType Leaf
 
         if ($InfoLogTest -eq $false)
@@ -110,7 +112,7 @@ function Start-CaTScheduler
 
     function Start-ConfigurationFiles
     {
-        [String]$ConfigDirectoryPath = "$PathStatementStartup\ConfigurationFiles"
+        [String]$ConfigDirectoryPath = "$PathStatementStartup\PowerLozConfigurationFiles"
         [Bool]$ConfigDirectoryTest = Test-Path -Path $ConfigDirectoryPath -PathType Container
 
         if ($ConfigDirectoryTest -eq $false)
@@ -130,7 +132,7 @@ function Start-CaTScheduler
             Exit
         }
 
-        [String]$SavedPathsPath = "$PathStatementStartup\ConfigurationFiles\SavedPaths.json"
+        [String]$SavedPathsPath = "$PathStatementStartup\PowerLozConfigurationFiles\LozSavedPaths.json"
         [Bool]$SavedPathsTest = Test-Path -Path $SavedPathsPath -PathType Leaf
 
         if ($SavedPathsTest -eq $false)
@@ -150,7 +152,7 @@ function Start-CaTScheduler
             Exit
         }
 
-        [String]$TaskNumberPath = "$PathStatementStartup\ConfigurationFiles\TaskNumber.txt"
+        [String]$TaskNumberPath = "$PathStatementStartup\PowerLozConfigurationFiles\LozTaskNumber.txt"
         [Bool]$TaskNumberTest = Test-Path -Path $TaskNumberPath -PathType Leaf
 
         if ($TaskNumberTest -eq $false)
@@ -172,7 +174,7 @@ function Start-CaTScheduler
             Exit
         }
 
-        [String]$ScheduledTasksPath = "$PathStatementStartup\ConfigurationFiles\ScheduledTasks.json"
+        [String]$ScheduledTasksPath = "$PathStatementStartup\PowerLozConfigurationFiles\LozScheduledTasks.json"
         [Bool]$ScheduledTasksTest = Test-Path -Path $ScheduledTasksPath -PathType Leaf
 
         if ($ScheduledTasksTest -eq $false)
@@ -197,7 +199,7 @@ function Start-CaTScheduler
 
     function Start-ScheduledTaskScript
     {
-        [String]$GetTasksScriptPath = "$PathStatementStartup\GetScheduledTasks.ps1"
+        [String]$GetTasksScriptPath = "$PathStatementStartup\LozFindScheduledTasks.ps1"
         Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -WindowStyle Hidden -File `"$GetTasksScriptPath`"" -WindowStyle Hidden -Verb RunAs
 
         return $true
@@ -205,7 +207,7 @@ function Start-CaTScheduler
 
     function Get-NewOrSaved
     {
-        [String]$SavedPathsPath = "$PathStatementStartup\ConfigurationFiles\SavedPaths.json"
+        [String]$SavedPathsPath = "$PathStatementStartup\PowerLozConfigurationFiles\LozSavedPaths.json"
         $HashtableDataStartup = Get-Content -Path $SavedPathsPath | ConvertFrom-Json
         $PathHashTableStartup = @{}
 
@@ -229,6 +231,8 @@ function Start-CaTScheduler
 
         return $NewOrSavedStartup
     }
+
+    [String]$ErrorTwo = "Startup failed"
 
     if ($Start -eq 1)
     {
@@ -256,40 +260,46 @@ function Start-CaTScheduler
                     }
                     else
                     {
-                        Write-Host "Startup failed" -ForegroundColor Red
+                        Write-Error -Message "$ErrorTwo"
                         Exit
                     }
                 }
                 else
                 {
-                    Write-Host "Startup failed" -ForegroundColor Red
+                    Write-Error -Message "$ErrorTwo"
                     Exit
                 }
             }
             else
             {
-                Write-Host "Startup failed" -ForegroundColor Red
+                Write-Error -Message "$ErrorTwo"
                 Exit
             }
         }
         else
         {
-            Write-Host "Startup failed" -ForegroundColor Red
+            Write-Error -Message "$ErrorTwo"
             Exit
         }
     }
     else
     {
-        Write-Host "Startup failed" -ForegroundColor Red
+        Write-Error -Message "$ErrorTwo"
         Exit
     }
 }
 
 Function Exit-CaTScheduler
 {
-    Write-Host
-    Write-Host "Thank you for using Compare and Transfer" -ForegroundColor Yellow
-    Write-Host "Goodbye" -ForegroundColor Yellow
+    Write-Information -MessageData ""
+
+    [Console]::ForegroundColor = [ConsoleColor]::Cyan
+    Write-Information -MessageData "Thank you for using Power-Loz as your backup utility."
+    Write-Information -MessageData "Have a nice day!"
+    [Console]::ResetColor()
+
+    Start-Sleep -Seconds 3
+
     Exit
 }
 

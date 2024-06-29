@@ -4,6 +4,8 @@ function Write-Task
 {
     param
     (
+        $InformationPreference = "Continue",
+        $WarningPreference = "Continue",
         [Int]$SchedulingOperation = $null,
         [String]$PathStatementScheduling = "",
         [Object[][]]$TotalArrayScheduling = @()
@@ -31,9 +33,35 @@ function Write-Task
 
         #Write-Host "Debug: Function: Write-TheSchedule | SourceArrayTasking: $SourceArrayTasking | DestArrayTasking: $DestArrayTasking | TheCountTasking: $TheCountTasking | FinalSourceDir: $FinalSourceDir | FinalDestDir: $FinalDestDir | FinalSourceDirX: $FinalSourceDirX | FinalDestDirX: $FinalDestDirX | FinalVerifyCountOne: $FinalVerifyCountOne | FinalVerifyCountTwo: $FinalVerifyCountTwo | FinalVerifyCountOneX: $FinalVerifyCountOneX | FinalVerifyCountTwoX: $FinalVerifyCountTwoX | DidAsk: $DidAsk | UserChoice: $UserChoice | AllReturnValues: $AllReturnValues" -ForegroundColor Green
 
+        function Write-Color
+        {
+            param
+            (
+                [Parameter(Mandatory=$true)]
+                [String]$InputText,
+                [Parameter()]
+                [ConsoleColor]$ForegroundColor = [ConsoleColor]::White,
+                [switch]$NoNewline
+            )
+
+            $CurrentColor = [Console]::ForegroundColor
+            [Console]::ForegroundColor = $ForegroundColor
+
+            if ($NoNewline)
+            {
+                [Console]::Write($InputText)
+            }
+            else
+            {
+                [Console]::WriteLine($InputText)
+            }
+
+            [Console]::ForegroundColor = $CurrentColor
+        }
+
         function Get-UserInputSchedulingOne
         {
-            [String]$WarningTen = "The input given was not valid. The options are 1 or 2." 
+            [String]$WarningTen = "The input given was not valid. The options are 1 or 2."
 
             $UserChoiceXX = Read-Host "Choice"
             Write-Information -MessageData ""
@@ -82,7 +110,7 @@ function Write-Task
                 [Int]$LoopingLoop = 0
 
                 [Console]::ForegroundColor = [ConsoleColor]::Yellow
-                Write-Information -MessageData "You cannot go back from here. Choose 1 to restart." 
+                Write-Information -MessageData "You cannot go back from here. Choose 1 to restart."
                 [Console]::ResetColor()
 
                 Write-Information -MessageData ""
@@ -93,19 +121,19 @@ function Write-Task
                     Write-Information -MessageData "1. Yes"
                     Write-Information -MessageData "2. No"
 
-                    $UserChoiceX = Read-Host "Choice"
+                    $UserChoiceXX = Read-Host "Choice"
                     Write-Information -MessageData ""
 
-                    if ($UserChoiceX -eq "")
+                    if ($UserChoiceXX -eq "")
                     {
                         $WarningTen | Write-Warning
                         Write-Information -MessageData ""
                         continue
                     }
 
-                    [Bool]$IntegerLooping = [Int]::TryParse($UserChoiceX, [ref]$null)
+                    [Bool]$IsItAnInteger = [Int]::TryParse($UserChoiceXX, [ref]$null)
 
-                    if (-not $IntegerLooping)
+                    if (-not $IsItAnInteger)
                     {
                         $WarningTen | Write-Warning
                         Write-Information -MessageData ""
@@ -114,7 +142,7 @@ function Write-Task
 
                     try
                     {
-                        [Int]$UserChoice = [Int]$UserChoiceX
+                        [Int]$UserChoice = [Int]$UserChoiceXX
                     }
                     catch [System.Management.Automation.RuntimeException]
                     {
@@ -202,11 +230,11 @@ function Write-Task
                     $FinalSourceDir += $SourceArrayTasking[$FinalVerifyCountTwo]
                     $FinalDestDir += $DestArrayTasking[$FinalVerifyCountTwo]
 
-                    [Int]$Numbering = $FinalVerifyCountTwo + 1 #FIXFIXFIXFIX
-                    Write-Host "Backup $Numbering. " -NoNewline
-                    Write-Host "$($FinalSourceDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow -NoNewline
-                    Write-Host " to " -NoNewline
-                    Write-Host "$($FinalDestDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow
+                    [Int]$Numbering = $FinalVerifyCountTwo + 1
+                    Write-Color "Backup $Numbering. " -NoNewline
+                    Write-Color "$($FinalSourceDir[$FinalVerifyCountTwo])" -ForegroundColor Green -NoNewline
+                    Write-Color " to " -NoNewline
+                    Write-Color "$($FinalDestDir[$FinalVerifyCountTwo])" -ForegroundColor Green
 
                     Get-SchedulingMenu -NumberX $Numbering -ControlNumber 1 -FlowControl 1 -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                 }
@@ -222,8 +250,11 @@ function Write-Task
                     }
                     elseif ($AllReturnValues.Count -ne $FinalVerifyCountOne)
                     {
-                        Write-Information -MessageData "$FinalVerifyCountOne backups have not been sucessfully verified" -ForegroundColor Red
-                        Write-Information -MessageData
+                        [Console]::ForegroundColor = [ConsoleColor]::Cyan
+                        Write-Information -MessageData "$FinalVerifyCountOne backups have not been sucessfully verified"
+                        [Console]::ResetColor()
+
+                        Write-Information -MessageData ""
 
                         Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                     }
@@ -248,11 +279,11 @@ function Write-Task
                     $FinalSourceDirX += $SourceArrayTasking[$FinalVerifyCountTwoX]
                     $FinalDestDirX += $DestArrayTasking[$FinalVerifyCountTwoX]
 
-                    [Int]$NumberingX = $FinalVerifyCountTwoX + 1   #FIXFIXFIXFIXFIX
-                    Write-Host "Backup $NumberingX. " -NoNewline
-                    Write-Host "$($FinalSourceDirX[$FinalVerifyCountTwoX])" -ForegroundColor Yellow -NoNewline
-                    Write-Host " to " -NoNewline
-                    Write-Host "$($FinalDestDirX[$FinalVerifyCountTwoX])" -ForegroundColor Yellow
+                    [Int]$NumberingX = $FinalVerifyCountTwoX + 1
+                    Write-Color "Backup $NumberingX. " -NoNewline
+                    Write-Color "$($FinalSourceDirX[$FinalVerifyCountTwoX])" -ForegroundColor Green -NoNewline
+                    Write-Color " to " -NoNewline
+                    Write-Color "$($FinalDestDirX[$FinalVerifyCountTwoX])" -ForegroundColor Green
 
                     $FinalVerifyCountTwoX = $FinalVerifyCountTwoX + 1
                 }
@@ -273,11 +304,11 @@ function Write-Task
             $FinalSourceDir += $SourceArrayTasking[$FinalVerifyCountTwo]
             $FinalDestDir += $DestArrayTasking[$FinalVerifyCountTwo]
 
-            [Int]$Numbering = $FinalVerifyCountTwo + 1 #FIXFIXFIXFIXFIX
-            Write-Host "Backup $Numbering. " -NoNewline
-            Write-Host "$($FinalSourceDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow -NoNewline
-            Write-Host " to " -NoNewline
-            Write-Host "$($FinalDestDir[$FinalVerifyCountTwo])" -ForegroundColor Yellow
+            [Int]$Numbering = $FinalVerifyCountTwo + 1
+            Write-Color "Backup $Numbering. " -NoNewline
+            Write-Color "$($FinalSourceDir[$FinalVerifyCountTwo])" -ForegroundColor Green -NoNewline
+            Write-Color " to " -NoNewline
+            Write-Color "$($FinalDestDir[$FinalVerifyCountTwo])" -ForegroundColor Green
 
             Get-SchedulingMenu -NumberX $Numbering -ControlNumber 1 -FlowControl 1 -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice
         }
@@ -326,6 +357,32 @@ function Write-Task
         #Write-Host "Debug: Function: Get-SchedulingMenu | Often: $Often | Day: $Day | Hour: $Hour | Minute: $Minute | Ampm: $AmPm | FlowControl: $FlowControl | GoBackNumber: $GoBackNumber | NumberX: $NumberX | ControlNumber: $ControlNumber | SchedulingVariables: $SchedulingVariables" -ForegroundColor Green
         #Write-Host "Debug: Function: Get-SchedulingMenu | SourceArrayTasking: $SourceArrayTasking | DestArrayTasking: $DestArrayTasking | TheCountTasking: $TheCountTasking | FinalSourceDir: $FinalSourceDir | FinalDestDir: $FinalDestDir | FinalSourceDirX: $FinalSourceDirX | FinalDestDirX: $FinalDestDirX | FinalVerifyCountTwo: $FinalVerifyCountTwo | FinalVerifyCountOne: $FinalVerifyCountOne | DidAsk: $DidAsk | UserChoice: $UserChoice | AllReturnValues: $AllReturnValues" -ForegroundColor Green
 
+        function Write-Color
+        {
+            param
+            (
+                [Parameter(Mandatory=$true)]
+                [String]$InputText,
+                [Parameter()]
+                [ConsoleColor]$ForegroundColor = [ConsoleColor]::White,
+                [switch]$NoNewline
+            )
+
+            $CurrentColor = [Console]::ForegroundColor
+            [Console]::ForegroundColor = $ForegroundColor
+
+            if ($NoNewline)
+            {
+                [Console]::Write($InputText)
+            }
+            else
+            {
+                [Console]::WriteLine($InputText)
+            }
+
+            [Console]::ForegroundColor = $CurrentColor
+        }
+
         function Get-UserInputSchedulingTwo
         {
             param
@@ -337,7 +394,7 @@ function Write-Task
 
             [String]$WarningEleven = "The input given was not valid. The options are 0 - $NumberOfChoices or 60 to go back."
             [String]$WarningOne = "The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back."
-            [String]$WarningTen = "The input given was not valid. The options are 1 or 2." 
+            [String]$WarningTen = "The input given was not valid. The options are 1 or 2."
 
             $UserChoiceXX = Read-Host "Choice"
             Write-Information -MessageData ""
@@ -426,7 +483,7 @@ function Write-Task
                         [Int]$LoopingLoop = 0
 
                         [Console]::ForegroundColor = [ConsoleColor]::Yellow
-                        Write-Information -MessageData "You cannot go back from here. Choose 1 to restart." 
+                        Write-Information -MessageData "You cannot go back from here. Choose 1 to restart."
                         [Console]::ResetColor()
 
                         Write-Information -MessageData ""
@@ -513,8 +570,8 @@ function Write-Task
                         [Int]$LoopingLoop = 0
 
                         [Console]::ForegroundColor = [ConsoleColor]::Yellow
-                        Write-Information -MessageData "You cannot go back from here. Choose 2 to quit." 
-                        Write-Information -MessageData "The backups you have already created will be preserved." 
+                        Write-Information -MessageData "You cannot go back from here. Choose 2 to quit."
+                        Write-Information -MessageData "The backups you have already created will be preserved."
                         [Console]::ResetColor()
 
                         Write-Information -MessageData ""
@@ -526,7 +583,7 @@ function Write-Task
                             Write-Information -MessageData "2. No"
 
                             $UserChoiceXXX = Read-Host "Choice"
-                            Write-Host
+                            Write-Information -MessageData ""
 
                             if ($UserChoiceXXX -eq "")
                             {
@@ -833,10 +890,10 @@ function Write-Task
 
             while ($LoopNumOne -eq 0)
             {
-                Write-Host "XX" -NoNewline -ForegroundColor Yellow #FIXFIXFIXFIX
-                Write-Host ":XX AM/PM"
-                Write-Host "01 02 03 04 05 06 07 08 09 10 11 12"
-                Write-Host "Type in the hour you want the backup to happen"
+                Write-Color "XX" -ForegroundColor Magenta -NoNewline
+                Write-Information -MessageData ":XX AM/PM"
+                Write-Information -MessageData "01 02 03 04 05 06 07 08 09 10 11 12"
+                Write-Information -MessageData "Type in the hour you want the backup to happen"
 
                 $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 12 -GoBackNumberX 3 -NeedZero 0
             }
@@ -863,12 +920,12 @@ function Write-Task
 
             while ($LoopNumOne -eq 60)
             {
-                Write-Host "XX:" -NoNewline
-                Write-Host "XX" -NoNewline -ForegroundColor Yellow #FIXFIXFIXFIX
-                Write-Host " AM/PM"
-                Write-Host "00 - 59"
-                Write-Host "Type in the minute you want the backup to happen"  -NoNewline
-                Write-Host "    (60 is to go back)" -ForegroundColor Yellow
+                Write-Color "XX:" -NoNewline
+                Write-Color "XX" -ForegroundColor Magenta -NoNewline
+                Write-Information -MessageData " AM/PM"
+                Write-Information -MessageData "00 - 59"
+                Write-Color "Type in the minute you want the backup to happen" -NoNewline
+                Write-Color "    (60 is to go back)" -ForegroundColor Magenta
 
                 $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 59 -GoBackNumberX 4 -NeedZero 1
             }
@@ -895,11 +952,11 @@ function Write-Task
 
             while ($LoopNumOne -eq 0)
             {
-                Write-Host "XX:XX" -NoNewline
-                Write-Host " AM/PM" -ForegroundColor Yellow #FIXFIXFIXFIX
-                Write-Host "AM or PM?"
-                Write-Host "1. AM"
-                Write-Host "2. PM"
+                Write-Color "XX:XX" -NoNewline
+                Write-Color " AM/PM" -ForegroundColor Magenta
+                Write-Information -MessageData "AM or PM?"
+                Write-Information -MessageData "1. AM"
+                Write-Information -MessageData "2. PM"
 
                 $LoopNumOne = Get-UserInputSchedulingTwo -NumberOfChoices 2 -GoBackNumberX 5 -NeedZero 0
             }
@@ -1034,9 +1091,9 @@ function Write-Task
                         Write-Information -MessageData ""
 
                         [Console]::ForegroundColor = [ConsoleColor]::Red
-                        Write-Information -MessageData "Backup $TaskCreationNumbering was not sucessfully verified" 
-                        Write-Information -MessageData "Source: $SourceX" 
-                        Write-Information -MessageData "Destination: $DestX" 
+                        Write-Information -MessageData "Backup $TaskCreationNumbering was not sucessfully verified"
+                        Write-Information -MessageData "Source: $SourceX"
+                        Write-Information -MessageData "Destination: $DestX"
                         [Console]::ResetColor()
 
                         Write-Information -MessageData ""
@@ -1065,16 +1122,18 @@ function Write-Task
                 {
                     if ($UserChoice -eq 1)
                     {
-                        Write-Host "$FinalVerifyCountOne backups have been sucessfully verified"
-                        Write-Host "Thank you for using CaT Scheduler"
-                        Write-Host
+                        Write-Information -MessageData "$FinalVerifyCountOne backups have been sucessfully verified"
+                        Write-Information -MessageData "Thank you for using Power-Loz"
+                        Write-Information -MessageData ""
+
                         Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                     }
                     elseif ($UserChoice -eq 3)
                     {
-                        Write-Host "$FinalVerifyCountOne backup was sucessfully verified"
-                        Write-Host "Thank you for using CaT Scheduler"
-                        Write-Host
+                        Write-Information -MessageData "$FinalVerifyCountOne backup was sucessfully verified"
+                        Write-Information -MessageData "Thank you for using Power-Loz"
+                        Write-Information -MessageData ""
+
                         Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                     }
                     else
@@ -1086,8 +1145,12 @@ function Write-Task
                 }
                 elseif ($AllReturnValues.Count -ne $FinalVerifyCountOne)
                 {
-                    Write-Host "$FinalVerifyCountOne backups have not been sucessfully verified" -ForegroundColor Red
-                    Write-Host
+                    [Console]::ForegroundColor = [ConsoleColor]::Red
+                    Write-Information -MessageData "$FinalVerifyCountOne backups have not been sucessfully verified"
+                    [Console]::ResetColor()
+
+                    Write-Information -MessageData ""
+
                     Start-CaTScheduler -PathStatementStartup $PathStatementScheduling -Start 1
                 }
                 else
@@ -1108,19 +1171,23 @@ function Write-Task
 
                 if (($TaskCreationReturnValue -eq $false) -or (-not($TaskCreationReturnValue -eq $true)))
                 {
-                    Write-Host
-                    Write-Host "Backup $TaskCreationNumbering was not sucessfully verified" -ForegroundColor Red
-                    Write-Host "Source: $SourceX" -ForegroundColor Red
-                    Write-Host "Destination: $DestX" -ForegroundColor Red
-                    Write-Host
+                    Write-Information -MessageData ""
+
+                    [Console]::ForegroundColor = [ConsoleColor]::Red
+                    Write-Information -MessageData "Backup $TaskCreationNumbering was not sucessfully verified"
+                    Write-Information -MessageData "Source: $SourceX"
+                    Write-Information -MessageData "Destination: $DestX"
+                    [Console]::ResetColor()
+
+                    Write-Information -MessageData ""
                 }
                 elseif ($TaskCreationReturnValue -eq $true)
                 {
-                    Write-Host
-                    Write-Host "Backup $TaskCreationNumbering was sucessfully verified"
-                    Write-Host "Source: $SourceX"
-                    Write-Host "Destination: $DestX"
-                    Write-Host
+                    Write-Information -MessageData ""
+                    Write-Information -MessageData "Backup $TaskCreationNumbering was sucessfully verified"
+                    Write-Information -MessageData "Source: $SourceX"
+                    Write-Information -MessageData "Destination: $DestX"
+                    Write-Information -MessageData ""
                 }
                 else
                 {
@@ -1155,7 +1222,7 @@ function Write-Task
 
         function Get-TaskNumber
         {
-            [String]$FilePath = "$PathStatementScheduling\ConfigurationFiles\TaskNumber.txt"
+            [String]$FilePath = "$PathStatementScheduling\PowerLozConfigurationFiles\LozTaskNumber.txt"
             $Content = Get-Content -Path $FilePath
             [Int]$TaskNumber = [Int]$Content
 
@@ -1224,7 +1291,7 @@ function Write-Task
             Exit
         }
 
-        [String]$WrapperScript = "$PathStatementScheduling\WrapperScript.ps1"
+        [String]$WrapperScript = "$PathStatementScheduling\LozWrapperScript.ps1"
 
         [String]$Arguments = "-NoProfile -WindowStyle Hidden -File `"$WrapperScript`" -SourceDir `"$SourceDir`" -DestDir `"$DestinationDir`""
 
@@ -1234,22 +1301,26 @@ function Write-Task
 
         $NewTaskAction = Register-ScheduledTask -TaskName $Taskname -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings -Description "Task created by CaT Scheduler."
 
-        [String]$FilePath = "$PathStatementScheduling\ConfigurationFiles\TaskNumber.txt"
+        [String]$FilePath = "$PathStatementScheduling\PowerLozConfigurationFiles\LozTaskNumber.txt"
         $NewItemTaskNumber = New-Item -Path $FilePath -ItemType File -Value $ScheduledTaskNumberX -Force
 
         if ($EndMsg -eq 1)
         {
-            Write-Host "$Taskname has been scheduled!" -ForegroundColor Yellow
-            Write-Host "$Taskname will automatically backup $SourceDir to $DestinationDir" -ForegroundColor Yellow
-            Write-Host "The backup will take place daily at $TimeX" -ForegroundColor Yellow
-            Write-Host "You can change or delete this backup by going to the main menu!" -ForegroundColor Yellow
+            [Console]::ForegroundColor = [ConsoleColor]::Cyan
+            Write-Information -MessageData "$Taskname has been scheduled!"
+            Write-Information -MessageData "$Taskname will automatically backup $SourceDir to $DestinationDir"
+            Write-Information -MessageData "The backup will take place daily at $TimeX"
+            Write-Information -MessageData "You can change or delete this backup by going to the main menu!"
+            [Console]::ResetColor()
         }
         elseif ($EndMsg -eq 2)
         {
-            Write-Host "$Taskname has been scheduled!" -ForegroundColor Yellow
-            Write-Host "$Taskname will automatically backup $SourceDir to $DestinationDir" -ForegroundColor Yellow
-            Write-Host "The backup will take place weekly on $DayX at $TimeX" -ForegroundColor Yellow
-            Write-Host "You can change or delete this backup by going to the main menu!" -ForegroundColor Yellow
+            [Console]::ForegroundColor = [ConsoleColor]::Cyan
+            Write-Information -MessageData "$Taskname has been scheduled!"
+            Write-Information -MessageData "$Taskname will automatically backup $SourceDir to $DestinationDir"
+            Write-Information -MessageData "The backup will take place weekly on $DayX at $TimeX"
+            Write-Information -MessageData "You can change or delete this backup by going to the main menu!"
+            [Console]::ResetColor()
         }
         else
         {

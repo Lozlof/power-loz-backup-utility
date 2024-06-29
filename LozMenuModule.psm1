@@ -28,7 +28,7 @@ function Get-Menu
     {
         [String]$WarningOne = "The input given was not valid. The options are 1 - $NumberOfChoices or 0 to go back."
         [String]$WarningTwo = "The input given was not valid. The options are 1 - $NumberOfChoices."
-        [String]$WarningThree = "You cannot go back from here. Choose 2 to restart." 
+        [String]$WarningThree = "You cannot go back from here. Choose 2 to restart."
 
         $UserInputXX = Read-Host "Choice"
 
@@ -1016,14 +1016,14 @@ function Get-Menu
     function Get-MainMenu
     {
         [Console]::ForegroundColor = [ConsoleColor]::Cyan
-        Write-Information -MessageData "Main Menu" 
+        Write-Information -MessageData "Main Menu"
         [Console]::ResetColor()
 
-        Write-Information -MessageData ""  
-        Write-Information -MessageData "Choose a task from the list!" 
-        Write-Information -MessageData "1. Schedule a persistent backup"  
-        Write-Information -MessageData "2. Run a backup for one time execution"  
-        Write-Information -MessageData "3. Delete scheduled backups" 
+        Write-Information -MessageData ""
+        Write-Information -MessageData "Choose a task from the list!"
+        Write-Information -MessageData "1. Schedule a persistent backup"
+        Write-Information -MessageData "2. Run a backup for one time execution"
+        Write-Information -MessageData "3. Delete scheduled backups"
         Write-Information -MessageData "0. Quit"
     }
 
@@ -1057,7 +1057,7 @@ function Get-Menu
     function Get-MenuThree
     {
         [Console]::ForegroundColor = [ConsoleColor]::Yellow
-        Write-Information -MessageData "Going back from here will erase your existing backups. Do you want to continue going back?" 
+        Write-Information -MessageData "Going back from here will erase your existing backups. Do you want to continue going back?"
         [Console]::ResetColor()
 
         Write-Information -MessageData "1. Yes"
@@ -1070,6 +1070,32 @@ function Get-Menu
         (
             [Int]$TypeOfBackup = $null
         )
+
+        function Write-Color
+        {
+            param
+            (
+                [Parameter(Mandatory=$true)]
+                [String]$InputText,
+                [Parameter()]
+                [ConsoleColor]$ForegroundColor = [ConsoleColor]::White,
+                [switch]$NoNewline
+            )
+
+            $CurrentColor = [Console]::ForegroundColor
+            [Console]::ForegroundColor = $ForegroundColor
+
+            if ($NoNewline)
+            {
+                [Console]::Write($InputText)
+            }
+            else
+            {
+                [Console]::WriteLine($InputText)
+            }
+
+            [Console]::ForegroundColor = $CurrentColor
+        }
 
         $SourceArrayMenu = $TotalArrayMenu[0]
         $DestinationArrayMenu = $TotalArrayMenu[1]
@@ -1096,15 +1122,15 @@ function Get-Menu
 
         [Int]$ArrayCountBase = 0
 
-        [Console]::ForegroundColor = [ConsoleColor]::Magenta
-        Write-Information -MessageData "Please verify your selection" 
-        [Console]::ResetColor()
+        Write-Information -MessageData "Please verify your selection"
 
         while ($ArrayCountBase -lt $ArrayCount)
         {
             $ArrayNumber = $ArrayCountBase + 1
-
-            Write-Information -MessageData "Backup $ArrayNumber. The directory [ $($SourceArrayMenu[$ArrayCountBase]) ] will backup to [ $($DestinationArrayMenu[$ArrayCountBase]) ]"
+            Write-Color "Backup $ArrayNumber. The directory " -NoNewline
+            Write-Color "$($SourceArrayMenu[$ArrayCountBase])" -ForegroundColor Green -NoNewline
+            Write-Color " will backup to " -NoNewline
+            Write-Color "$($DestinationArrayMenu[$ArrayCountBase])" -ForegroundColor Green
 
             $ArrayCountBase = $ArrayCountBase + 1
         }
