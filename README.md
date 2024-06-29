@@ -10,6 +10,8 @@ Check how ReadWriteModule writes JSON files.
 GetScheduledTasks define variables. 
 Appropriate task number.
 Remove saved paths.
+When program exits because of an error. Have a different exit message. 
+Notify user that overlapping paths will do better if scheduled at different times.
 
 Errors that need accounting:
 Test-Path : Illegal characters in path.
@@ -19,22 +21,4 @@ At C:\Users\Justin Cavage\Documents\Software\CaT_Scheduler\CaT_Scheduler_0.3.X\C
     + CategoryInfo          : InvalidArgument: (C:\Users\Justin Cavage\|:String) [Test-Path], ArgumentException
     + FullyQualifiedErrorId : ItemExistsArgumentError,Microsoft.PowerShell.Commands.TestPathCommand
 
-Register-ScheduledTask : Access is denied.
-At C:\Users\Justin
-Cavage\Documents\Software\CaT_Scheduler\CaT_Scheduler_0.3.X\CaT_Scheduler_0.3.4\Modules\SchedulingModule.psm1:595
-char:9
-+         Register-ScheduledTask -TaskName $Taskname -Action $Action -T ...
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : PermissionDenied: (PS_ScheduledTask:Root/Microsoft/...S_ScheduledTask) [Register-Schedul
-   edTask], CimException
-    + FullyQualifiedErrorId : HRESULT 0x80070005,Register-ScheduledTask
-
-notify user that overlapping paths will do better if scheduled at different times. 
-
-Cannot convert value "opre" to type "System.Int32". Error: "Input string was not in a correct format."
-At C:\Users\srogers\Documents\CaT_Scheduler_0.4.0\SchedulingModule.psm1:91 char:21
-+                     $UserChoiceX = Read-Host "Choice"
-+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : MetadataError: (:) [], ArgumentTransformationMetadataException
-    + FullyQualifiedErrorId : RuntimeException
-                                         WARNING: The input given was not valid. The options are 1 - 1 or 0 to go back.                         BackupModule has issues.         Scheduling Module has issues.  
+WARNING: The input given was not valid. The options are 1 - 1 or 0 to go back. 
