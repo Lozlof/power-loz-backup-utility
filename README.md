@@ -1,4 +1,4 @@
-# CaT-Scheduler
+# Power-Loz
 Backup utility
 
 Things to add:
