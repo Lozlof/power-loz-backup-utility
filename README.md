@@ -12,6 +12,7 @@ Appropriate task number.
 Remove saved paths.
 When program exits because of an error. Have a different exit message. 
 Notify user that overlapping paths will do better if scheduled at different times.
+Check if FindScheduledTasks is already running, and if it is, stop it. 
 
 Errors that need accounting:
 Test-Path : Illegal characters in path.
