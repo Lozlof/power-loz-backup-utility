@@ -25,3 +25,5 @@ At C:\Users\Justin Cavage\Documents\Software\CaT_Scheduler\CaT_Scheduler_0.3.X\C
     + FullyQualifiedErrorId : ItemExistsArgumentError,Microsoft.PowerShell.Commands.TestPathCommand
 
 WARNING: The input given was not valid. The options are 1 - 1 or 0 to go back. 
+
+Weekly on 32
