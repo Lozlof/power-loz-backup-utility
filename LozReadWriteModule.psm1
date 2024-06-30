@@ -26,7 +26,7 @@ function Invoke-ReadWrite
     [Int]$TheCountReadWrite = $TotalArrayReadWrite.Count
     #Write-Host "Debug: Function: Invoke-ReadWrite | OperationChoice: $OperationChoice | Message: | LogType: $LogType | SourcePathItem: $SourcePathItem | DestinationPathItem: $DestinationPathItem | TotalArrayReadWrite: $($TotalArrayReadWrite | ForEach-Object { $_ -join ', ' }) | TypeOfBackupReadWrite: $TypeOfBackupReadWrite | TotalArrayReadWrite Count: $TheCountReadWrite | SourceOrDest: $SourceOrDest | PathStatementReadWrite: $PathStatementReadWrite | NewOrSavedReadWrite: $NewOrSavedReadWrite | UserInputReadWrite: $UserInputReadWrite | TotalKeys: $TotalKeys" -ForegroundColor Green
 
-    function Write-Log
+    function Write-LozLog
     {
         $LogFileOne = "$PathStatementReadWrite\PowerLozLogs\LozInfoLog.log"
         $LogFileTwo = "$PathStatementReadWrite\PowerLozLogs\LozErrorLog.log"
@@ -60,7 +60,7 @@ function Invoke-ReadWrite
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(11)A. Parent Function: Invoke-ReadWrite | Child Function: Write-Log | Variable LogType: $LogType (Should equal 1, 2, or 3)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(11)A. Parent Function: Invoke-ReadWrite | Child Function: Write-LozLog | Variable LogType: $LogType (Should equal 1, 2, or 3)"
             Exit-CaTScheduler
             Exit
         }
@@ -667,15 +667,15 @@ function Invoke-ReadWrite
     {
         if ($LogType -eq 1)
         {
-            [Bool]$WriteToLog = Write-Log
+            [Bool]$WriteToLog = Write-LozLog
         }
         elseif ($LogType -eq 2)
         {
-            [Bool]$WriteToLog = Write-Log
+            [Bool]$WriteToLog = Write-LozLog
         }
         elseif ($LogType -eq 3)
         {
-            [Bool]$WriteToLog = Write-Log
+            [Bool]$WriteToLog = Write-LozLog
 
             if ($WriteToLog)
             {
@@ -690,7 +690,7 @@ function Invoke-ReadWrite
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(15)A. Parent Function: Invoke-ReadWrite | Child Function: Write-Log | Variable OperationChoice: $OperationChoice (Should equal 1) | Variable LogType: $LogType (Should equal 1, 2, 3)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(15)A. Parent Function: Invoke-ReadWrite | Child Function: Write-LozLog | Variable OperationChoice: $OperationChoice (Should equal 1) | Variable LogType: $LogType (Should equal 1, 2, 3)"
             Exit-CaTScheduler
             Exit
         }
