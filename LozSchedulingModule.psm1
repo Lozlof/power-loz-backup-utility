@@ -345,8 +345,6 @@ function Write-Task
             [Int]$TheCountTasking,
             $FinalSourceDir = @(),
             $FinalDestDir = @(),
-            $FinalSourceDirX = @(),
-            $FinalDestDirX = @(),
             [Int]$FinalVerifyCountTwo = 0,
             [Int]$FinalVerifyCountOne = $TheCountTasking,
             [Int]$DidAsk = 0,

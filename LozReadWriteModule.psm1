@@ -66,7 +66,7 @@ function Invoke-ReadWrite
         }
     }
 
-    function Write-PathStatements
+    function Write-PathStatement
     {
         $SavedPathsPathReadWrite = "$PathStatementReadWrite\PowerLozConfigurationFiles\LozSavedPaths.json"
         $PathHashTableReadWrite = @{}
@@ -77,7 +77,7 @@ function Invoke-ReadWrite
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule) Variable SavedPathsPathReadWrite ($SavedPathsPathReadWrite) does not exist therefore exited Write-PathStatements"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule) Variable SavedPathsPathReadWrite ($SavedPathsPathReadWrite) does not exist therefore exited Write-PathStatement"
 
             return $false
         }
@@ -146,7 +146,7 @@ function Invoke-ReadWrite
         }
     }
 
-    function Get-PathStatements
+    function Get-PathStatement
     {
         [String]$SavedPathsPathReadWrite = "$PathStatementReadWrite\PowerLozConfigurationFiles\LozSavedPaths.json"
 
@@ -158,7 +158,7 @@ function Invoke-ReadWrite
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule). Variable SavedPathsPathReadWrite ($SavedPathsPathReadWrite) does not exist therefore exited Get-PathStatements"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule). Variable SavedPathsPathReadWrite ($SavedPathsPathReadWrite) does not exist therefore exited Get-PathStatement"
                 return $false #redirect somewhere
             }
 
@@ -188,7 +188,7 @@ function Invoke-ReadWrite
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)A. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatements"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)A. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatement"
                 Exit-CaTScheduler
                 Exit
             }
@@ -207,7 +207,7 @@ function Invoke-ReadWrite
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)B. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatements"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)B. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatement"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -224,14 +224,14 @@ function Invoke-ReadWrite
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)C. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatements"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)C. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatement"
                     Exit-CaTScheduler
                     Exit
                 }
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)C. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatements"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)C. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatement"
                 Exit-CaTScheduler
                 Exit
             }
@@ -250,27 +250,27 @@ function Invoke-ReadWrite
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)D. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatements"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)D. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatement"
                     Exit-CaTScheduler
                     Exit
                 }
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)E. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatements"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)E. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatement"
                 Exit-CaTScheduler
                 Exit
             }
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)F. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatements"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(52)F. Parent Function: Invoke-ReadWrite | Child Function: Get-PathStatement"
             Exit-CaTScheduler
             Exit
         }
     }
 
-    function Get-TheScheduledTasks
+    function Get-TheScheduledTask
     {
         param
         (
@@ -310,7 +310,7 @@ function Invoke-ReadWrite
                     }
                     else
                     {
-                        Get-TheScheduledTasks -HasBeenChecked 1
+                        Get-TheScheduledTask -HasBeenChecked 1
                     }
                 }
 
@@ -327,7 +327,7 @@ function Invoke-ReadWrite
                     }
                     else
                     {
-                        Get-TheScheduledTasks -HasBeenChecked 1
+                        Get-TheScheduledTask -HasBeenChecked 1
                     }
                 }
 
@@ -348,7 +348,7 @@ function Invoke-ReadWrite
                         }
                         else
                         {
-                            Get-TheScheduledTasks -HasBeenChecked 1
+                            Get-TheScheduledTask -HasBeenChecked 1
                         }
                     }
                 }
@@ -362,7 +362,7 @@ function Invoke-ReadWrite
                 {
                     if ($GoBackControl -eq 1)
                     {
-                        Get-TheScheduledTasks -HasBeenChecked 1
+                        Get-TheScheduledTask -HasBeenChecked 1
                     }
                     else
                     {
@@ -380,7 +380,7 @@ function Invoke-ReadWrite
                     }
                     else
                     {
-                        Get-TheScheduledTasks -HasBeenChecked 1
+                        Get-TheScheduledTask -HasBeenChecked 1
                     }
                 }
                 else
@@ -394,7 +394,7 @@ function Invoke-ReadWrite
                     }
                     else
                     {
-                        Get-TheScheduledTasks -HasBeenChecked 1
+                        Get-TheScheduledTask -HasBeenChecked 1
                     }
                 }
             }
@@ -424,7 +424,7 @@ function Invoke-ReadWrite
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(74)A. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Child Function: Get-UserDeleteChoice"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(74)A. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask | Child Function: Get-UserDeleteChoice"
                 Exit-CaTScheduler
                 Exit
             }
@@ -453,11 +453,11 @@ function Invoke-ReadWrite
             }
             elseif ($UserSelectionChoiceTwo -eq 2)
             {
-                Get-TheScheduledTasks -HasBeenChecked 1
+                Get-TheScheduledTask -HasBeenChecked 1
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(74)B. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Child Function: Get-UserDeleteChoice | Variable UserSelectionChoiceTwo: $UserSelectionChoiceTwo (Should equal 1 or 2)"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(74)B. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask | Child Function: Get-UserDeleteChoice | Variable UserSelectionChoiceTwo: $UserSelectionChoiceTwo (Should equal 1 or 2)"
                 Exit-CaTScheduler
                 Exit
             }
@@ -492,7 +492,7 @@ function Invoke-ReadWrite
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(75)A. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Child Function: Test-IfFinished"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(75)A. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask | Child Function: Test-IfFinished"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -507,7 +507,7 @@ function Invoke-ReadWrite
             }
         }
 
-        function Write-ScheduledTasks
+        function Write-ScheduledTask
         {
             [String]$GetTasksFilePath = "$PathStatementReadWrite\PowerLozConfigurationFiles\LozScheduledTasks.json"
             [String]$WarningSix = "ScheduledTasks.json cannot be found"
@@ -518,7 +518,7 @@ function Invoke-ReadWrite
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule) Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Child Function: Write-ScheduledTasks | ScheduledTasks.json cannot be accessed. Variable GetTasksFilePath: $GetTasksFilePath"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule) Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask | Child Function: Write-ScheduledTask | ScheduledTasks.json cannot be accessed. Variable GetTasksFilePath: $GetTasksFilePath"
                 $WarningSix | Write-Warning
                 Write-Information -MessageData ""
                 Start-CaTScheduler -PathStatementStartup $PathStatementReadWrite -Start 1
@@ -585,7 +585,7 @@ function Invoke-ReadWrite
             {
                 $TaskNamesArray = @()
 
-                $TaskNamesArray = Write-ScheduledTasks
+                $TaskNamesArray = Write-ScheduledTask
 
                 [Int]$TaskNamesArrayCount = $TaskNamesArray.Count
 
@@ -601,7 +601,7 @@ function Invoke-ReadWrite
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(77)A. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Child Function:  Write-ScheduledTasks"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(77)A. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask | Child Function:  Write-ScheduledTask"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -610,7 +610,7 @@ function Invoke-ReadWrite
             {
                 [String]$WarningSeven = "Failed to verify scheduled tasks"
 
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule) Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Function Test-IfFinished failed to return true"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 2 -Message "(ReadWriteModule) Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask | Function Test-IfFinished failed to return true"
 
                 $WarningSeven | Write-Warning
                 Write-Information -MessageData ""
@@ -618,7 +618,7 @@ function Invoke-ReadWrite
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(77)B. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(77)B. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask"
                 Exit-CaTScheduler
                 Exit
             }
@@ -627,7 +627,7 @@ function Invoke-ReadWrite
         {
             $TaskNamesArray = @()
 
-            $TaskNamesArray = Write-ScheduledTasks
+            $TaskNamesArray = Write-ScheduledTask
 
             [Int]$TaskNamesArrayCount = $TaskNamesArray.Count
 
@@ -643,20 +643,20 @@ function Invoke-ReadWrite
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(77)C. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(77)C. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask"
                 Exit-CaTScheduler
                 Exit
             }
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(77)D. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTasks | Variable HasBeenChecked: $HasBeenChecked (Should equal 0 or 1)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(77)D. Parent Function: Invoke-ReadWrite | Child Function: Get-TheScheduledTask | Variable HasBeenChecked: $HasBeenChecked (Should equal 0 or 1)"
             Exit-CaTScheduler
             Exit
         }
     }
 
-    function Remove-Task
+    function Get-RemoveTask
     {
         Unregister-ScheduledTask -TaskName $NameOfSelection -Confirm:$false
 
@@ -697,7 +697,7 @@ function Invoke-ReadWrite
     }
     elseif ($OperationChoice -eq 2)
     {
-        [Bool]$WritePaths = Write-PathStatements
+        [Bool]$WritePaths = Write-PathStatement
 
         if ($WritePaths -eq $true)
         {
@@ -711,7 +711,7 @@ function Invoke-ReadWrite
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(15)B. Parent Function: Invoke-ReadWrite | Child Function: Write-PathStatements | Variable OperationChoice: $OperationChoice (Should equal 2) | Variable WritePaths: $WritePaths (Should equal true) | Variable TotalArrayReadWrite Count: $TheCountReadWrite (Should equal 0 or 2)"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(15)B. Parent Function: Invoke-ReadWrite | Child Function: Write-PathStatement | Variable OperationChoice: $OperationChoice (Should equal 2) | Variable WritePaths: $WritePaths (Should equal true) | Variable TotalArrayReadWrite Count: $TheCountReadWrite (Should equal 0 or 2)"
                 Exit-CaTScheduler
                 Exit
             }
@@ -728,14 +728,14 @@ function Invoke-ReadWrite
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(15)C. Parent Function: Invoke-ReadWrite | Child Function: Write-PathStatements | Variable OperationChoice: $OperationChoice (Should equal 2) | Variable WritePaths: $WritePaths (Should equal not true) | Variable TotalArrayReadWrite Count: $TheCountReadWrite (Should equal 0 or 2)"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(15)C. Parent Function: Invoke-ReadWrite | Child Function: Write-PathStatement | Variable OperationChoice: $OperationChoice (Should equal 2) | Variable WritePaths: $WritePaths (Should equal not true) | Variable TotalArrayReadWrite Count: $TheCountReadWrite (Should equal 0 or 2)"
                 Exit-CaTScheduler
                 Exit
             }
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(15)D. Parent Function: Invoke-ReadWrite | Child Function: Write-PathStatements | Variable OperationChoice: $OperationChoice (Should equal 2) | Variable WritePaths: $WritePaths (Should equal true or false)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementReadWrite -LogType 3 -Message "(15)D. Parent Function: Invoke-ReadWrite | Child Function: Write-PathStatement | Variable OperationChoice: $OperationChoice (Should equal 2) | Variable WritePaths: $WritePaths (Should equal true or false)"
             Exit-CaTScheduler
             Exit
         }
@@ -747,7 +747,7 @@ function Invoke-ReadWrite
 
         if ($SourceOrDest -eq 1)
         {
-            Get-PathStatements
+            Get-PathStatement
         }
         elseif (($SourceOrDest -eq 2) -or ($SourceOrDest -eq 3))
         {
@@ -771,7 +771,7 @@ function Invoke-ReadWrite
 
                 if ($IsItGoodStatement -eq $true)
                 {
-                    Get-PathStatements
+                    Get-PathStatement
                 }
                 elseif ($IsItGoodStatement -eq $false) #Do you want to create this folder?
                 {
@@ -780,7 +780,7 @@ function Invoke-ReadWrite
 
                     $SourcePathItem = ""
                     $SourceOrDest = 1
-                    Get-PathStatements
+                    Get-PathStatement
                 }
                 else
                 {
@@ -804,7 +804,7 @@ function Invoke-ReadWrite
                 {
                     $SourceOrDest = 0
                     $PrintHashTable = 1
-                    Get-PathStatements
+                    Get-PathStatement
                 }
                 elseif ($IsItGoodStatement -eq $false) #Do you want to create this folder?
                 {
@@ -818,7 +818,7 @@ function Invoke-ReadWrite
 
                         $DestinationPathItem = ""
                         $SourceOrDest = 2
-                        Get-PathStatements
+                        Get-PathStatement
                     }
                     elseif ($IsItGoodStatementTwo -eq $true)
                     {
@@ -832,7 +832,7 @@ function Invoke-ReadWrite
 
                             $DestinationPathItem = ""
                             $SourceOrDest = 2
-                            Get-PathStatements
+                            Get-PathStatement
                         }
                         elseif ($IsItGoodPathThree -eq $true)
                         {
@@ -873,11 +873,11 @@ function Invoke-ReadWrite
     {
         if (($TaskForDeletion -eq "") -or ($null -eq $TaskForDeletion))
         {
-            Get-TheScheduledTasks
+            Get-TheScheduledTask
         }
         elseif ((-not ($TaskForDeletion -eq "")) -or (-not ($null -eq $TaskForDeletion)))
         {
-            [Bool]$GoodRemove = Remove-Task
+            [Bool]$GoodRemove = Get-RemoveTask
 
             if ($GoodRemove -eq $true)
             {
@@ -906,7 +906,7 @@ function Invoke-ReadWrite
 
             Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -WindowStyle Hidden -File `"$GetTasksScriptPath`"" -WindowStyle Hidden -Verb RunAs
 
-            Get-TheScheduledTasks -HasBeenChecked 0
+            Get-TheScheduledTask -HasBeenChecked 0
         }
         else
         {
