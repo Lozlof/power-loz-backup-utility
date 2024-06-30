@@ -1,6 +1,6 @@
 
 
-function Start-Backup
+function Get-RunBackup
 {
     param
     (
@@ -14,7 +14,7 @@ function Start-Backup
         [Int]$FinalCount = $null
     )
 
-    #Write-Host "Function: Start-Backup | BackupOperation: $BackupOperation | PathStatementBackup: $PathStatementBackup | TotalArrayBackup: $($TotalArrayBackup | ForEach-Object { $_ -join ', ' }) | SourceArrayBackup: $SourceArrayBackup | DestinationArrayBackup: $DestinationArrayBackup | FinalCount: $FinalCount" -ForegroundColor Green
+    #Write-Host "Function: Get-RunBackup | BackupOperation: $BackupOperation | PathStatementBackup: $PathStatementBackup | TotalArrayBackup: $($TotalArrayBackup | ForEach-Object { $_ -join ', ' }) | SourceArrayBackup: $SourceArrayBackup | DestinationArrayBackup: $DestinationArrayBackup | FinalCount: $FinalCount" -ForegroundColor Green
 
     function Backup-DataOne
     {
@@ -76,7 +76,7 @@ function Start-Backup
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(54)A. Parent Function: Start-Backup | Child Function: Backup-DataOne | Variable MakeDirChoice: $MakeDirChoice (Should equal 1 or 2)"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(54)A. Parent Function: Get-RunBackup | Child Function: Backup-DataOne | Variable MakeDirChoice: $MakeDirChoice (Should equal 1 or 2)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -121,7 +121,7 @@ function Start-Backup
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(54)B. Parent Function: Start-Backup | Child Function: Backup-DataOne | Variable MakeDirChoice: $MakeDirChoice (Should equal 1 or 2)"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(54)B. Parent Function: Get-RunBackup | Child Function: Backup-DataOne | Variable MakeDirChoice: $MakeDirChoice (Should equal 1 or 2)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -228,7 +228,7 @@ function Start-Backup
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(55)A. Parent Function: Start-Backup | Child Function: Write-BackupLog | Variable LogTypeX: $LogTypeX (Should equal 1)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(55)A. Parent Function: Get-RunBackup | Child Function: Write-BackupLog | Variable LogTypeX: $LogTypeX (Should equal 1)"
             Exit-CaTScheduler
             Exit
         }
@@ -313,7 +313,7 @@ function Start-Backup
 
         if ($SourceCount -ne $DestCount)
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(58)A. Parent Function: Start-Backup | Variable BackupOperation: $BackupOperation (Should equal 1)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(58)A. Parent Function: Get-RunBackup | Variable BackupOperation: $BackupOperation (Should equal 1)"
             Exit-CaTScheduler
             Exit
         }
@@ -323,7 +323,7 @@ function Start-Backup
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(58)B. Parent Function: Start-Backup | Variable BackupOperation: $BackupOperation (Should equal 1)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(58)B. Parent Function: Get-RunBackup | Variable BackupOperation: $BackupOperation (Should equal 1)"
             Exit-CaTScheduler
             Exit
         }
@@ -348,17 +348,17 @@ function Start-Backup
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(56)A. Parent Function: Start-Backup | Variable BackupOperation: $BackupOperation (Should equal 1)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(56)A. Parent Function: Get-RunBackup | Variable BackupOperation: $BackupOperation (Should equal 1)"
             Exit-CaTScheduler
             Exit
         }
     }
     else
     {
-        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(57)A. Parent Function: Start-Backup | Variable BackupOperation: $BackupOperation (Should not equal 1)"
+        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementBackup -LogType 3 -Message "(57)A. Parent Function: Get-RunBackup | Variable BackupOperation: $BackupOperation (Should not equal 1)"
         Exit-CaTScheduler
         Exit
     }
 }
 
-Export-ModuleMember -Function Start-Backup
+Export-ModuleMember -Function Get-RunBackup

@@ -150,7 +150,7 @@ function Invoke-ReadWrite
     {
         [String]$SavedPathsPathReadWrite = "$PathStatementReadWrite\PowerLozConfigurationFiles\LozSavedPaths.json"
 
-        if (($PrintHashTable -eq 0) -or ($PrintHashTable -eq $null))
+        if (($PrintHashTable -eq 0) -or ($null -eq $PrintHashTable))
         {
             if (Test-Path -Path $SavedPathsPathReadWrite)
             {
@@ -242,11 +242,11 @@ function Invoke-ReadWrite
             {
                 if (-not $TotalArrayReadWrite -or $TotalArrayReadWrite.Count -eq 0)
                 {
-                    Set-Input -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -PathStatementInput $PathStatementReadWrite -GetPathsFromInput 1
+                    Get-SomeInput -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -PathStatementInput $PathStatementReadWrite -GetPathsFromInput 1
                 }
                 elseif ($TotalArrayReadWrite.Count -eq 2)
                 {
-                    Set-Input -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -TotalArrayInput $TotalArrayReadWrite -PathStatementInput $PathStatementReadWrite -GetPathsFromInput 1
+                    Get-SomeInput -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -TotalArrayInput $TotalArrayReadWrite -PathStatementInput $PathStatementReadWrite -GetPathsFromInput 1
                 }
                 else
                 {
@@ -481,11 +481,11 @@ function Invoke-ReadWrite
                         CommandLine = $ProcessDetails.CommandLine}
                 } | Where-Object { $_.CommandLine -like "*LozFindScheduledTasks*" } | Sort-Object -Property CommandLine
 
-                if (($FilteredProcesses -eq $null) -or ($FilteredProcesses -eq ""))
+                if (($null -eq $FilteredProcesses) -or ($FilteredProcesses -eq ""))
                 {
                     $ContinueLooking = 0
                 }
-                elseif ((-not ($FilteredProcesses -eq $null)) -or (-not ($FilteredProcesses -eq "")))
+                elseif ((-not ($null -eq $FilteredProcesses)) -or (-not ($FilteredProcesses -eq "")))
                 {
                     Write-Information -MessageData "Loading Scheduled Tasks"
                     Start-Sleep -Seconds 2
@@ -577,7 +577,7 @@ function Invoke-ReadWrite
             return $TaskNameArray
         }
 
-        if (($HasBeenChecked -eq $null) -or ($HasBeenChecked -eq 0))
+        if (($null -eq $HasBeenChecked) -or ($HasBeenChecked -eq 0))
         {
             [Bool]$IsItDone = Test-IfFinished
 
@@ -593,7 +593,7 @@ function Invoke-ReadWrite
                 {
                     Get-UserDeleteChoice -NumberOfChoices $TaskNamesArrayCount -TaskArray $TaskNamesArray
                 }
-                elseif (($TaskNamesArrayCount -eq $null) -or ($TaskNamesArrayCount -eq 0))
+                elseif (($null -eq $TaskNamesArrayCount) -or ($TaskNamesArrayCount -eq 0))
                 {
                     Write-Information -MessageData "There are no scheduled backups"
                     Write-Information -MessageData ""
@@ -635,7 +635,7 @@ function Invoke-ReadWrite
             {
                 Get-UserDeleteChoice -NumberOfChoices $TaskNamesArrayCount -TaskArray $TaskNamesArray
             }
-            elseif (($TaskNamesArrayCount -eq $null) -or ($TaskNamesArrayCount -eq 0))
+            elseif (($null -eq $TaskNamesArrayCount) -or ($TaskNamesArrayCount -eq 0))
             {
                 Write-Information -MessageData "There are no scheduled backups"
                 Write-Information -MessageData ""
@@ -703,11 +703,11 @@ function Invoke-ReadWrite
         {
             if (-not $TotalArrayReadWrite -or $TotalArrayReadWrite.Count -eq 0)
             {
-                Set-Input -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -PathStatementInput $PathStatementReadWrite
+                Get-SomeInput -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -PathStatementInput $PathStatementReadWrite
             }
             elseif ($TotalArrayReadWrite.Count -eq 2)
             {
-                Set-Input -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -TotalArrayInput $TotalArrayReadWrite -PathStatementInput $PathStatementReadWrite
+                Get-SomeInput -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -TotalArrayInput $TotalArrayReadWrite -PathStatementInput $PathStatementReadWrite
             }
             else
             {
@@ -720,11 +720,11 @@ function Invoke-ReadWrite
         {
             if (-not $TotalArrayReadWrite -or $TotalArrayReadWrite.Count -eq 0)
             {
-                Set-Input -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -PathStatementInput $PathStatementReadWrite -NewOrSavedInput $NewOrSavedReadWrite
+                Get-SomeInput -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -PathStatementInput $PathStatementReadWrite -NewOrSavedInput $NewOrSavedReadWrite
             }
             elseif ($TotalArrayReadWrite.Count -eq 2)
             {
-                Set-Input -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -TotalArrayInput $TotalArrayReadWrite -PathStatementInput $PathStatementReadWrite -NewOrSavedInput $NewOrSavedReadWrite
+                Get-SomeInput -ChooseMenuX 2 -SourceDirectory $SourcePathItem -DestinationDirectory $DestinationPathItem -TypeOfBackupX $TypeOfBackupReadWrite -TotalArrayInput $TotalArrayReadWrite -PathStatementInput $PathStatementReadWrite -NewOrSavedInput $NewOrSavedReadWrite
             }
             else
             {
@@ -871,11 +871,11 @@ function Invoke-ReadWrite
     }
     elseif ($OperationChoice -eq 4)
     {
-        if (($TaskForDeletion -eq "") -or ($TaskForDeletion -eq $null))
+        if (($TaskForDeletion -eq "") -or ($null -eq $TaskForDeletion))
         {
             Get-TheScheduledTasks
         }
-        elseif ((-not ($TaskForDeletion -eq "")) -or (-not ($TaskForDeletion -eq $null)))
+        elseif ((-not ($TaskForDeletion -eq "")) -or (-not ($null -eq $TaskForDeletion)))
         {
             [Bool]$GoodRemove = Remove-Task
 

@@ -1,16 +1,14 @@
 
 
-function Update-ScheduledTaskHashTable
+function Get-SchedTaskHashTable
 {
     param
     (
         [Int]$StartOperation
     )
 
-    function Get-CaTScheduledTasks
+    function Get-LozSchedTask
     {
-        Import-Module ScheduledTasks
-
         $TaskNames = @()
         $Number = 0
         $Pattern = '-SourceDir\s+"([^"]+)"|-DestDir\s+"([^"]+)"'
@@ -30,9 +28,9 @@ function Update-ScheduledTaskHashTable
                 $SelectedTaskAction = $SelectedTask.Actions
                 $SelectedTaskArguments = $SelectedTaskAction.Arguments
 
-                $Matches = [regex]::Matches($SelectedTaskArguments, $Pattern)
+                $MatchesXX = [regex]::Matches($SelectedTaskArguments, $Pattern)
 
-                foreach ($Match in $Matches)
+                foreach ($Match in $MatchesXX)
                 {
                     if ($Match.Groups[1].Value)
                     {
@@ -87,11 +85,11 @@ function Update-ScheduledTaskHashTable
         return $ScheduledTasksHashTableX
     }
 
-    function Write-CaTScheduledTasks
+    function Write-LozScheduledTask
     {
         $ScheduledTasksHashTable = @{}
 
-        $ScheduledTasksHashTable = Get-CaTScheduledTasks
+        $ScheduledTasksHashTable = Get-LozSchedTask
 
         $ScheduledTasksHashTable | ConvertTo-Json -Depth 2 | Set-Content -Path $PathStatement
 
@@ -105,7 +103,7 @@ function Update-ScheduledTaskHashTable
         $PathStatementX = Get-Location
         $PathStatement = "$PathStatementX\PowerLozConfigurationFiles\LozScheduledTasks.json"
 
-        [Bool]$IsWritten= Write-CaTScheduledTasks
+        [Bool]$IsWritten= Write-LozScheduledTask
 
         if ($IsWritten -eq $true)
         {
@@ -122,5 +120,5 @@ function Update-ScheduledTaskHashTable
     }
 }
 
-Update-ScheduledTaskHashTable -StartOperation 1
+Get-SchedTaskHashTable -StartOperation 1
 

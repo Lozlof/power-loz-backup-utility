@@ -1,6 +1,6 @@
 
 
-function Set-Input
+function Get-SomeInput
 {
     param
     (
@@ -20,7 +20,7 @@ function Set-Input
     )
 
     [Int]$TheCountInput = $TotalArrayInput.Count
-    #Write-Host "Debug: Function: Set-Input | ChooseMenuX: $ChooseMenuX | TypeOfBackupX: $TypeOfBackupX | TotalArrayInput: $($TotalArrayInput | ForEach-Object { $_ -join ', ' }) | GoBack: $GoBack | ContinueLoopOne: $ContinueLoopOne | ContinueLoopTwo: $ContinueLoopTwo | SourceDirectory: $SourceDirectory | DestinationDirectory: $DestinationDirectory | TotalArrayInput Count: $TheCountInput | PathStatementInput: $PathStatementInput | NewOrSavedInput: $NewOrSavedInput" -ForegroundColor Green
+    #Write-Host "Debug: Function: Get-SomeInput | ChooseMenuX: $ChooseMenuX | TypeOfBackupX: $TypeOfBackupX | TotalArrayInput: $($TotalArrayInput | ForEach-Object { $_ -join ', ' }) | GoBack: $GoBack | ContinueLoopOne: $ContinueLoopOne | ContinueLoopTwo: $ContinueLoopTwo | SourceDirectory: $SourceDirectory | DestinationDirectory: $DestinationDirectory | TotalArrayInput Count: $TheCountInput | PathStatementInput: $PathStatementInput | NewOrSavedInput: $NewOrSavedInput" -ForegroundColor Green
 
     function Get-Path
     {
@@ -41,15 +41,15 @@ function Set-Input
 
                 if (-not $TotalArrayInput -or $TotalArrayInput.Count -eq 0)
                 {
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 elseif ($TotalArrayInput.Count -eq 2)
                 {
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(4)A. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable SourceDirX: $SourceDirX (Should equal null)"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(4)A. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable SourceDirX: $SourceDirX (Should equal null)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -70,7 +70,7 @@ function Set-Input
                         }
                         else
                         {
-                            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(17)A. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0) | Variable GoBack: $GoBack (Should equal 1) | Variable SourceDirX: $SourceDirX (Should equal 0) | Variable: NewOrSavedInput: $NewOrSavedInput (Should equal 0 or 1)"
+                            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(17)A. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0) | Variable GoBack: $GoBack (Should equal 1) | Variable SourceDirX: $SourceDirX (Should equal 0) | Variable: NewOrSavedInput: $NewOrSavedInput (Should equal 0 or 1)"
                             Exit-CaTScheduler
                             Exit
                         }
@@ -81,7 +81,7 @@ function Set-Input
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(4)B. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable GoBack: $GoBack (Should equal 1) | Variable SourceDirX: $SourceDirX (Should equal 0)"
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(4)B. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable GoBack: $GoBack (Should equal 1) | Variable SourceDirX: $SourceDirX (Should equal 0)"
                         Exit-CaTScheduler
                         Exit
                     }
@@ -98,14 +98,14 @@ function Set-Input
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(4)C. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable GoBack: $GoBack (Should equal 2) | Variable SourceDirX: $SourceDirX (Should equal 0)"
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(4)C. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable GoBack: $GoBack (Should equal 2) | Variable SourceDirX: $SourceDirX (Should equal 0)"
                         Exit-CaTScheduler
                         Exit
                     }
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(4)D. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable SourceDirX: $SourceDirX (Should equal 0) | Variable GoBack: $GoBack (Should equal 1 or 2)"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(4)D. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable SourceDirX: $SourceDirX (Should equal 0) | Variable GoBack: $GoBack (Should equal 1 or 2)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -125,15 +125,15 @@ function Set-Input
             {
                 if (-not $TotalArrayInput -or $TotalArrayInput.Count -eq 0)
                 {
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 0 -SourceDirectory `"$SourceDir`" -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 0 -SourceDirectory `"$SourceDir`" -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 elseif ($TotalArrayInput.Count -eq 2)
                 {
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 0 -SourceDirectory `"$SourceDir`" -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 0 -SourceDirectory `"$SourceDir`" -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(5)A. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable IsItGoodPath: $IsItGoodPath (Should equal true) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2)"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(5)A. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable IsItGoodPath: $IsItGoodPath (Should equal true) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -145,7 +145,7 @@ function Set-Input
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(5)B. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable IsItGoodPath: $IsItGoodPath (Should equal true or false)"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(5)B. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopOne: $ContinueLoopOne (Should equal 0) | Variable IsItGoodPath: $IsItGoodPath (Should equal true or false)"
                 Exit-CaTScheduler
                 Exit
             }
@@ -164,15 +164,15 @@ function Set-Input
 
                 if (-not $TotalArrayInput -or $TotalArrayInput.Count -eq 0)
                 {
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -SourceDirectory `"$SourceDir`" -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -SourceDirectory `"$SourceDir`" -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 elseif ($TotalArrayInput.Count -eq 2)
                 {
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -SourceDirectory `"$SourceDir`" -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -SourceDirectory `"$SourceDir`" -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(6)A. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopTwo: $ContinueLoopTwo (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable DestDirX: $DestDirX (Should equal null)"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(6)A. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopTwo: $ContinueLoopTwo (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable DestDirX: $DestDirX (Should equal null)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -182,16 +182,16 @@ function Set-Input
                 if (-not $TotalArrayInput -or $TotalArrayInput.Count -eq 0)
                 {
                     Write-Information -MessageData ""
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 elseif ($TotalArrayInput.Count -eq 2)
                 {
                     Write-Information -MessageData ""
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(6)B. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopTwo: $ContinueLoopTwo (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable DestDirX: $SourceDirX (Should equal 0)"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(6)B. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopTwo: $ContinueLoopTwo (Should equal 0) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2) | Variable DestDirX: $SourceDirX (Should equal 0)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -211,15 +211,15 @@ function Set-Input
             {
                 if (-not $TotalArrayInput -or $TotalArrayInput.Count -eq 0)
                 {
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 1 -SourceDirectory `"$SourceDir`" -DestinationDirectory `"$DestDir`" -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 1 -SourceDirectory `"$SourceDir`" -DestinationDirectory `"$DestDir`" -TypeOfBackupX $TypeOfBackupX -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 elseif ($TotalArrayInput.Count -eq 2)
                 {
-                    Set-Input -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 1 -SourceDirectory `"$SourceDir`" -DestinationDirectory `"$DestDir`" -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
+                    Get-SomeInput -ChooseMenuX 1 -GoBack $GoBack -ContinueLoopOne 1 -ContinueLoopTwo 1 -SourceDirectory `"$SourceDir`" -DestinationDirectory `"$DestDir`" -TypeOfBackupX $TypeOfBackupX -TotalArrayInput $TotalArrayInput -PathStatementInput $PathStatementInput -NewOrSavedInput $NewOrSavedInput
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(7)A. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopTwo: $ContinueLoopTwo (Should equal 0) | Variable IsItGoodPath: $IsItGoodPath (Should equal true) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2)"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(7)A. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopTwo: $ContinueLoopTwo (Should equal 0) | Variable IsItGoodPath: $IsItGoodPath (Should equal true) | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2)"
                     Exit-CaTScheduler
                     Exit
                 }
@@ -246,27 +246,27 @@ function Set-Input
                     }
                     elseif ($IsItGoodPathThree -eq $true)
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(79)A. Parent Function: Set-Input | Child Function: Get-Path"
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(79)A. Parent Function: Get-SomeInput | Child Function: Get-Path"
                         Exit-CaTScheduler
                         Exit
                     }
                     else
                     {
-                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(79)B. Parent Function: Set-Input | Child Function: Get-Path"
+                        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(79)B. Parent Function: Get-SomeInput | Child Function: Get-Path"
                         Exit-CaTScheduler
                         Exit
                     }
                 }
                 else
                 {
-                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(79)C. Parent Function: Set-Input | Child Function: Get-Path"
+                    Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(79)C. Parent Function: Get-SomeInput | Child Function: Get-Path"
                     Exit-CaTScheduler
                     Exit
                 }
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(7)B. Parent Function: Set-Input | Child Function: Get-Path | Variable ContinueLoopTwo: $ContinueLoopTwo (Should equal 0) | Variable IsItGoodPath: $IsItGoodPath (Should equal true or false)"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(7)B. Parent Function: Get-SomeInput | Child Function: Get-Path | Variable ContinueLoopTwo: $ContinueLoopTwo (Should equal 0) | Variable IsItGoodPath: $IsItGoodPath (Should equal true or false)"
                 Exit-CaTScheduler
                 Exit
             }
@@ -275,7 +275,7 @@ function Set-Input
         return $true
     }
 
-    function Set-SourceDestArray
+    function Get-SourceDestArray
     {
         if ($TotalArrayInput.Count -eq 2)
         {
@@ -319,7 +319,7 @@ function Set-Input
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(8)A. Parent Function: Set-Input | Child Function: Set-SourceDestArray | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(8)A. Parent Function: Get-SomeInput | Child Function: Get-SourceDestArray | Variable TotalArrayInput Count: $TheCountInput (Should equal 0 or 2)"
             Exit-CaTScheduler
             Exit
         }
@@ -344,29 +344,29 @@ function Set-Input
             }
             else
             {
-                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(9)A. Parent Function: Set-Input | Variable ChooseMenuX: $ChooseMenuX (Should equal 1) | Variable GetPathGood: $GetPathGood (Should equal true) | TotalArrayInput Count: $TheCountInput (Should equal 0 or 2)"
+                Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(9)A. Parent Function: Get-SomeInput | Variable ChooseMenuX: $ChooseMenuX (Should equal 1) | Variable GetPathGood: $GetPathGood (Should equal true) | TotalArrayInput Count: $TheCountInput (Should equal 0 or 2)"
                 Exit-CaTScheduler
                 Exit
             }
         }
         elseif (-not ($GetPathGood -eq $true))
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(9)B. Parent Function: Set-Input | Variable ChooseMenuX: $ChooseMenuX (Should equal 1) | Variable GetPathGood: $GetPathGood (Should equal not true) | Function Get-Path failed"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(9)B. Parent Function: Get-SomeInput | Variable ChooseMenuX: $ChooseMenuX (Should equal 1) | Variable GetPathGood: $GetPathGood (Should equal not true) | Function Get-Path failed"
             Exit-CaTScheduler
             Exit
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(9)C. Parent Function: Set-Input | Variable ChooseMenuX: $ChooseMenuX (Should equal 1) | Variable GetPathGood: $GetPathGood (Should equal true or false)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(9)C. Parent Function: Get-SomeInput | Variable ChooseMenuX: $ChooseMenuX (Should equal 1) | Variable GetPathGood: $GetPathGood (Should equal true or false)"
             Exit-CaTScheduler
             Exit
         }
     }
     elseif ($ChooseMenuX -eq 2)
     {
-        $TotalArrayInput = Set-SourceDestArray
+        $TotalArrayInput = Get-SourceDestArray
 
-        if (($GetPathsFromInput -eq 0) -or ($GetPathsFromInput -eq $null))
+        if (($GetPathsFromInput -eq 0) -or ($null -eq $GetPathsFromInput))
         {
             Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackupX -TotalArrayMenu $TotalArrayInput -PathStatementMenu $PathStatementInput -NewOrSavedMenu $NewOrSavedInput
         }
@@ -376,17 +376,17 @@ function Set-Input
         }
         else
         {
-            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(51)A. Parent Function: Set-Input | Variable ChooseMenuX: $ChooseMenuX (Should equal 2)"
+            Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(51)A. Parent Function: Get-SomeInput | Variable ChooseMenuX: $ChooseMenuX (Should equal 2)"
             Exit-CaTScheduler
             Exit
         }
     }
     else
     {
-        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(10)A. Parent Function: Set-Input | Variable ChooseMenuX: $ChooseMenuX (Should equal 2)"
+        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementInput -LogType 3 -Message "(10)A. Parent Function: Get-SomeInput | Variable ChooseMenuX: $ChooseMenuX (Should equal 2)"
         Exit-CaTScheduler
         Exit
     }
 }
 
-Export-ModuleMember -Function Set-Input
+Export-ModuleMember -Function Get-SomeInput

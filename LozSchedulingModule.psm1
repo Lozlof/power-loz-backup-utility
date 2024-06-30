@@ -662,11 +662,11 @@ function Write-Task
                 }
                 elseif ($GoBackNumberX -eq 3)
                 {
-                    if (($Day -eq "") -or ($Day -eq $null))
+                    if (($Day -eq "") -or ($null -eq $Day))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 2 -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
-                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null)))
+                    elseif ((-not($Day -eq "")) -or (-not($null -eq $Day)))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 3 -Often $Often -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
@@ -679,11 +679,11 @@ function Write-Task
                 }
                 elseif ($GoBackNumberX -eq 5)
                 {
-                    if (($Day -eq "") -or ($Day -eq $null))
+                    if (($Day -eq "") -or ($null -eq $Day))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 5 -Often $Often -Hour $Hour -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
-                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null)))
+                    elseif ((-not($Day -eq "")) -or (-not($null -eq $Day)))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 5 -Often $Often -Day $Day -Hour $Hour -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
@@ -705,11 +705,11 @@ function Write-Task
             {
                 if ($GoBackNumberX -eq 4)
                 {
-                    if (($Day -eq "") -or ($Day -eq $null))
+                    if (($Day -eq "") -or ($null -eq $Day))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 4 -Often $Often -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
-                    elseif ((-not($Day -eq "")) -or (-not($Day -eq $null)))
+                    elseif ((-not($Day -eq "")) -or (-not($null -eq $Day)))
                     {
                         Get-SchedulingMenu -NumberX $NumberX -ControlNumber $ControlNumber -FlowControl 0 -GoBackNumber 4 -Often $Often -Day $Day -SourceArrayTasking $SourceArrayTasking -DestArrayTasking $DestArrayTasking -TheCountTasking $TheCountTasking -FinalSourceDir $FinalSourceDir -FinalDestDir $FinalDestDir -FinalVerifyCountTwo $FinalVerifyCountTwo -FinalVerifyCountOne $FinalVerifyCountOne -DidAsk $DidAsk -UserChoice $UserChoice -AllReturnValues $AllReturnValues
                     }
@@ -1032,13 +1032,13 @@ function Write-Task
         if ($FlowControl -eq 6)
         {
 
-            if (($Day -eq "") -or ($Day -eq $null))
+            if (($Day -eq "") -or ($null -eq $Day))
             {
                 $SchedulingVariablesX = @($Often, $Hour, $Minute, $AmPm)
 
                 $FlowControl = 7
             }
-            elseif ((-not($Day -eq "")) -or (-not($Day -eq $null)))
+            elseif ((-not($Day -eq "")) -or (-not($null -eq $Day)))
             {
                 $SchedulingVariablesX = @($Often, $Day, $Hour, $Minute, $AmPm)
 
@@ -1423,7 +1423,7 @@ function Write-Task
     }
     else
     {
-        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(57)A. Parent Function: Start-Backup | Variable BackupOperation: $BackupOperation (Should not equal 1)"
+        Invoke-ReadWrite -OperationChoice 1 -PathStatementReadWrite $PathStatementScheduling -LogType 3 -Message "(57)A. Parent Function: Format-TheScheduledTask | Variable SchedulingOperation: $SchedulingOperation"
         Exit-CaTScheduler
         Exit
     }

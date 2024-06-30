@@ -63,7 +63,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu
                     }
@@ -80,7 +80,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1 -TotalArrayMenu $TotalArrayMenu
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                     }
@@ -104,7 +104,7 @@ function Get-Menu
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu -SourceOrDestMenu 1
                 }
-                elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                 }
@@ -119,15 +119,15 @@ function Get-Menu
             {
                 if (-not $TotalArrayMenu -or $TotalArrayMenu.Count -eq 0)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu
                     }
@@ -140,15 +140,15 @@ function Get-Menu
                 }
                 elseif ($TotalArrayMenu.Count -eq 2)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
@@ -168,15 +168,15 @@ function Get-Menu
             }
             elseif ($PreserveArray -eq 4)
             {
-                if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -DestinationPathItemMenu $DestinationPathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
@@ -225,7 +225,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu
                     }
@@ -242,7 +242,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1 -TotalArrayMenu $TotalArrayMenu
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                     }
@@ -266,7 +266,7 @@ function Get-Menu
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu -SourceOrDestMenu 1
                 }
-                elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                 }
@@ -281,15 +281,15 @@ function Get-Menu
             {
                 if (-not $TotalArrayMenu -or $TotalArrayMenu.Count -eq 0)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu
                     }
@@ -302,15 +302,15 @@ function Get-Menu
                 }
                 elseif ($TotalArrayMenu.Count -eq 2)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
@@ -330,15 +330,15 @@ function Get-Menu
             }
             elseif ($PreserveArray -eq 4)
             {
-                if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -DestinationPathItemMenu $DestinationPathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
@@ -391,7 +391,7 @@ function Get-Menu
                         {
                             Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1
                         }
-                        elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                        elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                         {
                             Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu
                         }
@@ -408,7 +408,7 @@ function Get-Menu
                         {
                             Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1 -TotalArrayMenu $TotalArrayMenu
                         }
-                        elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                        elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                         {
                             Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                         }
@@ -432,7 +432,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu -SourceOrDestMenu 1
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                     }
@@ -447,15 +447,15 @@ function Get-Menu
                 {
                     if (-not $TotalArrayMenu -or $TotalArrayMenu.Count -eq 0)
                     {
-                        if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                         {
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu
                         }
@@ -468,15 +468,15 @@ function Get-Menu
                     }
                     elseif ($TotalArrayMenu.Count -eq 2)
                     {
-                        if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -TotalArrayReadWrite $TotalArrayMenu
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                         {
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                         }
@@ -496,15 +496,15 @@ function Get-Menu
                 }
                 elseif ($PreserveArray -eq 4)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -DestinationPathItemMenu $DestinationPathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                     }
@@ -544,7 +544,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu -SourceOrDestMenu 1
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                     }
@@ -562,7 +562,7 @@ function Get-Menu
                 {
                     Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu -SourceOrDestMenu 1
                 }
-                elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                 {
                     Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                 }
@@ -583,15 +583,15 @@ function Get-Menu
                     }
                     elseif ($TotalArrayMenu.Count -eq 2)
                     {
-                        if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                         {
                             Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -DestinationPathItemMenu $DestinationPathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                         }
@@ -613,17 +613,17 @@ function Get-Menu
                 {
                     if (-not $TotalArrayMenu -or $TotalArrayMenu.Count -eq 0)
                     {
-                        if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -SourcePathItem $SourcePathItemMenu
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                         {
                             Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu
@@ -637,17 +637,17 @@ function Get-Menu
                     }
                     elseif ($TotalArrayMenu.Count -eq 2)
                     {
-                        if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -TotalArrayReadWrite $TotalArrayMenu
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                         {
                             Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                         }
-                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                        elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                         {
                             Write-Information -MessageData ""
                             Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu
@@ -662,7 +662,7 @@ function Get-Menu
                 }
                 elseif ($PreserveArray -eq 4)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -TotalArrayReadWrite $TotalArrayMenu
                     }
@@ -717,7 +717,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu
                     }
@@ -734,7 +734,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1 -TotalArrayMenu $TotalArrayMenu
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                     }
@@ -758,7 +758,7 @@ function Get-Menu
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu -SourceOrDestMenu 1
                 }
-                elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                 }
@@ -773,15 +773,15 @@ function Get-Menu
             {
                 if (-not $TotalArrayMenu -or $TotalArrayMenu.Count -eq 0)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu
                     }
@@ -794,15 +794,15 @@ function Get-Menu
                 }
                 elseif ($TotalArrayMenu.Count -eq 2)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
@@ -822,15 +822,15 @@ function Get-Menu
             }
             elseif ($PreserveArray -eq 4)
             {
-                if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -DestinationPathItemMenu $DestinationPathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
@@ -876,7 +876,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu
                     }
@@ -893,7 +893,7 @@ function Get-Menu
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -SourceOrDestMenu 1 -TotalArrayMenu $TotalArrayMenu
                     }
-                    elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                    elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                     {
                         Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                     }
@@ -917,7 +917,7 @@ function Get-Menu
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu -SourceOrDestMenu 1
                 }
-                elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                 }
@@ -932,15 +932,15 @@ function Get-Menu
             {
                 if (-not $TotalArrayMenu -or $TotalArrayMenu.Count -eq 0)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu
                     }
@@ -953,15 +953,15 @@ function Get-Menu
                 }
                 elseif ($TotalArrayMenu.Count -eq 2)
                 {
-                    if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
-                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                    elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                     {
                         Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                     }
@@ -981,15 +981,15 @@ function Get-Menu
             }
             elseif ($PreserveArray -eq 4)
             {
-                if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                 {
                     Get-Menu -ChooseMenu 4 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -SourceOrDestMenu $SourceOrDestMenu -SourcePathItemMenu $SourcePathItemMenu -DestinationPathItemMenu $DestinationPathItemMenu -TotalArrayMenu $TotalArrayMenu -MenuThreeOptions $MenuThreeOptions
                 }
@@ -1187,7 +1187,7 @@ function Get-Menu
     {
         if ($NewOrSavedMenu -eq 1)
         {
-            Set-Input -ChooseMenuX 1 -GoBack 1 -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackup -PathStatementInput $PathStatementMenu -NewOrSavedInput $NewOrSavedMenu
+            Get-SomeInput -ChooseMenuX 1 -GoBack 1 -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackup -PathStatementInput $PathStatementMenu -NewOrSavedInput $NewOrSavedMenu
         }
         elseif ($NewOrSavedMenu -eq 0)
         {
@@ -1200,7 +1200,7 @@ function Get-Menu
 
             if ($UserInput -eq 1)
             {
-                Set-Input -ChooseMenuX 1 -GoBack 1 -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackup -PathStatementInput $PathStatementMenu -NewOrSavedInput $NewOrSavedMenu
+                Get-SomeInput -ChooseMenuX 1 -GoBack 1 -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackup -PathStatementInput $PathStatementMenu -NewOrSavedInput $NewOrSavedMenu
             }
             elseif ($UserInput -eq 2)
             {
@@ -1234,9 +1234,9 @@ function Get-Menu
             {
                 Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest 1 -TotalArrayReadWrite $TotalArrayMenu
             }
-            elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+            elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
             {
-                Set-Input -ChooseMenuX 1 -GoBack 2 -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackup -TotalArrayInput $TotalArrayMenu -PathStatementInput $PathStatementMenu -NewOrSavedInput $NewOrSavedMenu
+                Get-SomeInput -ChooseMenuX 1 -GoBack 2 -ContinueLoopOne 0 -ContinueLoopTwo 0 -TypeOfBackupX $TypeOfBackup -TotalArrayInput $TotalArrayMenu -PathStatementInput $PathStatementMenu -NewOrSavedInput $NewOrSavedMenu
             }
             else
             {
@@ -1258,7 +1258,7 @@ function Get-Menu
     }
     elseif ($ChooseMenu -eq 4)
     {
-        if (($MenuThreeOptions -eq 0) -or ($MenuThreeOptions -eq $null))
+        if (($MenuThreeOptions -eq 0) -or ($null -eq $MenuThreeOptions))
         {
             Get-MenuThree
             $NumberOfChoices = 2
@@ -1276,7 +1276,7 @@ function Get-Menu
                 {
                     Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu -SourceOrDestMenu 1
                 }
-                elseif (($SourceOrDestMenu -eq 0) -or ($SourceOrDestMenu -eq $null))
+                elseif (($SourceOrDestMenu -eq 0) -or ($null -eq $SourceOrDestMenu))
                 {
                     Get-Menu -ChooseMenu 3 -TypeOfBackup $TypeOfBackup -PathStatementMenu $PathStatementMenu -NewOrSavedMenu $NewOrSavedMenu -TotalArrayMenu $TotalArrayMenu
                 }
@@ -1308,15 +1308,15 @@ function Get-Menu
             }
             elseif ($UserInput -eq 2)
             {
-                if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -TotalArrayReadWrite $TotalArrayMenu
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest $SourceOrDestMenu -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu
                 }
@@ -1350,15 +1350,15 @@ function Get-Menu
         {
             if (-not $TotalArrayMenu -or $TotalArrayMenu.Count -eq 0)
             {
-                if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest ($SourceOrDestMenu + 1) -UserInputReadWrite $UserInput -TotalKeys $NumberOfChoices
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest ($SourceOrDestMenu + 1) -SourcePathItem $SourcePathItemMenu -UserInputReadWrite $UserInput -TotalKeys $NumberOfChoices
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest ($SourceOrDestMenu + 1) -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -UserInputReadWrite $UserInput -TotalKeys $NumberOfChoices
                 }
@@ -1371,15 +1371,15 @@ function Get-Menu
             }
             elseif ($TotalArrayMenu.Count -eq 2)
             {
-                if ((($SourcePathItemMenu -eq "") -or ($SourcePathItemMenu -eq $null)) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                if ((($SourcePathItemMenu -eq "") -or ($null -eq $SourcePathItemMenu)) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest ($SourceOrDestMenu + 1) -TotalArrayReadWrite $TotalArrayMenu -UserInputReadWrite $UserInput -TotalKeys $NumberOfChoices
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and (($DestinationPathItemMenu -eq "") -or ($DestinationPathItemMenu -eq $null)))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and (($DestinationPathItemMenu -eq "") -or ($null -eq $DestinationPathItemMenu)))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest ($SourceOrDestMenu + 1) -SourcePathItem $SourcePathItemMenu -TotalArrayReadWrite $TotalArrayMenu -UserInputReadWrite $UserInput -TotalKeys $NumberOfChoices
                 }
-                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($SourcePathItemMenu -eq $null))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($DestinationPathItemMenu -eq $null))))
+                elseif (((-not($SourcePathItemMenu -eq "")) -or (-not($null -eq $SourcePathItemMenu))) -and ((-not($DestinationPathItemMenu -eq "")) -or (-not($null -eq $DestinationPathItemMenu))))
                 {
                     Invoke-ReadWrite -OperationChoice 3 -TypeOfBackupReadWrite $TypeOfBackup -PathStatementReadWrite $PathStatementMenu -SourceOrDest ($SourceOrDestMenu + 1) -SourcePathItem $SourcePathItemMenu -DestinationPathItem $DestinationPathItemMenu -TotalArrayReadWrite $TotalArrayMenu -UserInputReadWrite $UserInput -TotalKeys $NumberOfChoices
                 }
@@ -1419,7 +1419,7 @@ function Get-Menu
             }
             elseif ($TypeOfBackup -eq 2)
             {
-                Start-Backup -BackupOperation 1 -PathStatementBackup $PathStatementMenu -TotalArrayBackup $TotalArrayMenu
+                Get-RunBackup -BackupOperation 1 -PathStatementBackup $PathStatementMenu -TotalArrayBackup $TotalArrayMenu
             }
             else
             {
