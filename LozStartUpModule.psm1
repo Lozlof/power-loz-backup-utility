@@ -1,4 +1,4 @@
-# Added to the Wiki
+# Posted on wiki
 
 function Start-CaTScheduler
 {
