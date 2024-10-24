@@ -1,4 +1,3 @@
-# Posted on Wiki
 
 param
 (
