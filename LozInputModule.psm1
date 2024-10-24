@@ -1,4 +1,3 @@
-# Posted on wiki
 
 function Get-SomeInput
 {
