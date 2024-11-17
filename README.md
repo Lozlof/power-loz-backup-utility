@@ -29,4 +29,5 @@ Notify user that overlapping paths will do better if scheduled at different time
 When program exits because of an error. Have a different exit message.   
 Appropriate task number.   
 GetScheduledTasks define variables.   
-Check how ReadWriteModule writes JSON files.  
+Check how ReadWriteModule writes JSON files.    
+## Contact: lozlofcyber@gmail.com      
