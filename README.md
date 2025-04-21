@@ -30,4 +30,3 @@ When program exits because of an error. Have a different exit message.
 Appropriate task number.   
 GetScheduledTasks define variables.   
 Check how ReadWriteModule writes JSON files.    
-## Contact: contact@gistyr.dev           
